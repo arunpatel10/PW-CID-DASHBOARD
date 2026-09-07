@@ -926,7 +926,16 @@ body.cid-home-mode .sidebar [data-view="cutoffs"]{
 <span class="cid-category-sub">Medical Entrance</span><span class="cid-category-arrow">→</span></button>
 <button class="cid-category-card" onclick="cidOpenEntrance('JEE')">
 <span class="cid-category-icon">⚙️</span><span class="cid-category-title">JEE</span>
-<span class="cid-category-sub">Engineering Entrance</span><span class="cid-category-arrow">→</span></button></div></section>
+<span class="cid-category-sub">Engineering Entrance</span><span class="cid-category-arrow">→</span></button>
+<button class="cid-category-card" onclick="cidOpenCategory('DEFENCE')">
+<span class="cid-category-icon">🎖️</span><span class="cid-category-title">DEFENCE</span>
+<span class="cid-category-sub">NDA, CDS, AFCAT, Agniveer</span><span class="cid-category-arrow">→</span></button>
+<button class="cid-category-card" onclick="cidOpenCategory('CUET UG')">
+<span class="cid-category-icon">🎓</span><span class="cid-category-title">CUET UG</span>
+<span class="cid-category-sub">Undergraduate Entrance</span><span class="cid-category-arrow">→</span></button>
+<button class="cid-category-card" onclick="cidOpenCategory('CUET PG')">
+<span class="cid-category-icon">📖</span><span class="cid-category-title">CUET PG</span>
+<span class="cid-category-sub">Postgraduate Entrance</span><span class="cid-category-arrow">→</span></button></div></section>
     <div class="topbar">
       <div class="search-wrap">
         <span class="search-icon">
@@ -3919,7 +3928,24 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     if(name === 'NEET'){
       document.body.classList.remove('cid-home-mode');
       document.body.classList.add('cid-category-mode');
-      if(typeof renderSidebar === 'function') renderSidebar();
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('NEET', 'Medical Entrance', [
+          {key:'overview', label:'NEET Overview'},
+          {key:'exam', label:'Exam Guide'},
+          {key:'syllabus', label:'Subjects & Syllabus'},
+          {key:'cutoff', label:'Cut-off Trends'},
+          {key:'colleges', label:'Colleges'},
+          {key:'results', label:'Results & Success Stories'}
+        ], 'overview', function(key){
+          var backBtn = document.querySelector('[data-neet-back]');
+          if(backBtn) backBtn.click();
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-neet-open="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      } else if(typeof renderSidebar === 'function') renderSidebar();
       var home = document.getElementById('cid-category-home');
       if(home) home.style.display = 'none';
       var topbar = document.querySelector('.cid-category-topbar');
@@ -4853,7 +4879,24 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     if(name === 'JEE'){
       document.body.classList.remove('cid-home-mode');
       document.body.classList.add('cid-category-mode');
-      if(typeof renderSidebar === 'function') renderSidebar();
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('JEE', 'Engineering Entrance', [
+          {key:'overview', label:'JEE Overview'},
+          {key:'exam', label:'Exam Guide'},
+          {key:'syllabus', label:'Subjects & Syllabus'},
+          {key:'cutoff', label:'Cut-off Trends'},
+          {key:'colleges', label:'Colleges'},
+          {key:'results', label:'Results & Success Stories'}
+        ], 'overview', function(key){
+          var backBtn = document.querySelector('[data-jee-back]');
+          if(backBtn) backBtn.click();
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-jee-open="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      } else if(typeof renderSidebar === 'function') renderSidebar();
       var home = document.getElementById('cid-category-home');
       if(home) home.style.display = 'none';
       var topbar = document.querySelector('.cid-category-topbar');
@@ -4871,6 +4914,11 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
 </script>
 
 <style id="ca-category-style">
+.ca-detail-block{margin-bottom:16px;}
+.ca-detail-block:last-child{margin-bottom:0;}
+.ca-tab-panel{display:none;}
+.ca-tab-panel.active{display:block;}
+
 .ca-level-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
 .ca-level-card{position:relative;text-align:left;min-height:150px;padding:20px;border:1px solid #cfd8e6;border-radius:18px;background:rgba(255,255,255,.6);cursor:pointer;display:flex;flex-direction:column;gap:6px;}
 .ca-level-card:hover{transform:translateY(-2px);border-color:#4665aa;}
@@ -4941,7 +4989,7 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
       ],
       groupStructure: 'No groups \u2014 CA Foundation is a single level. All 4 papers must be cleared together.',
       examPattern: 'Papers 1 &amp; 2 are fully descriptive (3 hours each). Papers 3 &amp; 4 are 100% MCQ-based (2 hours each) with negative marking of 0.25 marks for every wrong answer. Offline, pen-and-paper mode; English or Hindi (except one section of Paper 2).',
-      passingCriteria: 'Minimum 40% in each of the 4 papers <b>and</b> an overall aggregate of 50% across all 4 papers combined.',
+      passingCriteria: 'Minimum 40% in each of the 4 papers <b>and</b> an overall aggregate of 50% across all 4 papers combined. <b>Same rule every attempt</b> \u2014 CA Foundation has <b>no exemption or carry-forward scheme</b> (that only applies to Intermediate and Final), so all 4 papers must independently clear this bar each time.',
       attemptCycle: 'Held 3 times a year \u2014 January, May/June and September.'
     },
     intermediate: {
@@ -5040,6 +5088,73 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
       </section>`;
   }
 
+  var CA_EXEMPTION_HTML =
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px;">' +
+      '<div style="background:#f6f8fc;border:1px solid #e3e8ef;border-radius:10px;padding:10px 12px;">' +
+        '<span style="display:block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7a8797;margin-bottom:4px;">First Attempt</span>' +
+        '<span style="font-size:12.5px;font-weight:600;color:#24354c;">40% in each paper of the group + 50% group aggregate.</span>' +
+      '</div>' +
+      '<div style="background:#f6f8fc;border:1px solid #e3e8ef;border-radius:10px;padding:10px 12px;">' +
+        '<span style="display:block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7a8797;margin-bottom:4px;">If Not Cleared, but Scored 60%+ in a Paper</span>' +
+        '<span style="font-size:12.5px;font-weight:600;color:#24354c;">That paper is <b>exempted for the next 3 attempts</b> \u2014 only the remaining papers need reattempting; the 60%+ marks carry into the aggregate each time.</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="ca-step-note" style="margin-top:10px;">If the group still isn\u2019t cleared within those 3 attempts, the exemption lapses and that paper must be reattempted fresh. Confirm current exemption validity against the live ICAI notification, as this has been revised under the New Scheme.</div>';
+
+  // Official ICAI pass-percentage data, last 3 years, attempt-wise.
+  // Foundation/Intermediate: overall (Foundation) / Both-Groups (Intermediate) %, by Year x session.
+  // '\u2014' = no session held that slot (3x/year cycle only began Jan 2025); 'TBD' = session held, result not yet declared.
+  var CA_PASS_RATE_GRID = {
+    foundation: {
+      title: 'CA Foundation \u2014 Overall Pass %',
+      rows: [
+        ['2024', '\u2014', '\u2014', '19.67%'],
+        ['2025', '21.52%', '15.09%', '14.78%'],
+        ['2026', '19.23%', '20.09%', 'TBD (exam underway)']
+      ]
+    },
+    intermediate: {
+      title: 'CA Intermediate \u2014 Both Groups Pass %',
+      rows: [
+        ['2024', '\u2014', '\u2014', '5.66%'],
+        ['2025', '14.05%', '13.22%', '10.06%'],
+        ['2026', '9.39%', '8.47%', 'TBD (exam underway)']
+      ]
+    }
+  };
+
+  function passRateGridHTML(key){
+    var g = CA_PASS_RATE_GRID[key];
+    if(!g) return '';
+    var rowsHTML = g.rows.map(function(r){
+      return '<tr><td>'+r[0]+'</td><td><span class="mba-cutoff-badge">'+r[1]+'</span></td><td><span class="mba-cutoff-badge">'+r[2]+'</span></td><td><span class="mba-cutoff-badge">'+r[3]+'</span></td></tr>';
+    }).join('');
+    return '<div style="margin-top:14px;">'+
+      '<div style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7a8797;margin-bottom:8px;">'+g.title+' (Last 3 Years, Attempt-wise)</div>'+
+      '<div style="overflow:auto;"><table class="mba-cutoff-table"><thead><tr><th>Year</th><th>January</th><th>May</th><th>September</th></tr></thead><tbody>'+rowsHTML+'</tbody></table></div>'+
+      '<div class="ca-step-note" style="margin-top:8px;">3 sessions/year (Jan, May, Sep) began only from 2025 \u2014 2024 had 2 transitional sessions. Figures are official ICAI \u201cboth groups together\u201d / overall pass percentages; group-wise rates run higher. Always confirm against the latest ICAI result release.</div>'+
+    '</div>';
+  }
+
+  var CA_FINAL_PASS_RATE_HTML = (function(){
+    var rows = [
+      ['May 2024', '19.88%'],
+      ['Nov 2024', '13.44%'],
+      ['May 2025', '18.75%'],
+      ['Sep 2025', '16.23%'],
+      ['Jan 2026', '10.97%'],
+      ['May 2026', '14.07%']
+    ];
+    var rowsHTML = rows.map(function(r){
+      return '<tr><td>'+r[0]+'</td><td><span class="mba-cutoff-badge">'+r[1]+'</span></td></tr>';
+    }).join('');
+    return '<div style="margin-top:14px;">'+
+      '<div style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7a8797;margin-bottom:8px;">CA Final \u2014 Both Groups Pass % (Last 3 Years, Session-wise)</div>'+
+      '<div style="overflow:auto;"><table class="mba-cutoff-table"><thead><tr><th>Session</th><th>Both Groups Pass %</th></tr></thead><tbody>'+rowsHTML+'</tbody></table></div>'+
+      '<div class="ca-step-note" style="margin-top:8px;">Final\u2019s session calendar itself changed twice in this window (2x/year \u2192 briefly 3x/year from Jan 2025 \u2192 back to 2x/year from May 2026) \u2014 see Attempt Cycle above. Group-wise pass rates run higher than the \u201cboth groups\u201d figures shown here. Always confirm against the latest ICAI result release.</div>'+
+    '</div>';
+  })();
+
   function subjectsHTML(d, levelKey){
     return d.subjects.map(function(g, gi){
       var groupHeader = g.group ? '<div class="ca-subject-group-title">'+g.group+'</div>' : '';
@@ -5068,49 +5183,53 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
   function levelDetail(key){
     var d = CA_LEVELS[key];
     if(!d) return overview();
+
+    var sections = [
+      { key:'exam', icon:'📋', title:'Exam Details', desc:'Level, number of papers, group structure, exam pattern and attempt cycle.' },
+      { key:'subjects', icon:'📚', title:'Subjects', desc:'Paper-wise topics and number of questions \u2014 tap any paper to expand.' },
+      { key:'passing', icon:'🎯', title:'Passing Criteria & Pass %', desc:'Passing rule, exemption carry-forward, and last 3 years\u2019 pass percentage.' }
+    ];
+    var cardsHTML = sections.map(function(s){
+      return '<button class="upsc-module" type="button" data-ca-section="'+key+':'+s.key+'"><div class="i">'+s.icon+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p></button>';
+    }).join('');
+
     return back() + `
       <section class="upsc-section" style="margin-top:18px;">
         <div class="cid-kicker">${d.name.toUpperCase()}</div>
         <h2>${d.icon} ${d.name}</h2>
         <p class="sub">${d.tagline}</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cardsHTML}</div>
+      </section>`;
+  }
 
-        <div class="ca-timeline" style="margin-top:26px;">
-          <div class="ca-step">
-            <div class="ca-step-dot">1</div>
-            <div class="ca-step-label">Level</div>
-            <div class="ca-step-card">${d.level}</div>
-          </div>
-          <div class="ca-step">
-            <div class="ca-step-dot">2</div>
-            <div class="ca-step-label">Number of Papers</div>
-            <div class="ca-step-card"><span class="ca-big-num">${d.papers.count}</span> <span class="ca-dim">papers &middot; ${d.papers.marks} marks total</span><div class="ca-step-note">${d.papers.note}</div></div>
-          </div>
-          <div class="ca-step">
-            <div class="ca-step-dot">3</div>
-            <div class="ca-step-label">Subjects</div>
-            <div class="ca-step-card">${subjectsHTML(d, key)}</div>
-          </div>
-          <div class="ca-step">
-            <div class="ca-step-dot">4</div>
-            <div class="ca-step-label">Group Structure</div>
-            <div class="ca-step-card">${d.groupStructure}</div>
-          </div>
-          <div class="ca-step">
-            <div class="ca-step-dot">5</div>
-            <div class="ca-step-label">Exam Pattern</div>
-            <div class="ca-step-card">${d.examPattern}</div>
-          </div>
-          <div class="ca-step">
-            <div class="ca-step-dot">6</div>
-            <div class="ca-step-label">Passing Criteria</div>
-            <div class="ca-step-card">${d.passingCriteria}</div>
-          </div>
-          <div class="ca-step">
-            <div class="ca-step-dot">7</div>
-            <div class="ca-step-label">Attempt Cycle</div>
-            <div class="ca-step-card">${d.attemptCycle}</div>
-          </div>
-        </div>
+  function levelSectionDetail(key, section){
+    var d = CA_LEVELS[key];
+    if(!d) return overview();
+    var backBtn = '<button class="cid-back" type="button" data-ca-section-back="'+key+'" style="margin-top:22px;">← Back to '+d.name+'</button>';
+    var body = '';
+    var title = '';
+
+    if(section === 'exam'){
+      title = 'Exam Details';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Level</div><div class="ca-step-card">'+d.level+'</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Number of Papers</div><div class="ca-step-card"><span class="ca-big-num">'+d.papers.count+'</span> <span class="ca-dim">papers &middot; '+d.papers.marks+' marks total</span><div class="ca-step-note">'+d.papers.note+'</div></div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Group Structure</div><div class="ca-step-card">'+d.groupStructure+'</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Exam Pattern</div><div class="ca-step-card">'+d.examPattern+'</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Attempt Cycle</div><div class="ca-step-card">'+d.attemptCycle+'</div></div>';
+    } else if(section === 'subjects'){
+      title = 'Subjects';
+      body = '<div class="ca-detail-block"><div class="ca-step-card">'+subjectsHTML(d, key)+'</div></div>';
+    } else if(section === 'passing'){
+      title = 'Passing Criteria & Pass %';
+      body = '<div class="ca-detail-block"><div class="ca-step-label">Passing Criteria</div><div class="ca-step-card">'+d.passingCriteria+(key !== 'foundation' ? CA_EXEMPTION_HTML : '')+(key === 'final' ? CA_FINAL_PASS_RATE_HTML : passRateGridHTML(key))+'</div></div>';
+    }
+
+    return backBtn + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${d.name.toUpperCase()}</div>
+        <h2>${title}</h2>
+        ${body}
       </section>`;
   }
 
@@ -5130,13 +5249,37 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
         if(item) item.classList.toggle('open');
       };
     });
+    var caTabs = r.querySelectorAll('[data-ca-tab]');
+    if(caTabs.length){
+      caTabs.forEach(function(btn){
+        btn.onclick = function(){
+          caTabs.forEach(function(b){ b.classList.remove('active'); });
+          this.classList.add('active');
+          var target = this.getAttribute('data-ca-tab');
+          r.querySelectorAll('[data-ca-panel]').forEach(function(panel){
+            panel.classList.toggle('active', panel.getAttribute('data-ca-panel') === target);
+          });
+        };
+      });
+    }
+    r.querySelectorAll('[data-ca-section]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-ca-section')); };
+    });
+    r.querySelectorAll('[data-ca-section-back]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-ca-section-back')); };
+    });
   }
 
   function render(view){
     var r = root();
     if(!r) return;
     r.style.display = 'block';
-    r.innerHTML = (view && CA_LEVELS[view]) ? levelDetail(view) : overview();
+    if(view && view.indexOf(':') > -1){
+      var parts = view.split(':');
+      r.innerHTML = levelSectionDetail(parts[0], parts[1]);
+    } else {
+      r.innerHTML = (view && CA_LEVELS[view]) ? levelDetail(view) : overview();
+    }
     bind();
   }
 
@@ -5145,7 +5288,22 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     if(name === 'CA'){
       document.body.classList.remove('cid-home-mode');
       document.body.classList.add('cid-category-mode');
-      if(typeof renderSidebar === 'function') renderSidebar();
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('CA', 'Chartered Accountancy', [
+          {key:'overview', label:'CA Overview'},
+          {key:'foundation', label:'Foundation'},
+          {key:'intermediate', label:'Intermediate'},
+          {key:'final', label:'Final'}
+        ], 'overview', function(key){
+          var backBtn = document.querySelector('[data-ca-back]');
+          if(backBtn) backBtn.click();
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-ca-open="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      } else if(typeof renderSidebar === 'function') renderSidebar();
       var home = document.getElementById('cid-category-home');
       if(home) home.style.display = 'none';
       var topbar = document.querySelector('.cid-category-topbar');
@@ -5474,7 +5632,22 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     if(name === 'PHARMA' || name === 'Pharma'){
       document.body.classList.remove('cid-home-mode');
       document.body.classList.add('cid-category-mode');
-      if(typeof renderSidebar === 'function') renderSidebar();
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('Pharma', 'B.Pharm / M.Pharm', [
+          {key:'overview', label:'Pharma Overview'},
+          {key:'gpat', label:'GPAT'},
+          {key:'vacancy', label:'Govt Vacancies'},
+          {key:'semester', label:'Semester'}
+        ], 'overview', function(key){
+          var backBtn = document.querySelector('[data-pharma-back]');
+          if(backBtn) backBtn.click();
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-pharma-open="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      } else if(typeof renderSidebar === 'function') renderSidebar();
       var home = document.getElementById('cid-category-home');
       if(home) home.style.display = 'none';
       var topbar = document.querySelector('.cid-category-topbar');
@@ -5757,7 +5930,23 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     if(name === 'SSC + Railways'){
       document.body.classList.remove('cid-home-mode');
       document.body.classList.add('cid-category-mode');
-      if(typeof renderSidebar === 'function') renderSidebar();
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('SSC + Railways', 'Government Jobs', [
+          {key:'overview', label:'SSC + Railways Overview'},
+          {key:'ssc', label:'SSC'},
+          {key:'railway', label:'Railway'}
+        ], 'overview', function(key){
+          for(var i=0;i<2;i++){
+            var backBtn = document.querySelector('[data-sr-back]');
+            if(backBtn) backBtn.click();
+          }
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-sr-open="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      } else if(typeof renderSidebar === 'function') renderSidebar();
       var home = document.getElementById('cid-category-home');
       if(home) home.style.display = 'none';
       var topbar = document.querySelector('.cid-category-topbar');
@@ -5799,6 +5988,742 @@ body.cid-home-mode .main{ width:auto !important; max-width:none !important; marg
   window.cidGoHome = function(){
     if(typeof previousGoHome === 'function') previousGoHome();
     if(typeof renderSidebar === 'function') renderSidebar();
+  };
+})();
+</script>
+
+<script id="cid-shared-category-sidebar">
+/* One shared helper so every category's sidebar looks and behaves identically
+   to MBA's — a persistent module list with an "All Categories" button pinned
+   at the bottom. Reused by NEET, JEE, CA, Pharma and SSC+Railway instead of
+   each one inventing its own sidebar markup. */
+window.cidRenderCategorySidebar = function(categoryLabel, subtitle, items, activeKey, onSelect){
+  var s = document.getElementById('sidebar');
+  if(!s) return;
+  var navHTML = items.map(function(it){
+    return '<button type="button" class="mba-nav-btn'+(it.key===activeKey?' active':'')+'" data-cid-sb-item="'+it.key+'">'+it.label+'</button>';
+  }).join('');
+  s.innerHTML =
+    '<div class="brand">'+
+      '<div class="brand-mark">PW</div>'+
+      '<div class="mba-sidebar-title">Counsellor Intelligence<br>Dashboard (C.I.D)</div>'+
+      '<div class="mba-sidebar-sub">'+categoryLabel+' \u00b7 '+subtitle+'</div>'+
+    '</div>'+
+    '<div class="nav-label">'+categoryLabel.toUpperCase()+' MODULES</div>'+
+    '<div class="mba-nav-section">'+navHTML+'</div>'+
+    '<div class="mba-sidebar-home"><button type="button" data-cid-sb-allcats>← All Categories</button></div>';
+  s.querySelectorAll('[data-cid-sb-item]').forEach(function(btn){
+    btn.onclick = function(){ onSelect(this.getAttribute('data-cid-sb-item')); };
+  });
+  var homeBtn = s.querySelector('[data-cid-sb-allcats]');
+  if(homeBtn) homeBtn.onclick = function(){ if(typeof window.cidGoHome === 'function') window.cidGoHome(); };
+};
+
+window.cidSetSidebarActive = function(key){
+  document.querySelectorAll('#sidebar [data-cid-sb-item]').forEach(function(btn){
+    btn.classList.toggle('active', btn.getAttribute('data-cid-sb-item') === key);
+  });
+};
+
+/* Keeps the sidebar highlight in sync no matter how navigation happens —
+   via the sidebar itself, or by clicking a card directly inside the page. */
+document.addEventListener('click', function(e){
+  var el = e.target.closest && e.target.closest(
+    '[data-neet-open],[data-neet-back],[data-jee-open],[data-jee-back],'+
+    '[data-ca-open],[data-ca-back],[data-pharma-open],[data-pharma-back],'+
+    '[data-sr-open],[data-sr-back]'
+  );
+  if(!el) return;
+  setTimeout(function(){
+    var key = null;
+    if(el.hasAttribute('data-neet-back')) key = 'overview';
+    else if(el.hasAttribute('data-neet-open')) key = el.getAttribute('data-neet-open');
+    else if(el.hasAttribute('data-jee-back')) key = 'overview';
+    else if(el.hasAttribute('data-jee-open')) key = el.getAttribute('data-jee-open');
+    else if(el.hasAttribute('data-ca-back')) key = 'overview';
+    else if(el.hasAttribute('data-ca-open')) key = el.getAttribute('data-ca-open');
+    else if(el.hasAttribute('data-pharma-back')) key = 'overview';
+    else if(el.hasAttribute('data-pharma-open')) key = el.getAttribute('data-pharma-open');
+    else if(el.hasAttribute('data-sr-back')) key = el.getAttribute('data-sr-back');
+    else if(el.hasAttribute('data-sr-open')) key = el.getAttribute('data-sr-open');
+    if(key) window.cidSetSidebarActive(key);
+  }, 0);
+}, true);
+
+</script>
+
+<style id="defence-category-style">
+.df-checker{margin:14px 0 20px;padding:20px;border:1px solid #dbe3f2;border-radius:16px;background:linear-gradient(135deg,#f7f9ff,#fff);}
+.df-check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.df-field label{display:block;font-size:12px;font-weight:700;color:#475467;margin-bottom:6px;}
+.df-field input,.df-field select{width:100%;padding:10px 12px;border:1px solid #d8dee8;border-radius:10px;font:inherit;background:#fff;}
+@media(max-width:650px){.df-check-grid{grid-template-columns:1fr;}}
+</style>
+<script id="defence-category-module">
+(function(){
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, target){ return '<button class="cid-back" type="button" data-df-back="'+target+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+
+  var DEFENCE_EXAMS = {
+    nda: {
+      icon:'🎖️', name:'NDA', sub:'National Defence Academy',
+      examDetails:{
+        level:'Entry straight after Class 12 \u2014 the earliest officer-entry route into the Army, Navy or Air Force.',
+        stages:['Written (Maths + GAT)','SSB Interview','Medical'],
+        marking:'Maths: \u22120.83/wrong \u00b7 GAT: \u22121.33/wrong (1/3rd deduction)',
+        structure:'Written 900 marks (Maths 300 + GAT 600) + SSB 900 marks = 1800 total.',
+        frequency:'Twice a year \u2014 NDA 1 and NDA 2, conducted by UPSC.',
+        posts:['Indian Army (IMA)','Indian Navy (INA)','Indian Air Force (AFA)']
+      },
+      eligibilitySummary:'12th pass or appearing (Physics & Maths compulsory for Army/Navy/Air Force wings). Age 16.5\u201319.5 years. Must be unmarried \u2014 marriage during training leads to discharge.',
+      subjects:[
+        {name:'Mathematics', desc:'Algebra, calculus, trigonometry, analytic geometry, vectors, statistics \u2014 Class 11\u201312 level.'},
+        {name:'English (GAT Part A)', desc:'Grammar, vocabulary, comprehension \u2014 200 of the 600 GAT marks.'},
+        {name:'General Knowledge (GAT Part B)', desc:'Physics, Chemistry, General Science, History, Geography, Current Affairs \u2014 400 of the 600 GAT marks.'}
+      ],
+      cutoff:{
+        type:'general',
+        note:'NDA does not publish a category-wise (Gen/OBC/SC/ST) written cutoff \u2014 UPSC releases one cutoff per exam cycle (NDA 1 and NDA 2 separately), applicable across categories. NDA 1 figures below are officially confirmed; NDA 2 figures are the commonly reported range pending exact confirmation \u2014 verify against the live UPSC release.',
+        rows:[
+          ['NDA 1 2024','360 / 900 (confirmed)','683 / 1800 (confirmed)'],
+          ['NDA 2 2024','~354\u2013364 / 900 (reported range)','~709\u2013719 / 1800 (reported range)'],
+          ['NDA 1 2025','370 / 900 (confirmed)','688 / 1800 (confirmed)'],
+          ['NDA 2 2025','~365\u2013375 / 900 (reported range)','~710\u2013720 / 1800 (reported range)']
+        ],
+        cols:['Cycle','Written Cutoff','Final Cutoff (Written+SSB)']
+      }
+    },
+    cds: {
+      icon:'🪖', name:'CDS', sub:'Combined Defence Services',
+      examDetails:{
+        level:'Graduate-entry route into the Army, Navy, Air Force or Short Service Commission.',
+        stages:['Written (English + GK + Maths, or English + GK for OTA)','SSB Interview','Medical'],
+        marking:'\u22121/3 per wrong answer',
+        structure:'IMA/INA/AFA: 3 papers \u00d7 100 marks = 300, + SSB 300 marks. OTA: 2 papers \u00d7 100 = 200 (no Maths), + SSB 200 marks.',
+        frequency:'Twice a year, conducted by UPSC.',
+        posts:['IMA (Army)','INA (Navy)','AFA (Air Force)','OTA (Short Service Commission)']
+      },
+      eligibilitySummary:'Bachelor\u2019s degree (Engineering required for INA; any degree for IMA/OTA). Age: IMA/INA/AFA 19\u201324 years, OTA 19\u201325 years. Women eligible for all four academies.',
+      subjects:[
+        {name:'English', desc:'Grammar, vocabulary, comprehension \u2014 100 marks, common to all academies.'},
+        {name:'General Knowledge', desc:'Current affairs, history, geography, polity, science \u2014 100 marks, common to all academies.'},
+        {name:'Elementary Mathematics', desc:'Class 10 level \u2014 100 marks. Not required for OTA.'}
+      ],
+      cutoff:{
+        type:'academy-year',
+        note:'UPSC releases the CDS cutoff by academy (IMA/INA/AFA/OTA), not by social category \u2014 this is the actual, meaningful segmentation for this exam. Select a year to see that cycle\u2019s official written cutoff and final merit score (last recommended candidate) per academy.',
+        byYear:{
+          '2025 (CDS 1)': [
+            ['IMA','120 / 300','243 / 600'],
+            ['INA','104 / 300','230 / 600'],
+            ['AFA','128 / 300','253 / 600'],
+            ['OTA (Men)','81 / 200','163 / 400'],
+            ['OTA (Women)','81 / 200','171 / 400']
+          ],
+          '2024 (CDS 2)': [
+            ['IMA','117 / 300','241 / 600'],
+            ['INA','90 / 300','220 / 600'],
+            ['AFA','126 / 300','Verification Required'],
+            ['OTA (Men)','Verification Required','Verification Required'],
+            ['OTA (Women)','Verification Required','Verification Required']
+          ]
+        },
+        cols:['Academy','Written Cutoff','Final Merit Score (Last Recommended)']
+      }
+    },
+    afcat: {
+      icon:'✈️', name:'AFCAT', sub:'Air Force Common Admission Test',
+      examDetails:{
+        level:'Graduate-entry route into the Indian Air Force \u2014 open to both technical and non-technical graduates.',
+        stages:['AFCAT CBT','EKT (Technical branch only)','AFSB Interview','Medical'],
+        marking:'+3 correct, \u22121 wrong',
+        structure:'AFCAT: 100 questions/300 marks/2 hrs. EKT (if applicable): 50 questions/150 marks/45 min, no negative marking.',
+        frequency:'Twice a year, conducted by the Indian Air Force.',
+        posts:['Flying Branch','Ground Duty (Technical)','Ground Duty (Non-Technical)']
+      },
+      eligibilitySummary:'Flying & Ground Duty (Non-Technical): 50%+ in Physics & Maths at 12th + Bachelor\u2019s degree (60%+ for Engineering). Ground Duty (Technical): 60%+ in Physics & Maths at 12th + Engineering degree. Age: Flying 20\u201324 yrs (up to 26 with a DGCA CPL), Ground Duty (Technical & Non-Technical) 20\u201326 yrs.',
+      subjects:[
+        {name:'General Awareness', desc:'Current affairs, history, geography, polity, defence-related GK.'},
+        {name:'Verbal Ability (English)', desc:'Comprehension, error-spotting, fill-in-the-blanks, synonyms/antonyms.'},
+        {name:'Numerical Ability', desc:'Basic arithmetic, percentage, ratio, averages, time-speed-distance.'},
+        {name:'Reasoning & Military Aptitude', desc:'Verbal & non-verbal reasoning, spatial ability, military-situation judgement.'}
+      ],
+      cutoff:{
+        type:'general',
+        note:'AFCAT cutoff is released per cycle (not by social category) and varies by branch \u2014 Flying Branch typically runs highest, Ground Duty Non-Technical lowest. Rows below are the confirmed overall AFCAT cutoffs for the last 3 released cycles (out of 300).',
+        rows:[
+          ['AFCAT 2 2024','139 / 300'],
+          ['AFCAT 1 2025','121 / 300'],
+          ['AFCAT 1 2026','110 / 300']
+        ],
+        cols:['Cycle','Cutoff (Written)']
+      }
+    },
+    agniveer: {
+      icon:'🪙', name:'Agniveer', sub:'Agnipath Scheme \u2014 Soldier/Sailor/Airman entry',
+      examDetails:{
+        level:'4-year short service scheme for soldier/sailor/airman-level entry \u2014 Army, Navy and Air Force each run their own separately-notified recruitment.',
+        stages:['CEE (Computer-Based Test)','Physical Fitness Test','Medical Examination','Document Verification'],
+        marking:'\u22120.5 per wrong answer (varies slightly by category)',
+        structure:'CEE: 50 MCQs / 100 marks / 60 minutes (post-wise weightage on Science/GK/Maths varies by category).',
+        frequency:'Held periodically through the year; Army, Navy and Air Force notify separately.',
+        posts:['Agniveer GD','Agniveer Technical','Agniveer Clerk/Store Keeper','Agniveer Tradesman']
+      },
+      eligibilitySummary:'GD: 10th pass, 45% aggregate + 33% per subject. Technical: 12th pass with Physics, Chemistry, Maths & English. Clerk/Store Keeper: 12th pass, 60% aggregate + 50% per subject. Age: 17.5\u201321 years for most categories (some categories differ) \u2014 roughly 25% of Agniveers are retained as permanent regular cadre after 4 years.',
+      subjects:[
+        {name:'General Science', desc:'Physics, Chemistry, Biology basics \u2014 weighted highest for GD (40%).'},
+        {name:'General Knowledge', desc:'Current affairs, history, geography, civics.'},
+        {name:'Mathematics/Reasoning', desc:'Weightage and depth vary by category \u2014 heaviest for Technical (~60% combined with Science).'}
+      ],
+      cutoff:{
+        type:'general',
+        note:'Agniveer does not have one national cutoff \u2014 the Army releases merit lists per recruiting Zone (state/region) and category, similar to how RRB/SSC GD cutoffs work. A student\u2019s actual qualifying score depends on their specific Zone Recruiting Office\u2019s rally and vacancy count that cycle.',
+        rows:[
+          ['All zones/categories','Varies by Zone Recruiting Office and category \u2014 check the specific Rally/ARO notification']
+        ],
+        cols:['Scope','What Determines the Cutoff']
+      }
+    }
+  };
+
+  var EXAM_LIST = ['nda','cds','afcat','agniveer'];
+
+  function overview(){
+    var cards = EXAM_LIST.map(function(k){
+      var e = DEFENCE_EXAMS[k];
+      return '<button type="button" class="exam-icon-card" data-df-exam="'+k+'">'+
+        '<span class="exam-icon">'+e.icon+'</span>'+
+        '<b>'+e.name+'</b>'+
+        '<span>'+e.sub+'</span>'+
+        '<em>Explore →</em>'+
+      '</button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">DEFENCE INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">Defence Entrance & Recruitment</h1>
+        <p class="sub">Officer entry (NDA, CDS, AFCAT) and soldier/sailor/airman entry (Agniveer) into the Indian Armed Forces.</p>
+        <div class="exam-icon-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function examOverview(key){
+    var e = DEFENCE_EXAMS[key];
+    if(!e) return overview();
+    var sections = [
+      { key:'exam', icon:'📋', title:'Exam Details', desc:'Stages, marking scheme, structure and frequency.' },
+      { key:'eligibility', icon:'✅', title:'Eligibility Criterion', desc:'Education, age band and an interactive quick-check tool.' },
+      { key:'subjects', icon:'📚', title:'Subjects & Syllabus', desc:'Section-wise topics tested in the written exam.' },
+      { key:'cutoff', icon:'📊', title:'Cut-off (Last 3 Years)', desc:'Recent cutoff trend and how it\u2019s actually segmented.' }
+    ];
+    var cardsHTML = sections.map(function(s){
+      return '<button class="upsc-module" type="button" data-df-section="'+key+':'+s.key+'"><div class="i">'+s.icon+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p></button>';
+    }).join('');
+    return back('Defence Overview', 'overview') + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">DEFENCE</div>
+        <h2>${e.icon} ${e.name}</h2>
+        <p class="sub">${e.sub}</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cardsHTML}</div>
+      </section>`;
+  }
+
+  function chipList(items){
+    return '<div class="ca-topic-chips">' + items.map(function(t){ return '<span class="ca-topic-chip">'+t+'</span>'; }).join('') + '</div>';
+  }
+
+  function examDetailsBody(e){
+    return '<div class="ca-detail-block"><div class="ca-step-label">Level</div><div class="ca-step-card">'+e.examDetails.level+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Stages</div><div class="ca-step-card">'+
+        '<div class="exam-stage-flow">'+e.examDetails.stages.map(function(s,i){ return (i>0?'<span class="exam-stage-arrow">→</span>':'')+'<span class="exam-stage-chip">'+s+'</span>'; }).join('')+'</div>'+
+      '</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Marking</div><div class="ca-step-card"><span class="exam-marking-badge">'+e.examDetails.marking+'</span></div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Structure</div><div class="ca-step-card">'+e.examDetails.structure+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Frequency</div><div class="ca-step-card">'+e.examDetails.frequency+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Posts</div><div class="ca-step-card">'+chipList(e.examDetails.posts)+'</div></div>';
+  }
+
+  function subjectsBody(e){
+    return e.subjects.map(function(s){
+      return '<div class="ca-detail-block"><div class="ca-step-label">'+s.name+'</div><div class="ca-step-card">'+s.desc+'</div></div>';
+    }).join('');
+  }
+
+  function cutoffTableHTML(cols, rows){
+    var head = '<tr>'+cols.map(function(h){ return '<th>'+h+'</th>'; }).join('')+'</tr>';
+    var body = rows.map(function(r){
+      return '<tr>'+r.map(function(v){ return '<td><span class="mba-cutoff-badge">'+v+'</span></td>'; }).join('')+'</tr>';
+    }).join('');
+    return '<table class="mba-cutoff-table"><thead>'+head+'</thead><tbody>'+body+'</tbody></table>';
+  }
+
+  function cutoffBody(e){
+    var c = e.cutoff;
+    if(c.type === 'academy-year'){
+      var years = Object.keys(c.byYear);
+      var options = years.map(function(y,i){ return '<option value="'+y+'"'+(i===0?' selected':'')+'>'+y+'</option>'; }).join('');
+      return '<div class="ca-detail-block">'+
+        '<div class="ca-step-label">Select Year</div>'+
+        '<div class="ca-step-card">'+
+          '<div class="df-field" style="max-width:260px;"><select id="dfCutoffYear">'+options+'</select></div>'+
+          '<div style="overflow:auto;margin-top:14px;" id="dfCutoffTableWrap">'+cutoffTableHTML(c.cols, c.byYear[years[0]])+'</div>'+
+          '<div class="ca-step-note" style="margin-top:10px;">'+c.note+'</div>'+
+        '</div>'+
+      '</div>';
+    }
+    return '<div class="ca-detail-block"><div class="ca-step-card">'+
+      '<div style="overflow:auto;">'+cutoffTableHTML(c.cols, c.rows)+'</div>'+
+      '<div class="ca-step-note" style="margin-top:10px;">'+c.note+'</div>'+
+    '</div></div>';
+  }
+
+  // ---- Eligibility Checkers ----
+  function eligibilityBody(key, e){
+    var checkerHTML = '';
+    if(key === 'nda'){
+      checkerHTML =
+        '<div class="df-checker"><div class="df-check-grid">'+
+          '<div class="df-field"><label>Date of Birth</label><input id="dfDob" type="date"></div>'+
+          '<div class="df-field"><label>Education Status</label><select id="dfEdu"><option value="pass">12th Pass</option><option value="appearing">12th Appearing</option><option value="notyet">Below 12th</option></select></div>'+
+          '<div class="df-field"><label>Marital Status</label><select id="dfMarital"><option value="single">Unmarried</option><option value="married">Married</option></select></div>'+
+        '</div>'+
+        '<div class="upsc-checker-actions"><button class="upsc-check-btn" id="dfCheckBtn">Check Eligibility</button><button class="upsc-reset-btn" id="dfResetBtn">Reset</button></div>'+
+        '<div id="dfEligibilityResult" class="upsc-check-result"></div></div>';
+    } else if(key === 'cds'){
+      checkerHTML =
+        '<div class="df-checker"><div class="df-check-grid">'+
+          '<div class="df-field"><label>Date of Birth</label><input id="dfDob" type="date"></div>'+
+          '<div class="df-field"><label>Academy</label><select id="dfAcademy"><option value="IMA">IMA (Army)</option><option value="INA">INA (Navy)</option><option value="AFA">AFA (Air Force)</option><option value="OTA">OTA (Short Service Commission)</option></select></div>'+
+          '<div class="df-field"><label>Education Status</label><select id="dfEdu"><option value="completed">Graduation Completed</option><option value="final">Final Year / Appearing</option><option value="notyet">Not Yet Graduate</option></select></div>'+
+        '</div>'+
+        '<div class="upsc-checker-actions"><button class="upsc-check-btn" id="dfCheckBtn">Check Eligibility</button><button class="upsc-reset-btn" id="dfResetBtn">Reset</button></div>'+
+        '<div id="dfEligibilityResult" class="upsc-check-result"></div></div>';
+    } else if(key === 'afcat'){
+      checkerHTML =
+        '<div class="df-checker"><div class="df-check-grid">'+
+          '<div class="df-field"><label>Date of Birth</label><input id="dfDob" type="date"></div>'+
+          '<div class="df-field"><label>Branch</label><select id="dfBranch"><option value="flying">Flying Branch</option><option value="gdt">Ground Duty (Technical)</option><option value="gdnt">Ground Duty (Non-Technical)</option></select></div>'+
+          '<div class="df-field"><label>Education Status</label><select id="dfEdu"><option value="completed">Degree Completed (meets % criteria)</option><option value="final">Final Year / Appearing</option><option value="notyet">Doesn\u2019t Meet Degree/% Criteria</option></select></div>'+
+        '</div>'+
+        '<div class="upsc-checker-actions"><button class="upsc-check-btn" id="dfCheckBtn">Check Eligibility</button><button class="upsc-reset-btn" id="dfResetBtn">Reset</button></div>'+
+        '<div id="dfEligibilityResult" class="upsc-check-result"></div></div>';
+    } else if(key === 'agniveer'){
+      checkerHTML =
+        '<div class="df-checker"><div class="df-check-grid">'+
+          '<div class="df-field"><label>Date of Birth</label><input id="dfDob" type="date"></div>'+
+          '<div class="df-field"><label>Category</label><select id="dfCategory"><option value="gd">Agniveer GD</option><option value="tech">Agniveer Technical</option><option value="clerk">Agniveer Clerk/Store Keeper</option><option value="tradesman">Agniveer Tradesman</option></select></div>'+
+          '<div class="df-field"><label>Education Status</label><select id="dfEdu"><option value="meets">Meets the category\u2019s education requirement</option><option value="notmeets">Doesn\u2019t meet it yet</option></select></div>'+
+        '</div>'+
+        '<div class="upsc-checker-actions"><button class="upsc-check-btn" id="dfCheckBtn">Check Eligibility</button><button class="upsc-reset-btn" id="dfResetBtn">Reset</button></div>'+
+        '<div id="dfEligibilityResult" class="upsc-check-result"></div></div>';
+    }
+    return '<div class="ca-detail-block"><div class="ca-step-label">At a Glance</div><div class="ca-step-card">'+e.eligibilitySummary+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Quick Eligibility Checker</div>'+checkerHTML+
+      '<div class="ca-step-note">This is a directional quick-check for counselling conversations \u2014 always confirm against the live official notification before giving a final answer, especially for branch-specific physical/medical standards.</div></div>';
+  }
+
+  function ageOn(dobStr, refDate){
+    var d = new Date(dobStr+'T00:00:00');
+    var age = refDate.getFullYear() - d.getFullYear();
+    if(refDate.getMonth() < d.getMonth() || (refDate.getMonth() === d.getMonth() && refDate.getDate() < d.getDate())) age--;
+    return age;
+  }
+
+  function bindChecker(key){
+    var checkBtn = document.getElementById('dfCheckBtn');
+    var resetBtn = document.getElementById('dfResetBtn');
+    if(!checkBtn) return;
+    var today = new Date();
+
+    checkBtn.onclick = function(){
+      var out = document.getElementById('dfEligibilityResult');
+      var dob = document.getElementById('dfDob').value;
+      if(!dob){
+        out.className = 'upsc-check-result show warn';
+        out.innerHTML = '<div class="upsc-result-title">Enter Date of Birth</div><div class="upsc-result-sub">Please select a DOB to calculate age eligibility.</div>';
+        return;
+      }
+      var age = ageOn(dob, today);
+      var ok = true, reasons = [], stats = [];
+
+      if(key === 'nda'){
+        var edu = document.getElementById('dfEdu').value;
+        var marital = document.getElementById('dfMarital').value;
+        if(age < 16.5 || age > 19.5){ ok = false; reasons.push('Age must be between 16.5 and 19.5 years (currently '+age+').'); }
+        if(edu === 'notyet'){ ok = false; reasons.push('Must have passed or be appearing for Class 12.'); }
+        if(marital === 'married'){ ok = false; reasons.push('NDA requires candidates to be unmarried.'); }
+        stats = [['Age Today', age+' years'], ['Age Band', '16.5\u201319.5 yrs'], ['Education', edu === 'pass' ? '12th Pass' : (edu === 'appearing' ? '12th Appearing' : 'Below 12th')]];
+      } else if(key === 'cds'){
+        var academy = document.getElementById('dfAcademy').value;
+        var edu2 = document.getElementById('dfEdu').value;
+        var bands = { IMA:[19,24], INA:[19,24], AFA:[19,24], OTA:[19,25] };
+        var band = bands[academy];
+        if(age < band[0] || age > band[1]){ ok = false; reasons.push('Age must be between '+band[0]+' and '+band[1]+' years for '+academy+' (currently '+age+').'); }
+        if(edu2 === 'notyet'){ ok = false; reasons.push('Must hold (or be in the final year of) a Bachelor\u2019s degree.'); }
+        stats = [['Age Today', age+' years'], ['Age Band', band[0]+'\u2013'+band[1]+' yrs'], ['Academy', academy]];
+      } else if(key === 'afcat'){
+        var branch = document.getElementById('dfBranch').value;
+        var edu3 = document.getElementById('dfEdu').value;
+        var bands3 = { flying:[20,24], gdt:[20,26], gdnt:[20,26] };
+        var band3 = bands3[branch];
+        if(age < band3[0] || age > band3[1]){ ok = false; reasons.push('Age must be between '+band3[0]+' and '+band3[1]+' years for this branch (currently '+age+'; Flying Branch can extend to 26 with a DGCA CPL).'); }
+        if(edu3 === 'notyet'){ ok = false; reasons.push('Must meet the branch\u2019s degree and 12th Physics/Maths percentage requirement.'); }
+        stats = [['Age Today', age+' years'], ['Age Band', band3[0]+'\u2013'+band3[1]+' yrs'], ['Branch', branch === 'flying' ? 'Flying' : (branch === 'gdt' ? 'Ground Duty (Tech)' : 'Ground Duty (Non-Tech)')]];
+      } else if(key === 'agniveer'){
+        var cat = document.getElementById('dfCategory').value;
+        var edu4 = document.getElementById('dfEdu').value;
+        if(age < 17.5 || age > 21){ ok = false; reasons.push('Age must be between 17.5 and 21 years for most Agniveer categories (currently '+age+'; some categories may differ \u2014 confirm from the live notification).'); }
+        if(edu4 === 'notmeets'){ ok = false; reasons.push('Must meet the specific education requirement for the chosen category.'); }
+        stats = [['Age Today', age+' years'], ['Age Band', '17.5\u201321 yrs (typical)'], ['Category', cat]];
+      }
+
+      out.className = 'upsc-check-result show ' + (ok ? 'ok' : 'no');
+      out.innerHTML = '<div class="upsc-result-title">'+(ok ? 'Eligible for quick check' : 'Not Eligible for quick check')+'</div>'+
+        '<div class="upsc-result-sub">'+(ok ? 'Age and education conditions are within the selected limits.' : reasons.join(' '))+'</div>'+
+        '<div class="upsc-result-grid">'+stats.map(function(s){ return '<div class="upsc-result-stat"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>'; }).join('')+'</div>';
+    };
+
+    if(resetBtn){
+      resetBtn.onclick = function(){
+        var dobEl = document.getElementById('dfDob'); if(dobEl) dobEl.value = '';
+        var out = document.getElementById('dfEligibilityResult'); if(out) out.className = 'upsc-check-result';
+      };
+    }
+  }
+
+  function sectionDetail(examKey, section){
+    var e = DEFENCE_EXAMS[examKey];
+    if(!e) return overview();
+    var title = '', body = '';
+    if(section === 'exam'){ title = 'Exam Details'; body = examDetailsBody(e); }
+    else if(section === 'eligibility'){ title = 'Eligibility Criterion'; body = eligibilityBody(examKey, e); }
+    else if(section === 'subjects'){ title = 'Subjects & Syllabus'; body = subjectsBody(e); }
+    else if(section === 'cutoff'){ title = 'Cut-off (Last 3 Years)'; body = cutoffBody(e); }
+
+    return back(e.name, examKey) + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${e.name.toUpperCase()}</div>
+        <h2>${title}</h2>
+        ${body}
+      </section>`;
+  }
+
+  function bind(){
+    var r = root();
+    if(!r) return;
+    r.querySelectorAll('[data-df-exam]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-df-exam')); };
+    });
+    r.querySelectorAll('[data-df-section]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-df-section')); };
+    });
+    r.querySelectorAll('[data-df-back]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-df-back')); };
+    });
+    var elBody = r.querySelector('#dfCheckBtn');
+    if(elBody){
+      var currentView = r.getAttribute('data-current-view') || '';
+      var parts = currentView.split(':');
+      if(parts[1] === 'eligibility') bindChecker(parts[0]);
+    }
+    var yearSelect = r.querySelector('#dfCutoffYear');
+    if(yearSelect){
+      var cvParts = (r.getAttribute('data-current-view') || '').split(':');
+      var examKey = cvParts[0];
+      yearSelect.onchange = function(){
+        var e = DEFENCE_EXAMS[examKey];
+        var wrap = document.getElementById('dfCutoffTableWrap');
+        if(e && wrap) wrap.innerHTML = cutoffTableHTML(e.cutoff.cols, e.cutoff.byYear[this.value]);
+      };
+    }
+  }
+
+  function render(view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    if(view && view.indexOf(':') > -1){
+      var parts = view.split(':');
+      r.innerHTML = sectionDetail(parts[0], parts[1]);
+      r.setAttribute('data-current-view', view);
+    } else if(view && DEFENCE_EXAMS[view]){
+      r.innerHTML = examOverview(view);
+      r.setAttribute('data-current-view', view);
+    } else {
+      r.innerHTML = overview();
+      r.setAttribute('data-current-view', 'overview');
+    }
+    bind();
+  }
+
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'DEFENCE'){
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('Defence', 'Armed Forces Entry', [
+          {key:'overview', label:'Defence Overview'},
+          {key:'nda', label:'NDA'},
+          {key:'cds', label:'CDS'},
+          {key:'afcat', label:'AFCAT'},
+          {key:'agniveer', label:'Agniveer'}
+        ], 'overview', function(key){
+          for(var i=0;i<2;i++){
+            var backBtn = document.querySelector('[data-df-back]');
+            if(backBtn) backBtn.click();
+          }
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-df-exam="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = 'Defence';
+      }
+      render('overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
+  };
+})();
+</script>
+</script>
+
+<script id="cuetug-category-module">
+(function(){
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, target){ return '<button class="cid-back" type="button" data-cug-back="'+target+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+
+  var CUETUG_SECTIONS = [
+    { key:'exam', icon:'📋', title:'Exam Pattern & Eligibility', desc:'Sections, marking scheme, eligibility and frequency.' },
+    { key:'subjects', icon:'📚', title:'Subjects & Domains', desc:'Languages, domain subjects and the General Test.' },
+    { key:'cutoff', icon:'📊', title:'Cutoff Trends', desc:'How CUET UG cutoffs actually work \u2014 and why NTA doesn\u2019t set one.' },
+    { key:'universities', icon:'🏛️', title:'Universities & Career', desc:'Participating universities and what the score is used for.' }
+  ];
+
+  function overview(){
+    var cards = CUETUG_SECTIONS.map(function(s){
+      return '<button class="upsc-module" type="button" data-cug-section="'+s.key+'"><div class="i">'+s.icon+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p></button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">CUET UG INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">CUET UG \u2014 Common University Entrance Test</h1>
+        <p class="sub">NTA\u2019s single national entrance test for undergraduate admission to 280+ universities, including every central university.</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function sectionDetail(section){
+    var body = '', title = '';
+    if(section === 'exam'){
+      title = 'Exam Pattern & Eligibility';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Conducting Body & Mode</div><div class="ca-step-card">National Testing Agency (NTA), Computer-Based Test (CBT), conducted once a year (typically May\u2013June) across multiple days and shifts.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Eligibility</div><div class="ca-step-card">12th pass (or appearing) from any recognised board. Most participating universities require 45\u201350% aggregate for admission (this is a university-admission requirement, not a CUET exam-eligibility gate) \u2014 5% relaxation typically applies for SC/ST/OBC.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Sections</div><div class="ca-step-card">Section IA (Language, choice of 13), Section IB (an additional Language, choice of 20, optional), Section II (Domain-specific subjects \u2014 choose up to 6 from 23), Section III (General Test \u2014 required by some universities, optional for others). Each subject paper has 50 MCQs.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Marking Scheme</div><div class="ca-step-card"><span class="exam-marking-badge">+5 correct, \u22121 wrong, 0 unattempted</span><div class="ca-step-note" style="margin-top:8px;">Maximum 200 marks per subject/domain paper.</div></div></div>';
+    } else if(section === 'subjects'){
+      title = 'Subjects & Domains';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Section IA \u2014 Languages (choose 1 of 13)</div><div class="ca-step-card"><div class="ca-topic-chips">'+['Hindi','English','Marathi','Gujarati','Tamil','Telugu','Kannada','Malayalam','Bengali','Punjabi','Odia','Assamese','Urdu'].map(function(t){return '<span class="ca-topic-chip">'+t+'</span>';}).join('')+'</div></div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Section II \u2014 Domain Subjects (choose up to 6 of 23)</div><div class="ca-step-card"><div class="ca-topic-chips">'+['Accountancy','Biology/Biological Studies','Business Studies','Chemistry','Computer Science/Informatics Practices','Economics/Business Economics','Physics','Mathematics','History','Geography','Political Science','Sociology','Psychology','Home Science','Environmental Science','Agriculture','Fine Arts/Visual Arts'].map(function(t){return '<span class="ca-topic-chip">'+t+'</span>';}).join('')+'</div><div class="ca-step-note" style="margin-top:8px;">Reduced from 27 to 23 subjects in 2026 \u2014 a few discontinued subjects (e.g. Entrepreneurship, Legal Studies, Fashion Studies) are now covered via the General Test instead. Students can now choose a domain subject they didn\u2019t study in Class 12.</div></div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Section III \u2014 General Test</div><div class="ca-step-card"><div class="ca-topic-chips">'+['General Knowledge & Current Affairs','Numerical Ability','Quantitative Reasoning','Logical & Analytical Reasoning','General Science & Environmental Literacy'].map(function(t){return '<span class="ca-topic-chip">'+t+'</span>';}).join('')+'</div></div></div>';
+    } else if(section === 'cutoff'){
+      title = 'Cutoff Trends';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-card">NTA does <b>not</b> release a central CUET UG cutoff \u2014 it only provides raw scores, percentiles and an All India Rank. Each of the 280+ participating universities releases its own course-wise and category-wise cutoff separately, based on its own seat matrix, applicant pool and normalisation of that year\u2019s scores.<div class="ca-step-note" style="margin-top:10px;">This is the single most important thing to tell a student: a \u201cgood CUET score\u201d only means something once matched against the specific university + course they\u2019re targeting. Always point students to that university\u2019s own counselling portal (e.g. DU\u2019s CSAS, JNU\u2019s CUET-based admission) for the actual cutoff, rather than quoting a generic number.</div></div></div>';
+    } else if(section === 'universities'){
+      title = 'Universities & Career';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Participating Universities</div><div class="ca-step-card">280+ universities accept CUET UG scores, including <b>all central universities</b> (Delhi University, JNU, BHU, Jamia Millia Islamia, Aligarh Muslim University, and more), plus many State, Deemed and Private universities.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">What It Replaced</div><div class="ca-step-card">Since 2022, Class 12 board percentages are no longer used for central university UG admission \u2014 CUET UG score is what matters. A student with a lower board percentage but a stronger CUET score will be preferred over the reverse.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Career Pathways</div><div class="ca-step-card">One CUET UG score is usable across hundreds of universities and programmes \u2014 Arts, Science, Commerce, Management and more \u2014 removing the need to prepare for or sit multiple separate university entrance tests.</div></div>';
+    }
+    return back('CUET UG', 'overview') + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">CUET UG</div>
+        <h2>${title}</h2>
+        ${body}
+      </section>`;
+  }
+
+  function bind(){
+    var r = root();
+    if(!r) return;
+    r.querySelectorAll('[data-cug-section]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-cug-section')); };
+    });
+    r.querySelectorAll('[data-cug-back]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-cug-back')); };
+    });
+  }
+
+  function render(view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    r.innerHTML = (view && view !== 'overview') ? sectionDetail(view) : overview();
+    bind();
+  }
+
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'CUET UG'){
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('CUET UG', 'Undergraduate Entrance', [
+          {key:'overview', label:'CUET UG Overview'},
+          {key:'exam', label:'Exam Pattern & Eligibility'},
+          {key:'subjects', label:'Subjects & Domains'},
+          {key:'cutoff', label:'Cutoff Trends'},
+          {key:'universities', label:'Universities & Career'}
+        ], 'overview', function(key){
+          var backBtn = document.querySelector('[data-cug-back]');
+          if(backBtn) backBtn.click();
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-cug-section="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = 'CUET UG';
+      }
+      render('overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
+  };
+})();
+</script>
+
+<script id="cuetpg-category-module">
+(function(){
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, target){ return '<button class="cid-back" type="button" data-cpg-back="'+target+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+
+  var CUETPG_SECTIONS = [
+    { key:'exam', icon:'📋', title:'Exam Pattern & Eligibility', desc:'Format, marking scheme, eligibility and frequency.' },
+    { key:'subjects', icon:'📚', title:'Subjects & Domains', desc:'Domain-specific PG papers and general papers.' },
+    { key:'cutoff', icon:'📊', title:'Cutoff Trends', desc:'How CUET PG cutoffs work \u2014 and why NTA doesn\u2019t set one.' },
+    { key:'universities', icon:'🏛️', title:'Universities & Career', desc:'Participating universities and what the score is used for.' }
+  ];
+
+  function overview(){
+    var cards = CUETPG_SECTIONS.map(function(s){
+      return '<button class="upsc-module" type="button" data-cpg-section="'+s.key+'"><div class="i">'+s.icon+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p></button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">CUET PG INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">CUET PG \u2014 Common University Entrance Test (PG)</h1>
+        <p class="sub">NTA\u2019s single national entrance test for postgraduate admission to 190+ universities, including every central university.</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function sectionDetail(section){
+    var body = '', title = '';
+    if(section === 'exam'){
+      title = 'Exam Pattern & Eligibility';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Conducting Body & Mode</div><div class="ca-step-card">National Testing Agency (NTA), Computer-Based Test (CBT), conducted once a year (typically March) across multiple days and shifts.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Eligibility</div><div class="ca-step-card">Bachelor\u2019s degree (any discipline) or final year appearing. <b>No upper age limit.</b> Most universities require 50% aggregate in the qualifying degree (45% for SC/ST/OBC/PwD) \u2014 this is a university-admission requirement, not a CUET exam-eligibility gate.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Pattern</div><div class="ca-step-card">Single paper per subject/domain \u2014 <b>75 MCQs in 90 minutes</b> (about 1.2 minutes per question). Candidates choose the domain paper(s) matching the PG programme they want to apply for.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Marking Scheme</div><div class="ca-step-card"><span class="exam-marking-badge">+4 correct, \u22121 wrong, 0 unattempted</span><div class="ca-step-note" style="margin-top:8px;">Exact marks-per-question have varied slightly across cycles \u2014 confirm from the current year\u2019s official NTA bulletin before advising a student.</div></div></div>';
+    } else if(section === 'subjects'){
+      title = 'Subjects & Domains';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Domain-specific PG Papers</div><div class="ca-step-card"><div class="ca-topic-chips">'+['Political Science','Economics','Physics','Chemistry','Mathematics','Commerce','Management','Computer Science','English','Hindi','History','Sociology','Psychology','Life Sciences','Law','Social Work','Education','Geography'].map(function(t){return '<span class="ca-topic-chip">'+t+'</span>';}).join('')+'</div><div class="ca-step-note" style="margin-top:8px;">Each subject is a separate 75-question paper based on undergraduate-level knowledge of that discipline.</div></div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">General Papers (some universities)</div><div class="ca-step-card"><div class="ca-topic-chips">'+['General Reasoning','Language/Comprehension','General Awareness'].map(function(t){return '<span class="ca-topic-chip">'+t+'</span>';}).join('')+'</div></div></div>';
+    } else if(section === 'cutoff'){
+      title = 'Cutoff Trends';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-card">Like CUET UG, NTA does <b>not</b> release a central CUET PG cutoff \u2014 it only provides raw scores and rank. Each of the 190+ participating universities (53 Central, 42 State, 15 Deemed, 80+ Private, plus 1 international \u2014 Kathmandu University) runs its <b>own decentralised counselling</b> and releases its own course-wise, category-wise merit list/cutoff.<div class="ca-step-note" style="margin-top:10px;">JNU, DU and BHU typically release their first PG merit list in late May/early June. Always direct students to the specific university\u2019s own admission portal rather than quoting one generic cutoff figure.</div></div></div>';
+    } else if(section === 'universities'){
+      title = 'Universities & Career';
+      body =
+        '<div class="ca-detail-block"><div class="ca-step-label">Participating Universities</div><div class="ca-step-card">190+ universities accept CUET PG scores \u2014 53 Central universities (DU, JNU, BHU, Jamia, University of Hyderabad, and more), 42 State, 15 Deemed, 80+ Private, plus 1 international university (Kathmandu University).</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">What It Replaced</div><div class="ca-step-card">Since 2022, most individual university-specific PG entrance tests (e.g. the old JNUEE) have been merged into CUET PG \u2014 one exam now feeds admission across all of them, rather than a student needing to sit separate tests per university.</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Career Pathways</div><div class="ca-step-card">Gateway to Master\u2019s programmes across disciplines at India\u2019s top central universities \u2014 a common next step after a CUET UG-admitted (or any) undergraduate degree, feeding into further research (PhD/NET) or professional careers.</div></div>';
+    }
+    return back('CUET PG', 'overview') + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">CUET PG</div>
+        <h2>${title}</h2>
+        ${body}
+      </section>`;
+  }
+
+  function bind(){
+    var r = root();
+    if(!r) return;
+    r.querySelectorAll('[data-cpg-section]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-cpg-section')); };
+    });
+    r.querySelectorAll('[data-cpg-back]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-cpg-back')); };
+    });
+  }
+
+  function render(view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    r.innerHTML = (view && view !== 'overview') ? sectionDetail(view) : overview();
+    bind();
+  }
+
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'CUET PG'){
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('CUET PG', 'Postgraduate Entrance', [
+          {key:'overview', label:'CUET PG Overview'},
+          {key:'exam', label:'Exam Pattern & Eligibility'},
+          {key:'subjects', label:'Subjects & Domains'},
+          {key:'cutoff', label:'Cutoff Trends'},
+          {key:'universities', label:'Universities & Career'}
+        ], 'overview', function(key){
+          var backBtn = document.querySelector('[data-cpg-back]');
+          if(backBtn) backBtn.click();
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-cpg-section="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = 'CUET PG';
+      }
+      render('overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
   };
 })();
 </script>
