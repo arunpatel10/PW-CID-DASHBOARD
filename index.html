@@ -1027,17 +1027,17 @@ const EXAMS = {
     fullName: "University Grants Commission – National Eligibility Test",
     conductingBody: "National Testing Agency (NTA)",
     purpose: "National eligibility examination for teaching, research and related academic pathways. Subject-wise details can be explored from the list below.",
-    frequency: "As notified for the current cycle",
+    frequency: "Twice a year — June and December sessions",
     mode: "Computer Based Test (CBT)",
-    duration: "As per the current NTA information bulletin",
-    pattern: "Subject-wise examination structure. Use the current official NTA notification for exact year-specific pattern and rules.",
-    marking: "Verify the latest official information bulletin before quoting exact marking rules to a student.",
-    qualifyingBenchmark: "Category-wise qualifying criteria and subject cut-offs vary by cycle.",
-    ageLimit: "Verify current-cycle eligibility and age rules from the official notification.",
+    duration: "3 hours (single uninterrupted sitting, no break between papers)",
+    pattern: "2 compulsory papers in one sitting: Paper 1 (50 questions/100 marks) tests general teaching & research aptitude, common to all candidates. Paper 2 (100 questions/200 marks) is subject-specific, based on the candidate's chosen discipline. 150 questions / 300 marks total across ~87 subjects.",
+    marking: "+2 for every correct answer. There is NO negative marking \u2014 candidates should attempt every question. Paper 1 and Paper 2 carry equal weightage in the aggregate score.",
+    qualifyingBenchmark: "Category-wise qualifying percentage/percentile varies by subject and session \u2014 see the subject's own Cutoff Trend for historical figures.",
+    ageLimit: "JRF: upper age limit 30 years (as on 1 June/1 December of the exam cycle), with relaxation for OBC-NCL/SC/ST/PwD/women/third gender. No upper age limit for Assistant Professor eligibility or PhD admission.",
     officialSite: "ugcnet.nta.ac.in",
-    lastUpdated: "Subject list added to C.I.D",
-    source: "Subjects provided for the C.I.D dashboard",
-    verified: false,
+    lastUpdated: "29 April 2026 notification (June 2026 cycle)",
+    source: "NTA official UGC NET exam pattern notification",
+    verified: true,
     careerPaths: ["Assistant Professor eligibility pathway", "Research and PhD-related academic pathways", "Subject-specific teaching and academic careers"],
     subjects: ["ugc-paper1","ugc-commerce","ugc-computer","ugc-economics","ugc-education","ugc-english","ugc-geography","ugc-hindi","ugc-history","ugc-law","ugc-political-science","ugc-sociology","ugc-environmental-science","ugc-management"]
   }
@@ -1250,6 +1250,14 @@ const CSIR_CUTOFFS = [
 /* Source: JAM 2025 official qualifying cutoff, via Careers360             */
 /* ---------------------------------------------------------------------- */
 const JAM_CUTOFFS = [
+  // Official JAM 2024 qualifying cut-offs — IIT Madras statistical report
+  {exam:"iitjam",subject:"Mathematics",session:"2024",General:11.22,"OBC-NCL/EWS":10.09,"SC/ST/PwD":5.61,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
+  {exam:"iitjam",subject:"Physics",session:"2024",General:19.63,"OBC-NCL/EWS":17.66,"SC/ST/PwD":9.81,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
+  {exam:"iitjam",subject:"Chemistry",session:"2024",General:25.38,"OBC-NCL/EWS":22.84,"SC/ST/PwD":12.69,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
+  {exam:"iitjam",subject:"Biotechnology",session:"2024",General:44.46,"OBC-NCL/EWS":40.01,"SC/ST/PwD":22.23,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
+  {exam:"iitjam",subject:"Mathematical Statistics",session:"2024",General:23.03,"OBC-NCL/EWS":20.72,"SC/ST/PwD":11.51,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
+  {exam:"iitjam",subject:"Geology",session:"2024",General:33.09,"OBC-NCL/EWS":29.78,"SC/ST/PwD":16.54,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
+  {exam:"iitjam",subject:"Economics",session:"2024",General:24.64,"OBC-NCL/EWS":22.17,"SC/ST/PwD":12.32,unit:"marks /100",source:"Official JAM 2024 qualifying cutoff (IIT Madras)",verified:true},
   {exam:"iitjam",subject:"Mathematics",session:"2025",General:19.90,"OBC-NCL/EWS":17.91,"SC/ST/PwD":9.95,unit:"marks /100",source:"Official JAM 2025 qualifying cutoff (IIT Delhi)",verified:true},
   {exam:"iitjam",subject:"Physics",session:"2025",General:14.66,"OBC-NCL/EWS":13.19,"SC/ST/PwD":7.33,unit:"marks /100",source:"Official JAM 2025 qualifying cutoff (IIT Delhi)",verified:true},
   {exam:"iitjam",subject:"Chemistry",session:"2025",General:25.83,"OBC-NCL/EWS":23.24,"SC/ST/PwD":12.91,unit:"marks /100",source:"Official JAM 2025 qualifying cutoff (IIT Delhi)",verified:true},
@@ -7460,6 +7468,1040 @@ document.addEventListener('click', function(e){
         if(label) label.textContent = 'ACCA';
       }
       render('overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
+  };
+})();
+</script>
+<script id="clat-category-module">
+(function(){
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, target){ return '<button class="cid-back" type="button" data-clat-back="'+target+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+  function chipList(items){ return '<div class="ca-topic-chips">' + items.map(function(t){ return '<span class="ca-topic-chip">'+t+'</span>'; }).join('') + '</div>'; }
+
+  var LEVELS = {
+    ug: {
+      name:'CLAT UG', icon:'🎓', sub:'5-year Integrated Law Programmes (BA LLB & equivalent)',
+      overview:'CLAT UG is the single national entrance test for 5-year integrated undergraduate law programmes (BA LLB, BBA LLB, B.Com LLB, etc.) at the National Law Universities. It is an aptitude test, not a knowledge test \u2014 the Consortium designs it to assess reading, reasoning and analytical ability rather than rote legal knowledge.',
+      eligibility:'12th pass (or appearing) from any recognised board with a minimum of 45% aggregate (40% for SC/ST/PwD). There is <b>no upper age limit</b> and <b>no cap on the number of attempts.</b>',
+      pattern:'120 MCQs / 120 marks, 2 hours, conducted <b>offline</b> (pen-and-paper, OMR sheet) \u2014 unlike most other national entrance tests which have moved to CBT. Each correct answer: +1. Each wrong answer: \u22120.25. There are <b>no sectional cut-offs</b> \u2014 only the total score determines rank.',
+      subjects:[
+        {name:'Legal Reasoning', desc:'~30 questions, the single highest-weighted section (~25% of marks). Passage-based scenarios testing application of legal principles \u2014 no prior legal knowledge required, but strong reading speed matters.'},
+        {name:'Current Affairs & General Knowledge', desc:'~30 questions, passage-based, drawing on the last 12 months of news, static GK, and significant national/international events.'},
+        {name:'English Language', desc:'22\u201326 questions, comprehension passages (~450 words) testing vocabulary, grammar and inference.'},
+        {name:'Logical Reasoning', desc:'22\u201324 questions \u2014 puzzles, deductions, critical reasoning and argument analysis, passage-based.'},
+        {name:'Quantitative Techniques', desc:'10\u201312 questions, Class 10 difficulty level \u2014 data interpretation and basic numerical ability, all passage/data-based.'}
+      ],
+      dates:[
+        ['Application Opens','~August (previous year)'],
+        ['Exam Date','First Sunday of December (typically)'],
+        ['Result Declaration','Within ~3\u20134 weeks of the exam'],
+        ['Counselling & Seat Allotment','January\u2013June, across 5 allotment rounds']
+      ],
+      nlus:[
+        ['NLSIU Bangalore','1','Rank 1\u2013102 (Gen) \u2014 India\u2019s top-ranked law school'],
+        ['NALSAR Hyderabad','3','Rank 4\u2013167 (Gen)'],
+        ['WBNUJS Kolkata','4','Rank 140\u2013327 (Gen, BA LLB)'],
+        ['NLIU Bhopal','12','Rank ~200\u2013500 (Gen)'],
+        ['GNLU Gandhinagar','8','Rank 8\u2013464 (Gen)'],
+        ['NLU Jodhpur','7','Consistently among the top 5\u20137 choices nationally'],
+        ['RMLNLU Lucknow','20','Rank 357\u2013764 (Gen)'],
+        ['HNLU Raipur','15','Mid-tier, strong regional reputation'],
+        ['RGNUL Patiala','14','Mid-tier, popular in North India'],
+        ['CNLU Patna','18','Mid-tier'],
+        ['NUALS Kochi','17','Mid-tier, strong in Kerala/South India'],
+        ['NLU Odisha (Cuttack)','22','Mid-tier'],
+        ['NUSRL Ranchi','23','Mid-tier'],
+        ['MNLU Mumbai','10','Newer but high-demand due to Mumbai location'],
+        ['MNLU Nagpur','\u2014','Newer NLU'],
+        ['MNLU Aurangabad','\u2014','Newer NLU'],
+        ['DSNLU Visakhapatnam','\u2014','Newer NLU'],
+        ['TNNLS Tiruchirappalli','\u2014','Newer NLU, South India'],
+        ['HPNLU Shimla','\u2014','Newer NLU'],
+        ['DBRANLU Sonipat (Haryana)','\u2014','Newer NLU'],
+        ['NLUJAA Guwahati','\u2014','Newer NLU, Northeast region'],
+        ['NLU Agartala','\u2014','Newer/lower-demand NLU \u2014 most accessible closing ranks']
+      ],
+      nluNote:'25 NLUs exist, but <b>NLU Delhi runs its own separate exam (AILET)</b> and <b>NLU Meghalaya doesn\u2019t use CLAT either</b> \u2014 so CLAT actually feeds admission to the remaining ~23 NLUs plus 60+ affiliated private law colleges nationwide. NIRF rank shown where established; newer NLUs are still building their NIRF standing.',
+      career:['Litigation & courtroom practice','Corporate law / in-house counsel','Judiciary (after further judicial exams)','Civil Services (law background is a strong asset)','Legal Process Outsourcing (LPO)','Policy research & legal journalism']
+    },
+    pg: {
+      name:'CLAT PG', icon:'📖', sub:'1-year LLM Programme',
+      overview:'CLAT PG is the national entrance test for the 1-year LLM (Master of Laws) programme at National Law Universities. Unlike CLAT UG\u2019s aptitude focus, CLAT PG directly tests depth of legal subject knowledge \u2014 it assumes a law degree background. Around 17,000 candidates compete for roughly 1,590 LLM seats across 26 NLUs \u2014 a much tighter seat-to-applicant ratio than UG.',
+      eligibility:'An LLB / 5-year integrated law degree (or equivalent) with a minimum of 50% aggregate (45% for SC/ST). Final-year law students awaiting results can also apply, subject to the Consortium\u2019s conditions.',
+      pattern:'120 MCQs / 120 marks, 2 hours, <b>same marking scheme as CLAT UG</b>: +1 for correct, \u22120.25 for wrong. Offline, pen-and-paper (OMR) mode. No sectional cut-offs.',
+      subjects:[
+        {name:'Constitutional Law', desc:'The single most heavily weighted subject \u2014 fundamental rights, directive principles, constitutional amendments, landmark judgments.'},
+        {name:'Jurisprudence', desc:'Legal theory, schools of jurisprudence, concepts of law, rights and justice.'},
+        {name:'Administrative Law', desc:'Delegated legislation, judicial review, principles of natural justice.'},
+        {name:'Law of Contracts & Torts', desc:'Core private law principles and application-based scenarios.'},
+        {name:'Criminal Law, International Law & IPR', desc:'Additional core and specialised law areas drawn from the standard LLB curriculum.'}
+      ],
+      dates:[
+        ['Application Opens','~August (previous year)'],
+        ['Exam Date','Same day as CLAT UG (first Sunday of December, typically)'],
+        ['Result Declaration','Within ~3\u20134 weeks of the exam'],
+        ['Counselling & Seat Allotment','January\u2013May, run separately from UG counselling, across 5 rounds']
+      ],
+      nlus:[
+        ['NLSIU Bangalore','1','AIR ~2\u2013108 (Gen) \u2014 the most competitive LLM in the country'],
+        ['NALSAR Hyderabad','3','AIR ~5\u2013143 (Gen)'],
+        ['WBNUJS Kolkata','4','AIR ~460\u2013610 (Gen, varies by round/year)'],
+        ['NLU Jodhpur','7','Cutoff 85+ marks'],
+        ['NLIU Bhopal','12','Cutoff 85+ marks'],
+        ['GNLU Gandhinagar','8','Cutoff 85+ marks'],
+        ['RMLNLU Lucknow','20','Cutoff 78+ marks'],
+        ['MNLU Mumbai','10','Cutoff 82+ marks \u2014 high demand for Mumbai location'],
+        ['HNLU Raipur','15','Mid-tier'],
+        ['RGNUL Patiala','14','Mid-tier'],
+        ['CNLU Patna','18','Mid-tier'],
+        ['GNLU Silvassa (campus)','\u2014','Mid-tier'],
+        ['NLU Odisha (Cuttack)','22','~75+ marks \u2014 mid-lower tier'],
+        ['NUSRL Ranchi','23','Mid-lower tier'],
+        ['NUALS Kochi','17','Mid-lower tier'],
+        ['MNLU Nagpur / Aurangabad','\u2014','Newer/lower-demand'],
+        ['DSNLU Visakhapatnam','\u2014','Newer/lower-demand'],
+        ['TNNLU streams','\u2014','Newer/lower-demand'],
+        ['HPNLU Shimla','\u2014','Newer/lower-demand'],
+        ['NLUJAA Guwahati','\u2014','Newer/lower-demand'],
+        ['NLU Agartala','\u2014','Lowest closing rank (~3000+, General) \u2014 most accessible']
+      ],
+      nluNote:'26 NLUs participate in CLAT PG counselling. NLU Delhi (AILET) and NLU Meghalaya remain outside this process.',
+      rankPredictor:{
+        title:'If Your CLAT PG Rank Range Is\u2026 You\u2019ll Likely Get',
+        note:'Based on actual 2026 closing-rank data across 5 counselling rounds (General category, ~17,335 candidates for ~1,590 seats). Category-wise ranks (SC/ST/OBC/EWS) close much later than General \u2014 always check the specific round\u2019s category-wise release.',
+        rows:[
+          ['1 \u2013 150','NLSIU Bangalore or NALSAR Hyderabad'],
+          ['150 \u2013 500','WBNUJS Kolkata, NLU Jodhpur, NLIU Bhopal, or GNLU Gandhinagar'],
+          ['500 \u2013 1,000','RMLNLU Lucknow, MNLU Mumbai, HNLU Raipur, or RGNUL Patiala'],
+          ['1,000 \u2013 2,000','CNLU Patna, NUSRL Ranchi, NUALS Kochi, NLU Odisha, or GNLU Silvassa'],
+          ['2,000 \u2013 3,000+','MNLU Nagpur/Aurangabad, DSNLU, TNNLU, HPNLU, NLUJAA Guwahati, or NLU Agartala']
+        ]
+      },
+      career:['Academia & legal research','Judicial services (LLM strengthens judiciary exam profile)','Specialised legal practice (IP, Corporate, Tax law)','Corporate legal advisory & compliance','Policy think-tanks & legal consultancy']
+    }
+  };
+
+  function overview(){
+    var cards = ['ug','pg'].map(function(k){
+      var l = LEVELS[k];
+      return '<button type="button" class="ca-level-card" data-clat-open="'+k+'">'+
+        '<span class="ca-level-icon">'+l.icon+'</span>'+
+        '<b>'+l.name+'</b>'+
+        '<span>'+l.sub+'</span>'+
+        '<em>Explore →</em>'+
+      '</button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">CLAT INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">CLAT \u2014 Common Law Admission Test</h1>
+        <p class="sub">The single national entrance test for admission to India\u2019s National Law Universities \u2014 undergraduate and postgraduate law programmes.</p>
+        <div class="ca-level-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function levelOverview(key){
+    var l = LEVELS[key];
+    if(!l) return overview();
+    var sections = [
+      { key:'about', icon:'📋', title:'Overview & Eligibility', desc:'What this exam is for, who can apply, career options and important dates.' },
+      { key:'pattern', icon:'📝', title:'Exam Pattern & Syllabus', desc:'Sections, marking scheme and topics tested.' },
+      { key:'nlus', icon:'🏛️', title:'NLU Explorer', desc:'Participating NLUs, rankings and rank bands.' }
+    ];
+    var cardsHTML = sections.map(function(s){
+      return '<button class="upsc-module" type="button" data-clat-section="'+key+':'+s.key+'"><div class="i">'+s.icon+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p></button>';
+    }).join('');
+    return back('CLAT Overview', 'overview') + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">CLAT</div>
+        <h2>${l.icon} ${l.name}</h2>
+        <p class="sub">${l.sub}</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cardsHTML}</div>
+      </section>`;
+  }
+
+  function sectionDetail(key, section){
+    var l = LEVELS[key];
+    if(!l) return overview();
+    var title = '', body = '';
+
+    if(section === 'about'){
+      title = 'Overview & Eligibility';
+      var dateRows = l.dates.map(function(d){ return '<tr><td><b>'+d[0]+'</b></td><td>'+d[1]+'</td></tr>'; }).join('');
+      body = '<div class="ca-detail-block"><div class="ca-step-label">Overview</div><div class="ca-step-card">'+l.overview+'</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Eligibility</div><div class="ca-step-card">'+l.eligibility+'</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Career Options</div><div class="ca-step-card">'+chipList(l.career)+'</div></div>'+
+        '<div class="ca-detail-block"><div class="ca-step-label">Important Dates</div><div class="ca-step-card">'+
+          '<div style="overflow:auto;"><table class="mba-cutoff-table"><thead><tr><th>Milestone</th><th>Typical Timing</th></tr></thead><tbody>'+dateRows+'</tbody></table></div>'+
+          '<div class="ca-step-note" style="margin-top:10px;">Dates shift slightly each cycle \u2014 always confirm against the current year\u2019s official Consortium notification before advising a student on deadlines.</div>'+
+        '</div></div>';
+    } else if(section === 'pattern'){
+      title = 'Exam Pattern & Syllabus';
+      var subjRows = l.subjects.map(function(s){
+        return '<div class="ca-detail-block"><div class="ca-step-label">'+s.name+'</div><div class="ca-step-card">'+s.desc+'</div></div>';
+      }).join('');
+      body = '<div class="ca-detail-block"><div class="ca-step-label">Exam Pattern</div><div class="ca-step-card">'+l.pattern+'</div></div>' + subjRows;
+    } else if(section === 'nlus'){
+      title = 'NLU Explorer';
+      var nluRows = l.nlus.map(function(n){ return '<tr><td><b>'+n[0]+'</b></td><td>'+n[1]+'</td><td>'+n[2]+'</td></tr>'; }).join('');
+      var predictorHTML = '';
+      if(l.rankPredictor){
+        var predRows = l.rankPredictor.rows.map(function(r){ return '<tr><td><span class="mba-cutoff-badge">'+r[0]+'</span></td><td>'+r[1]+'</td></tr>'; }).join('');
+        predictorHTML = '<div class="ca-detail-block"><div class="ca-step-label">'+l.rankPredictor.title+'</div><div class="ca-step-card">'+
+          '<div style="overflow:auto;"><table class="mba-cutoff-table"><thead><tr><th>CLAT PG Rank Range</th><th>Likely NLU</th></tr></thead><tbody>'+predRows+'</tbody></table></div>'+
+          '<div class="ca-step-note" style="margin-top:10px;">'+l.rankPredictor.note+'</div>'+
+        '</div></div>';
+      }
+      body = predictorHTML + '<div class="ca-detail-block"><div class="ca-step-label">Participating NLUs</div><div class="ca-step-card">'+
+        '<div style="overflow:auto;"><table class="mba-cutoff-table"><thead><tr><th>NLU</th><th>NIRF Law Rank</th><th>Notes</th></tr></thead><tbody>'+nluRows+'</tbody></table></div>'+
+        '<div class="ca-step-note" style="margin-top:10px;">'+l.nluNote+'</div></div></div>';
+    }
+
+    return back(l.name, key) + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${l.name.toUpperCase()}</div>
+        <h2>${title}</h2>
+        ${body}
+      </section>`;
+  }
+
+  function bind(){
+    var r = root();
+    if(!r) return;
+    r.querySelectorAll('[data-clat-open]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-clat-open')); };
+    });
+    r.querySelectorAll('[data-clat-section]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-clat-section')); };
+    });
+    r.querySelectorAll('[data-clat-back]').forEach(function(btn){
+      btn.onclick = function(){ render(this.getAttribute('data-clat-back')); };
+    });
+  }
+
+  function render(view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    if(view && view.indexOf(':') > -1){
+      var parts = view.split(':');
+      r.innerHTML = sectionDetail(parts[0], parts[1]);
+    } else if(view && LEVELS[view]){
+      r.innerHTML = levelOverview(view);
+    } else {
+      r.innerHTML = overview();
+    }
+    bind();
+  }
+
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'CLAT'){
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('CLAT', 'Law Entrance', [
+          {key:'overview', label:'CLAT Overview'},
+          {key:'ug', label:'CLAT UG'},
+          {key:'pg', label:'CLAT PG'}
+        ], 'overview', function(key){
+          for(var i=0;i<2;i++){
+            var backBtn = document.querySelector('[data-clat-back]');
+            if(backBtn) backBtn.click();
+          }
+          if(key !== 'overview'){
+            var openBtn = document.querySelector('[data-clat-open="'+key+'"]');
+            if(openBtn) openBtn.click();
+          }
+          window.cidSetSidebarActive(key);
+        });
+      }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = 'CLAT';
+      }
+      render('overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
+  };
+})();
+</script>
+<script id="csir-ugc-redesign-module">
+(function(){
+  var _originalRenderExamPage = renderExamPage;
+
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, action){ return '<button class="cid-back" type="button" data-cun-back onclick="'+action+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+  function chipList(items){ return '<div class="ca-topic-chips">' + items.map(function(t){ return '<span class="ca-topic-chip">'+t+'</span>'; }).join('') + '</div>'; }
+
+  function subjectsMapFor(examId){ return examId === 'csirnet' ? CSIR_SUBJECTS : UGC_SUBJECTS; }
+  function cutoffsFor(examId){ return examId === 'csirnet' ? CSIR_CUTOFFS : UGC_CUTOFFS; }
+
+  window.cunRender = function(examId, view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    if(view === 'examdetails') r.innerHTML = examDetailsPage(examId);
+    else if(view === 'subjects') r.innerHTML = subjectsListPage(examId);
+    else if(view && view.indexOf('subject:') === 0) r.innerHTML = subjectDetailPage(examId, view.slice(8));
+    else if(view === 'allcutoffs'){ r.innerHTML = allCutoffsPage(examId); bindAllCutoffControls(); return; }
+    else if(view === 'selectionratio') r.innerHTML = selectionRatioPage(examId);
+    else if(view === 'results'){
+      renderResults({exam:examId});
+      var backBtn = document.createElement('button');
+      backBtn.className = 'cid-back'; backBtn.type = 'button';
+      backBtn.style.cssText = 'margin-bottom:18px;display:block;';
+      backBtn.textContent = '← Back to '+EXAMS[examId].shortName+' Overview';
+      backBtn.onclick = function(){ window.cunRender(examId,'overview'); if(window.cidSetSidebarActive) window.cidSetSidebarActive('overview'); };
+      r.insertBefore(backBtn, r.firstChild);
+      return;
+    }
+    else r.innerHTML = catOverview(examId);
+    bindCun(r, examId);
+  };
+
+  function catOverview(examId){
+    var exam = EXAMS[examId];
+    var cards = [
+      { key:'examdetails', icon:'📋', title:'Exam Details', desc:'Conducting body, pattern, marking scheme and eligibility age limits.' },
+      { key:'subjects', icon:'📚', title:'Subjects', desc:exam.subjects.length+' subjects \u2014 tap any one for topics, cutoff trend, pattern and career.' }
+    ];
+    if(examId === 'csirnet'){
+      cards.push({ key:'allcutoffs', icon:'📊', title:'Cutoff Trend (All Subjects)', desc:'Pick a year, track and category \u2014 see every subject\u2019s cutoff side by side.' });
+      cards.push({ key:'selectionratio', icon:'🎯', title:'Selection Ratio', desc:'How many appeared vs qualified, session by session.' });
+      cards.push({ key:'results', icon:'🏆', title:'PW Results', desc:'PW topper ranks, subject-wise and year-wise.' });
+    }
+    var cardsHTML = cards.map(function(c){
+      return '<button class="upsc-module" type="button" onclick="cunRender(\''+examId+'\',\''+c.key+'\')"><div class="i">'+c.icon+'</div><h3>'+c.title+'</h3><p>'+c.desc+'</p></button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">${exam.shortName} INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">${exam.fullName}</h1>
+        <p class="sub">${exam.purpose}</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cardsHTML}</div>
+      </section>`;
+  }
+
+  function bindAllCutoffControls(){
+    var yearSel = document.getElementById('csirAllYear');
+    var trackSel = document.getElementById('csirAllTrack');
+    var catSel = document.getElementById('csirAllCat');
+    if(!yearSel) return;
+    function refresh(){
+      var year = yearSel.value, track = trackSel.value, cat = catSel.value;
+      var rows = ['Chemical Sciences','Earth Sciences','Life Sciences','Mathematical Sciences','Physical Sciences'].map(function(subj){
+        var rec = CSIR_CUTOFFS.find(function(c){ return c.subject === subj && c.session === year && c.track === track; });
+        var cell = rec ? csirCutoffCellHTML(rec, cat) : '\u2014';
+        return '<tr><td><b>'+subj+'</b></td><td>'+cell+'</td></tr>';
+      }).join('');
+      document.getElementById('csirAllCutoffWrap').innerHTML =
+        '<table class="mba-cutoff-table"><thead><tr><th>Subject</th><th>'+cat+' Cutoff (%/percentile + approx marks /200)</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    }
+    yearSel.onchange = refresh; trackSel.onchange = refresh; catSel.onchange = refresh;
+    refresh();
+  }
+
+  function allCutoffsPage(examId){
+    var exam = EXAMS[examId];
+    var years = ['June 2024','Dec 2025'];
+    var tracks = ['JRF','Assistant Professor / LS','PhD Only'];
+    var cats = ['UR','EWS','OBC','SC','ST','PwD'];
+    var yearOpts = years.map(function(y){ return '<option value="'+y+'">'+y+'</option>'; }).join('');
+    var trackOpts = tracks.map(function(t){ return '<option value="'+t+'">'+t+'</option>'; }).join('');
+    var catOpts = cats.map(function(c){ return '<option value="'+c+'">'+c+'</option>'; }).join('');
+    return back(exam.shortName+' Overview', "cunRender('"+examId+"','overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${exam.shortName}</div>
+        <h2>📊 Cutoff Trend \u2014 All Subjects</h2>
+        <p class="sub">Pick a year, track and category to compare every subject's cutoff at a glance.</p>
+        <div class="exam-fact-row">
+          <div class="df-field"><label>Year</label><select id="csirAllYear">${yearOpts}</select></div>
+          <div class="df-field"><label>Track</label><select id="csirAllTrack">${trackOpts}</select></div>
+          <div class="df-field"><label>Category</label><select id="csirAllCat">${catOpts}</select></div>
+        </div>
+        <div id="csirAllCutoffWrap" style="margin-top:16px;overflow:auto;"></div>
+        <div class="ca-step-note" style="margin-top:10px;">Each cell shows the official %/percentile first, with approximate marks out of 200 just below it. Life Sciences is scored as an NTA percentile (large applicant pool) so its marks figure is an approximate range, not exact. Source: CSIR HRDG official releases.</div>
+      </section>`;
+  }
+
+  var CSIR_SELECTION_DATA = [
+    ['June 2023','2,74,027','1,99,890','8,570 (JRF+LS)','~4.3%'],
+    ['Dec 2023','2,19,146','1,75,355','6,901 (JRF+LS)','~3.9%'],
+    ['June 2024','2,25,335','1,63,529','6,539 (JRF+LS)','~4.0%'],
+    ['June 2025','\u2014','~1,47,000','13,102 (Cat 1+2+3 combined)','~8.9%']
+  ];
+
+  function selectionRatioPage(examId){
+    var exam = EXAMS[examId];
+    var rows = CSIR_SELECTION_DATA.map(function(r){
+      return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td>'+r[2]+'</td><td><span class="mba-cutoff-badge">'+r[3]+'</span></td><td>'+r[4]+'</td></tr>';
+    }).join('');
+    return back(exam.shortName+' Overview', "cunRender('"+examId+"','overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${exam.shortName}</div>
+        <h2>🎯 Selection Ratio</h2>
+        <p class="sub">How many candidates appeared each session, and how many actually qualified.</p>
+        <div style="overflow:auto;">
+        <table class="mba-cutoff-table">
+          <thead><tr><th>Session</th><th>Registered</th><th>Appeared</th><th>Qualified</th><th>Qualifying %</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        </div>
+        <div class="ca-step-note" style="margin-top:10px;">From June 2025 onward, CSIR reports qualification across 3 categories (Cat 1: JRF+Assistant Professor eligible; Cat 2: Assistant Professor+PhD eligible; Cat 3: PhD-only eligible) instead of the older JRF/LS split \u2014 so qualifying % isn't perfectly comparable across the two reporting eras. Source: Official CSIR-HRDG/NTA result releases.</div>
+      </section>`;
+  }
+
+  function examDetailsPage(examId){
+    var exam = EXAMS[examId];
+    return back(exam.shortName+' Overview', "cunRender('"+examId+"','overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${exam.shortName}</div>
+        <h2>📋 Exam Details</h2>
+        <div class="exam-fact-row">
+          <div class="exam-fact"><span class="exam-fact-label">Conducting Body</span><span class="exam-fact-value">${exam.conductingBody}</span></div>
+          <div class="exam-fact"><span class="exam-fact-label">Frequency</span><span class="exam-fact-value">${exam.frequency}</span></div>
+          <div class="exam-fact"><span class="exam-fact-label">Duration</span><span class="exam-fact-value">${exam.duration}</span></div>
+        </div>
+        <div class="exam-block-label">Exam Pattern</div>
+        <div class="ca-step-card">${exam.pattern}</div>
+        <div class="exam-block-label">Marking Scheme</div>
+        <div class="ca-step-card"><span class="exam-marking-badge">${exam.marking}</span></div>
+        <div class="exam-block-label">Qualifying Benchmark</div>
+        <div class="ca-step-card">${exam.qualifyingBenchmark}</div>
+        <div class="exam-block-label">Age Limit</div>
+        <div class="ca-step-card">${exam.ageLimit}</div>
+        <div class="exam-block-label">Career Pathway</div>
+        <div class="ca-step-card">${chipList(exam.careerPaths)}</div>
+      </section>`;
+  }
+
+  function subjectsListPage(examId){
+    var exam = EXAMS[examId];
+    var subjectsMap = subjectsMapFor(examId);
+    var cards = exam.subjects.map(function(sid){
+      var s = subjectsMap[sid];
+      return '<button type="button" class="exam-icon-card" onclick="cunRender(\''+examId+'\',\'subject:'+sid+'\')">'+
+        '<span class="exam-icon">📖</span>'+
+        '<b>'+s.name+'</b>'+
+        '<span>'+s.code+'</span>'+
+        '<em>Explore →</em>'+
+      '</button>';
+    }).join('');
+    return back(exam.shortName+' Overview', "cunRender('"+examId+"','overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${exam.shortName}</div>
+        <h2>📚 Subjects</h2>
+        <p class="sub">Tap any subject for its topics, paper pattern, cutoff trend and career relevance.</p>
+        <div class="exam-icon-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function csirCutoffCellHTML(rec, cat){
+    if(rec[cat] === undefined) return '\u2014';
+    var val = rec[cat];
+    if(rec.unit === 'percentile'){
+      var approx = rec.approxMarks && rec.approxMarks[cat] ? rec.approxMarks[cat] : null;
+      return '<span class="mba-cutoff-badge">'+val+' pct</span><div class="ca-dim" style="margin-top:3px;font-size:11px;">'+(approx ? '~'+approx+' / 200' : 'marks n/a')+'</div>';
+    }
+    var marks = (val/100*200).toFixed(1).replace(/\.0$/,'');
+    return '<span class="mba-cutoff-badge">'+val+'%</span><div class="ca-dim" style="margin-top:3px;font-size:11px;">~'+marks+' / 200</div>';
+  }
+
+  function cutoffTrendTable(examId, subjectName){
+    var records = cutoffsFor(examId).filter(function(c){ return c.subject === subjectName; });
+    if(!records.length){
+      return '<div class="ca-step-note">No verified cutoff data on file yet for this subject \u2014 check the latest official NTA/CSIR-HRDG release.</div>';
+    }
+    var catCols = examId === 'csirnet' ? ['UR','EWS','OBC','SC','ST','PwD'] : ['UR','OBC','EWS','SC','ST'];
+    var head = '<tr><th>Session</th><th>Track</th>' + catCols.map(function(c){ return '<th>'+c+'</th>'; }).join('') + '</tr>';
+    var rows = records.map(function(r){
+      return '<tr><td><b>'+r.session+'</b></td><td>'+r.track+'</td>' +
+        catCols.map(function(c){
+          if(examId === 'csirnet') return '<td>'+csirCutoffCellHTML(r, c)+'</td>';
+          return '<td>'+(r[c] !== undefined ? '<span class="mba-cutoff-badge">'+r[c]+'</span>' : '\u2014')+'</td>';
+        }).join('') +
+      '</tr>';
+    }).join('');
+    var unitNote = examId === 'csirnet'
+      ? 'Each cell shows the official percentile/% first, with the approximate marks out of 200 just below it. Life Sciences is scored as an NTA percentile (large applicant pool) \u2014 its marks figure is an approximate range, not exact.'
+      : 'Figures are aggregate marks out of 300 (Paper 1 + Paper 2 combined).';
+    return '<div style="overflow:auto;"><table class="mba-cutoff-table"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+
+      '<div class="ca-step-note" style="margin-top:10px;">'+unitNote+' Source: '+records[0].source+(records[0].verified ? '' : ' \u2014 Verification Required.')+'</div>';
+  }
+
+  function subjectDetailPage(examId, subjectId){
+    var exam = EXAMS[examId];
+    var subjectsMap = subjectsMapFor(examId);
+    var s = subjectsMap[subjectId];
+    if(!s) return subjectsListPage(examId);
+    return back(exam.shortName+' Subjects', "cunRender('"+examId+"','subjects')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${exam.shortName} \u2014 ${s.code}</div>
+        <h2>${s.name}</h2>
+        <p class="sub">${s.desc}</p>
+
+        <div class="exam-block-label">Important Topics</div>
+        <div class="ca-step-card">${chipList(s.keyTopics || [])}</div>
+
+        <div class="exam-block-label">Paper Pattern & Marking Structure</div>
+        <div class="ca-step-card">${exam.pattern}<div class="ca-step-note" style="margin-top:8px;">${exam.marking}</div></div>
+
+        <div class="exam-block-label">Cutoff Trend</div>
+        <div class="ca-step-card">${cutoffTrendTable(examId, s.name)}</div>
+
+        <div class="exam-block-label">Career Through This Subject</div>
+        <div class="ca-step-card">${chipList(s.careers || [])}</div>
+      </section>`;
+  }
+
+  function bindCun(r, examId){
+    // buttons use inline onclick="cunRender(...)" so no extra binding needed
+  }
+
+  // Override renderExamPage: new card-grid UI for csirnet/ugcnet, untouched behaviour for iitjam.
+  renderExamPage = function(examId){
+    window._lastExamContext = examId;
+    if(examId === 'csirnet' || examId === 'ugcnet'){
+      window.cunRender(examId, 'overview');
+      return;
+    }
+    return _originalRenderExamPage(examId);
+  };
+
+  // Fix: JAM's own "Cut-offs" / "View cut-off trend" buttons were routing into the
+  // generic UGC-NET cutoffs dashboard (renderCutoffs takes no examId param, so it
+  // always rendered UGC-NET content regardless of where the click came from).
+  // This gives JAM its own real, last-3-years, subject-wise cutoff page instead.
+  function jamCutoffsPage(){
+    var subjects = ['Mathematics','Physics','Chemistry','Biotechnology','Mathematical Statistics','Geology','Economics'];
+    var years = ['2024','2025','2026'];
+    var catOptions = ['General','OBC-NCL/EWS','SC/ST/PwD'];
+    var catOpts = catOptions.map(function(c){ return '<option value="'+c+'">'+c+'</option>'; }).join('');
+    var head = '<tr><th>Subject</th>' + years.map(function(y){ return '<th>'+y+'</th>'; }).join('') + '</tr>';
+    var rows = subjects.map(function(s){
+      var cells = years.map(function(y){
+        var rec = JAM_CUTOFFS.find(function(c){ return c.subject === s && c.session === y; });
+        return '<td data-jam-subj="'+s+'" data-jam-year="'+y+'"><span class="mba-cutoff-badge">'+(rec ? rec.General : '\u2014')+'</span></td>';
+      }).join('');
+      return '<tr><td><b>'+s+'</b></td>'+cells+'</tr>';
+    }).join('');
+    var html =
+      '<div class="page-header">'+
+        '<div class="page-eyebrow">IIT-JAM CUT-OFFS</div>'+
+        '<h1 class="page-title">IIT-JAM Qualifying Cut-off \u2014 Last 3 Years, Subject-wise</h1>'+
+        '<p class="page-desc">Official qualifying marks (out of 100) needed to appear in JOAPS counselling \u2014 select a category to see all 7 subjects across 2024, 2025 and 2026.</p>'+
+      '</div>'+
+      '<div class="card" style="margin-bottom:18px;padding:18px;">'+
+        '<div class="df-field" style="max-width:280px;margin-bottom:16px;"><label>Category</label><select id="jamCutoffCat">'+catOpts+'</select></div>'+
+        '<div style="overflow:auto;"><table class="mba-cutoff-table" id="jamCutoffTable"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+
+        '<div class="ca-step-note" style="margin-top:10px;">These are qualifying cutoffs (the minimum to appear on the merit list) \u2014 the actual IIT/programme a candidate gets depends on their All India Rank in JOAPS counselling, not just clearing this mark. Source: Official JAM qualifying cutoff releases (rotating organising IIT each year).</div>'+
+      '</div>'+
+      '<button class="btn" id="jamCutoffBackBtn">← Back to IIT-JAM</button>';
+    var root = document.getElementById('pageRoot');
+    root.innerHTML = html;
+    var catSel = document.getElementById('jamCutoffCat');
+    catSel.onchange = function(){
+      var cat = this.value;
+      document.querySelectorAll('#jamCutoffTable td[data-jam-subj]').forEach(function(td){
+        var s = td.getAttribute('data-jam-subj'), y = td.getAttribute('data-jam-year');
+        var rec = JAM_CUTOFFS.find(function(c){ return c.subject === s && c.session === y; });
+        td.innerHTML = '<span class="mba-cutoff-badge">'+(rec && rec[cat] !== undefined ? rec[cat] : '\u2014')+'</span>';
+      });
+    };
+    document.getElementById('jamCutoffBackBtn').onclick = function(){ goTo('iitjam'); };
+  }
+
+  var _originalRenderCutoffs = renderCutoffs;
+  renderCutoffs = function(sub){
+    if(window._lastExamContext === 'iitjam'){
+      return jamCutoffsPage();
+    }
+    return _originalRenderCutoffs(sub);
+  };
+  // PAGE_RENDERERS.cutoffs captured a direct reference to the original renderCutoffs
+  // when the dispatch object was built, so reassigning the variable above alone
+  // doesn't change what goTo('cutoffs') actually calls — the dispatch entry itself
+  // must be repointed too.
+  PAGE_RENDERERS.cutoffs = renderCutoffs;
+
+  // Give CSIR-NET and UGC-NET the same persistent module sidebar as every other category.
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'CSIR-NET' || name === 'UGC-NET'){
+      var examId = name === 'CSIR-NET' ? 'csirnet' : 'ugcnet';
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      currentPage = examId;
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        var sbItems = [
+          {key:'overview', label:name+' Overview'},
+          {key:'examdetails', label:'Exam Details'},
+          {key:'subjects', label:'Subjects'}
+        ];
+        if(examId === 'csirnet'){
+          sbItems.push({key:'allcutoffs', label:'Cutoff Trend (All Subjects)'});
+          sbItems.push({key:'selectionratio', label:'Selection Ratio'});
+          sbItems.push({key:'results', label:'PW Results'});
+        }
+        window.cidRenderCategorySidebar(name, name === 'CSIR-NET' ? 'Science & Research' : 'Teaching & Research', sbItems, 'overview', function(key){
+          window.cunRender(examId, key === 'overview' ? 'overview' : key);
+          window.cidSetSidebarActive(key);
+        });
+      } else if(typeof renderSidebar === 'function') { renderSidebar(); }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = name;
+      }
+      document.getElementById('pageRoot').innerHTML = '';
+      window.cunRender(examId, 'overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
+  };
+})();
+</script>
+<script id="gate-category-module">
+(function(){
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, action){ return '<button class="cid-back" type="button" onclick="'+action+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+  function chipList(items){ return '<div class="ca-topic-chips">' + items.map(function(t){ return '<span class="ca-topic-chip">'+t+'</span>'; }).join('') + '</div>'; }
+
+  var GATE_SUBJECTS = {
+    cs: { code:'CS', name:'Computer Science & Information Technology',
+      topics:['Data Structures & Algorithms','Programming & OOP','Theory of Computation','Computer Networks','Operating Systems','DBMS','Computer Organisation & Architecture','Compiler Design'],
+      cutoff:[['2024','32.5','29.2','21.6'],['2025','29.2','26.2','19.4'],['2026','30','~27','~20']] },
+    me: { code:'ME', name:'Mechanical Engineering',
+      topics:['Engineering Mechanics','Strength of Materials','Theory of Machines & Vibrations','Thermodynamics','Fluid Mechanics & Turbomachinery','Heat Transfer','Manufacturing & Industrial Engineering','Machine Design'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','35.8','32.2','23.8'],['2026','~35','~31.5','~23']] },
+    ee: { code:'EE', name:'Electrical Engineering',
+      topics:['Electric Circuits','Electromagnetic Fields','Signals & Systems','Electrical Machines','Power Systems','Control Systems','Power Electronics','Analog & Digital Electronics'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','25','22.5','16.6'],['2026','~26','~23.4','~17.3']] },
+    ece: { code:'EC', name:'Electronics & Communication Engineering',
+      topics:['Network Theory','Analog & Digital Circuits','Signals & Systems','Control Systems','Communication Systems','Electromagnetics','Microprocessors','Analog/Digital ICs'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','25','22.5','16.6'],['2026','~26','~23.4','~17.3']] },
+    ce: { code:'CE', name:'Civil Engineering',
+      topics:['Structural Analysis','RCC & Steel Structures','Geotechnical Engineering','Fluid Mechanics & Hydraulics','Environmental Engineering','Transportation Engineering','Surveying','Construction Materials & Management'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','29.2','26.2','19.4'],['2026','~30','~27','~20']] },
+    ch: { code:'CH', name:'Chemical Engineering',
+      topics:['Process Calculations & Thermodynamics','Fluid Mechanics','Mass Transfer','Heat Transfer','Chemical Reaction Engineering','Instrumentation & Process Control','Plant Design & Economics'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','~45','~40.5','~30'],['2026','Verification Required','Verification Required','Verification Required']] },
+    in: { code:'IN', name:'Instrumentation Engineering',
+      topics:['Electrical & Electronic Measurements','Sensors & Transducers','Signals & Systems','Control Systems','Analog & Digital Electronics','Process Control','Communication & Optical Instrumentation'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','~48','~43.2','~32'],['2026','Verification Required','Verification Required','Verification Required']] },
+    da: { code:'DA', name:'Data Science & Artificial Intelligence',
+      topics:['Probability & Statistics','Linear Algebra','Machine Learning','Data Science Programming (Python)','Database Management','Artificial Intelligence & Search','Optimisation'],
+      cutoff:[['2024','\u2014 (new paper)','\u2014','\u2014'],['2025','29','26.1','19.3'],['2026','Verification Required','Verification Required','Verification Required']] },
+    bt: { code:'BT', name:'Biotechnology',
+      topics:['Biochemistry & Molecular Biology','Microbiology','Cell Biology','Genetics & Genetic Engineering','Bioprocess Engineering','Immunology','Plant & Animal Biotechnology'],
+      cutoff:[['2024','38.9','35','26'],['2025','28','25.2','18.7'],['2026','Verification Required','Verification Required','Verification Required']] },
+    ph: { code:'PH', name:'Physics',
+      topics:['Mathematical Physics','Classical Mechanics','Electromagnetic Theory','Quantum Mechanics','Thermodynamics & Statistical Physics','Atomic & Molecular Physics','Solid State Physics','Nuclear & Particle Physics'],
+      cutoff:[['2024','Verification Required','Verification Required','Verification Required'],['2025','~28','~25.2','~18.7'],['2026','Verification Required','Verification Required','Verification Required']] }
+  };
+  var SUBJECT_LIST = ['cs','me','ee','ece','ce','ch','in','da','bt','ph'];
+
+  var GATE_PSUS = [
+    ['Maharatna/Navratna (highest cutoff)', ['ONGC','GAIL','IOCL','NTPC','BHEL','SAIL'], 'General category typically needs 70\u201380+ marks; ONGC/GAIL often the highest bar.'],
+    ['Miniratna / other CPSEs', ['HAL','BEL','PGCIL (POWERGRID)','NHPC','MDL','HPCL','BPCL'], 'General category typically needs 60\u201375 marks depending on branch and vacancies.'],
+    ['Others', ['Airports Authority of India (AAI)','Coal India','NPCIL','DRDO (select roles)'], 'Cutoffs vary widely (~60\u201370 marks) \u2014 always check that PSU\u2019s own notification.']
+  ];
+
+  function overview(){
+    var cards = [
+      { key:'examdetails', icon:'📋', title:'Exam Details', desc:'Pattern, marking scheme, papers and score validity.' },
+      { key:'subjects', icon:'📚', title:'Subjects', desc:SUBJECT_LIST.length+' major papers \u2014 tap any one for topics, cutoff trend and career.' },
+      { key:'psu', icon:'🏭', title:'PSU Recruitment', desc:'Which PSUs hire via GATE, and what score they typically need.' },
+      { key:'career', icon:'💼', title:'Career Options', desc:'M.Tech, PhD and PSU pathways after GATE.' }
+    ];
+    var cardsHTML = cards.map(function(c){
+      return '<button class="upsc-module" type="button" onclick="gateRender(\''+c.key+'\')"><div class="i">'+c.icon+'</div><h3>'+c.title+'</h3><p>'+c.desc+'</p></button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">GATE INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">GATE \u2014 Graduate Aptitude Test in Engineering</h1>
+        <p class="sub">A single national exam with 30 papers \u2014 the gateway to M.Tech/PhD admission at IITs/NITs and entry-level PSU recruitment.</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cardsHTML}</div>
+      </section>`;
+  }
+
+  function examDetailsPage(){
+    return back('GATE Overview', "gateRender('overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">GATE</div>
+        <h2>📋 Exam Details</h2>
+        <div class="exam-fact-row">
+          <div class="exam-fact"><span class="exam-fact-label">Conducting Body</span><span class="exam-fact-value">IITs, rotational basis (IIT Guwahati for 2026)</span></div>
+          <div class="exam-fact"><span class="exam-fact-label">Duration</span><span class="exam-fact-value">3 hours per paper</span></div>
+          <div class="exam-fact"><span class="exam-fact-label">Score Validity</span><span class="exam-fact-value">3 years from result date</span></div>
+        </div>
+        <div class="exam-block-label">Exam Pattern</div>
+        <div class="ca-step-card">30 test papers, Computer-Based Test (CBT). Each paper: 65 questions / 100 marks \u2014 10 questions (15 marks) from General Aptitude, common to all papers; remaining 55 questions (85 marks) from the candidate\u2019s chosen subject. Question types: MCQ, MSQ (Multiple Select) and NAT (Numerical Answer Type). Since 2021, candidates may appear for two papers from an approved combination list.</div>
+        <div class="exam-block-label">Marking Scheme</div>
+        <div class="ca-step-card"><span class="exam-marking-badge">MCQs: \u22121/3 (1-mark Qs), \u22122/3 (2-mark Qs) \u2014 no negative marking for MSQ or NAT</span></div>
+        <div class="exam-block-label">Scoring</div>
+        <div class="ca-step-card">Raw score out of 100 is normalised across sessions/papers to a scale of 0\u20131000 (the "GATE Score") \u2014 this is what's used for admissions and PSU shortlisting, not the raw marks.</div>
+        <div class="exam-block-label">Eligibility</div>
+        <div class="ca-step-card">Bachelor\u2019s degree in Engineering/Technology/Architecture/Science (or final year), or equivalent professional qualification. <b>No upper age limit.</b></div>
+      </section>`;
+  }
+
+  function subjectsListPage(){
+    var cards = SUBJECT_LIST.map(function(k){
+      var s = GATE_SUBJECTS[k];
+      return '<button type="button" class="exam-icon-card" onclick="gateRender(\'subject:'+k+'\')">'+
+        '<span class="exam-icon">📖</span>'+
+        '<b>'+s.code+'</b>'+
+        '<span>'+s.name+'</span>'+
+        '<em>Explore →</em>'+
+      '</button>';
+    }).join('');
+    return back('GATE Overview', "gateRender('overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">GATE</div>
+        <h2>📚 Subjects</h2>
+        <p class="sub">10 of GATE\u2019s most-asked-about papers \u2014 tap any one for topics, cutoff trend and career relevance. (GATE has 30 papers in total; less commonly asked ones aren\u2019t listed here to keep this focused.)</p>
+        <div class="exam-icon-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function subjectDetailPage(key){
+    var s = GATE_SUBJECTS[key];
+    if(!s) return subjectsListPage();
+    var cutoffRows = s.cutoff.map(function(r){
+      return '<tr><td><b>'+r[0]+'</b></td><td><span class="mba-cutoff-badge">'+r[1]+'</span></td><td><span class="mba-cutoff-badge">'+r[2]+'</span></td><td><span class="mba-cutoff-badge">'+r[3]+'</span></td></tr>';
+    }).join('');
+    return back('GATE Subjects', "gateRender('subjects')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">GATE \u2014 ${s.code}</div>
+        <h2>${s.name}</h2>
+
+        <div class="exam-block-label">Important Topics</div>
+        <div class="ca-step-card">${chipList(s.topics)}</div>
+
+        <div class="exam-block-label">Paper Pattern & Marking</div>
+        <div class="ca-step-card">65 questions / 100 marks / 3 hours \u2014 15 marks General Aptitude (common to all papers) + 85 marks subject-specific.<div class="ca-step-note" style="margin-top:8px;">MCQs: \u22121/3 (1-mark), \u22122/3 (2-mark). No negative marking for MSQ/NAT.</div></div>
+
+        <div class="exam-block-label">Cutoff Trend (Last 3 Years, out of 100)</div>
+        <div class="ca-step-card">
+          <div style="overflow:auto;"><table class="mba-cutoff-table"><thead><tr><th>Year</th><th>General</th><th>OBC-NCL/EWS</th><th>SC/ST/PwD</th></tr></thead><tbody>${cutoffRows}</tbody></table></div>
+          <div class="ca-step-note" style="margin-top:10px;">This is the <b>qualifying</b> cutoff only \u2014 the score needed to appear on the merit list. Admission to a specific IIT/NIT or PSU shortlisting needs a much higher normalised GATE score. Source: Official GATE qualifying cutoff releases.</div>
+        </div>
+
+        <div class="exam-block-label">Career Relevance</div>
+        <div class="ca-step-card">M.Tech/PhD admission at IITs, NITs and IIITs; entry-level Engineer/Officer roles at PSUs matching this discipline; a strong credential even for private-sector core engineering roles.</div>
+      </section>`;
+  }
+
+  function psuPage(){
+    var rows = GATE_PSUS.map(function(g){
+      return '<div class="ca-detail-block"><div class="ca-step-label">'+g[0]+'</div><div class="ca-step-card">'+chipList(g[1])+'<div class="ca-step-note" style="margin-top:8px;">'+g[2]+'</div></div></div>';
+    }).join('');
+    return back('GATE Overview', "gateRender('overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">GATE</div>
+        <h2>🏭 PSU Recruitment via GATE</h2>
+        <p class="sub">Many Public Sector Undertakings use GATE scores to shortlist candidates, skipping their own written test \u2014 shortlisted candidates then go through a Group Discussion/Interview.</p>
+        ${rows}
+        <div class="ca-detail-block"><div class="ca-step-label">General Process</div><div class="ca-step-card">Valid GATE score (within its 3-year validity) in the PSU\u2019s required paper \u2192 PSU-specific eligibility check (min. 60% aggregate or equivalent CGPA, usually 55% for SC/ST/PwBD) \u2192 shortlisting purely on GATE score/rank \u2192 Group Discussion/Interview (some PSUs skip this and hire on GATE score alone) \u2192 Medical fitness, and sometimes security clearance (e.g. NPCIL, BARC).</div></div>
+        <div class="ca-detail-block"><div class="ca-step-label">Age Limit (typical)</div><div class="ca-step-card">General: 21\u201330 years \u00b7 OBC: up to 33 \u00b7 SC/ST: up to 35 (varies by PSU \u2014 always confirm from that PSU\u2019s own notification).</div></div>
+      </section>`;
+  }
+
+  function careerPage(){
+    return back('GATE Overview', "gateRender('overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">GATE</div>
+        <h2>💼 Career Options</h2>
+        <div class="ca-detail-block"><div class="ca-step-label">Higher Education</div><div class="ca-step-card">${chipList(['M.Tech/M.E. at IITs, NITs, IIITs, GFTIs','Direct PhD (Integrated) at IITs/IISc','MS by Research programmes'])}</div></div>
+        <div class="ca-detail-block"><div class="ca-step-label">Government / PSU Careers</div><div class="ca-step-card">${chipList(['Engineer/Executive Trainee roles at Maharatna/Navratna PSUs','Scientist/Engineer roles at DRDO, ISRO (select centres), BARC','State PSU engineering recruitment (in some states)'])}</div></div>
+        <div class="ca-detail-block"><div class="ca-step-label">Other Pathways</div><div class="ca-step-card">${chipList(['Teaching/Assistant Professor roles at some private engineering colleges (with M.Tech)','Strong differentiator for core-engineering private sector roles','Scholarship (stipend) during M.Tech for GATE-qualified students at centrally-funded institutes'])}</div></div>
+      </section>`;
+  }
+
+  window.gateRender = function(view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    if(view === 'examdetails') r.innerHTML = examDetailsPage();
+    else if(view === 'subjects') r.innerHTML = subjectsListPage();
+    else if(view && view.indexOf('subject:') === 0) r.innerHTML = subjectDetailPage(view.slice(8));
+    else if(view === 'psu') r.innerHTML = psuPage();
+    else if(view === 'career') r.innerHTML = careerPage();
+    else r.innerHTML = overview();
+  };
+
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'GATE OA'){
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('GATE', 'Engineering & Other Applications', [
+          {key:'overview', label:'GATE Overview'},
+          {key:'examdetails', label:'Exam Details'},
+          {key:'subjects', label:'Subjects'},
+          {key:'psu', label:'PSU Recruitment'},
+          {key:'career', label:'Career Options'}
+        ], 'overview', function(key){
+          window.gateRender(key === 'overview' ? 'overview' : key);
+          window.cidSetSidebarActive(key);
+        });
+      }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = 'GATE';
+      }
+      document.getElementById('pageRoot').innerHTML = '';
+      window.gateRender('overview');
+      return;
+    }
+    if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
+  };
+})();
+</script>
+<script id="judiciary-category-module">
+(function(){
+  function root(){ return document.getElementById('pageRoot'); }
+  function back(label, action){ return '<button class="cid-back" type="button" onclick="'+action+'" style="margin-top:22px;">← Back to '+label+'</button>'; }
+  function chipList(items){ return '<div class="ca-topic-chips">' + items.map(function(t){ return '<span class="ca-topic-chip">'+t+'</span>'; }).join('') + '</div>'; }
+
+  var JUD_EXAMS = {
+    up: { icon:'⚖️', name:'UP PCS-J', sub:'Uttar Pradesh \u2014 Civil Judge (Junior Division)',
+      examDetails:{ body:'Uttar Pradesh Public Service Commission (UPPSC)', stages:['Prelims (Objective)','Mains (Descriptive)','Interview'], marking:'Prelims: objective MCQ, no confirmed universal negative-marking rule \u2014 check the live notification.', structure:'Prelims: General Knowledge + General Law papers (qualifying, used for Mains shortlisting). Mains: multiple descriptive law papers + language paper. Interview: personality/viva-voce.', frequency:'Notified periodically by UPPSC \u2014 not a fixed annual cycle.', posts:['Civil Judge (Junior Division)'] },
+      eligibilitySummary:'LLB from a recognised university, knowledge of Hindi in Devanagari script, Indian citizen. Age 22\u201335 years (as on 1 July of the exam year), with category-based relaxation. Up to 4 attempts.',
+      subjects:['General Knowledge & Current Affairs','General Law (Constitution, CPC, CrPC, Evidence Act)','Hindi Language','Civil Law (Mains)','Criminal Law (Mains)','Language Paper (Mains)'],
+      cutoff:{ note:'UP PCS-J cutoff varies sharply by cycle and category \u2014 no single stable figure. Prelims General category commonly needs to clear well above the 45%+ qualifying bar; check UPPSC\u2019s live cutoff release for the current cycle.' },
+      career:'Civil Judge (JD) \u2192 Civil Judge (Senior Division) \u2192 Additional District Judge \u2192 District Judge, with possible elevation to the Allahabad High Court on rare, merit-driven selection.'
+    },
+    bihar: { icon:'⚖️', name:'Bihar Judicial Service', sub:'Bihar \u2014 Civil Judge (Junior Division)',
+      examDetails:{ body:'Bihar Public Service Commission (BPSC)', stages:['Prelims (Objective)','Mains (5 compulsory papers)','Interview (Viva-Voce)'], marking:'Prelims: General 45% qualifying, Reserved 40%. Interview: minimum 35% required to be included in the final successful list.', structure:'Mains has 5 compulsory descriptive law papers. Final merit = Mains + Interview marks.', frequency:'Notified periodically by BPSC.', posts:['Civil Judge (Junior Division)'] },
+      eligibilitySummary:'LLB from a BCI-recognised institute, Indian citizen. Age 22\u201335 years (as on 1 August of the reference year), with category-based relaxation.',
+      subjects:['General Knowledge','General Law','Hindi (qualifying)','Civil Law papers (Mains)','Criminal Law papers (Mains)','Language & Essay Paper (Mains)'],
+      cutoff:{ note:'Prelims qualifying: 45% (General), 40% (Reserved). Final selection depends on the combined Mains + Interview merit list for that cycle \u2014 varies year to year with vacancies.' },
+      career:'Civil Judge (JD) \u2192 Civil Judge (Senior Division) \u2192 Additional District Judge \u2192 District Judge under the Patna High Court.'
+    },
+    mp: { icon:'⚖️', name:'MP Civil Judge', sub:'Madhya Pradesh \u2014 Civil Judge (Entry Level)',
+      examDetails:{ body:'Madhya Pradesh Public Service Commission (MPPSC), under the MP High Court', stages:['Prelims (Objective)','Mains (Descriptive)','Interview'], marking:'General/OBC candidates need an impressive aggregate (commonly cited around 70%) across all three stages to be considered highly competitive \u2014 confirm exact category-wise cutoffs from the live notification.', structure:'Some entry categories require continuous legal practice as an advocate for at least 3 years before the application deadline \u2014 check the specific notification, as this requirement has varied across cycles.', frequency:'Notified periodically by MPPSC.', posts:['Civil Judge (Entry Level)'] },
+      eligibilitySummary:'LLB from a recognised university, Indian citizen. Age band varies by cycle and category \u2014 confirm from the live MPPSC notification. Some cycles have required 3 years of continuous legal practice for certain entry categories.',
+      subjects:['General Knowledge','General Law & Constitution','Hindi','Civil Law (Mains)','Criminal Law (Mains)','Procedural Law (CPC/CrPC/Evidence Act)'],
+      cutoff:{ note:'MP judiciary cutoffs vary significantly by cycle \u2014 always confirm the current year\u2019s category-wise cutoff from MPPSC\u2019s official release rather than quoting a past cycle\u2019s figure.' },
+      career:'Civil Judge (Entry Level) \u2192 Senior Division \u2192 Additional District Judge \u2192 District Judge under the Madhya Pradesh High Court.'
+    },
+    rajasthan: { icon:'⚖️', name:'RJS (Rajasthan)', sub:'Rajasthan Judicial Service \u2014 Civil Judge',
+      examDetails:{ body:'Rajasthan High Court', stages:['Prelims (Objective)','Mains (Descriptive)','Interview (Viva-Voce)'], marking:'Standard 3-stage judiciary marking \u2014 Prelims qualifying, Mains descriptive with aggregate + per-paper minimums, Interview as the final differentiator.', structure:'Knowledge of Hindi in Devanagari script is a specific, often-overlooked eligibility requirement for Rajasthan.', frequency:'Notified periodically by the Rajasthan High Court.', posts:['Civil Judge'] },
+      eligibilitySummary:'LLB from a recognised university, Indian citizen, knowledge of Hindi in Devanagari script. Age 23\u201335 years, with category-based relaxation.',
+      subjects:['General Knowledge','Rajasthan-specific GK & Current Affairs','General Law','Civil Law (Mains)','Criminal Law (Mains)','Hindi/Language Paper'],
+      cutoff:{ note:'RJS cutoff varies by cycle and category \u2014 always confirm from the Rajasthan High Court\u2019s live notification/result release.' },
+      career:'Civil Judge \u2192 Senior Division \u2192 Additional District Judge \u2192 District Judge under the Rajasthan High Court.'
+    },
+    delhi: { icon:'⚖️', name:'DJS (Delhi)', sub:'Delhi Judicial Service \u2014 Civil Judge',
+      examDetails:{ body:'Delhi High Court', stages:['Prelims (Objective)','Mains (Descriptive)','Interview (Viva-Voce)'], marking:'Standard 3-stage judiciary marking \u2014 Prelims qualifying, Mains descriptive, Interview as the final differentiator.', structure:'Considered one of the more prestigious and competitive state judiciary exams given Delhi\u2019s High Court prominence.', frequency:'Notified periodically by the Delhi High Court.', posts:['Civil Judge'] },
+      eligibilitySummary:'LLB from a recognised university, Indian citizen, practising advocate or eligible to practise. Age band set by the Delhi High Court\u2019s notification \u2014 confirm current limits from the live release.',
+      subjects:['General Knowledge','General Law & Constitution','Civil Law (Mains)','Criminal Law (Mains)','Procedural Law','Language/Essay Paper'],
+      cutoff:{ note:'DJS cutoff is highly competitive given limited vacancies \u2014 always confirm from the Delhi High Court\u2019s official result release rather than quoting an old figure.' },
+      career:'Civil Judge \u2192 Senior Division \u2192 Additional District Judge \u2192 District Judge under the Delhi High Court \u2014 often seen as a strong stepping stone given Delhi\u2019s legal ecosystem.'
+    },
+    higher: { icon:'🏛️', name:'Higher Judicial Service', sub:'Direct District Judge Entry (via Bar)',
+      examDetails:{ body:'Respective State Public Service Commission / High Court', stages:['Written Exam','Interview'], marking:'Pattern varies by state \u2014 generally a written law paper followed by an interview, without a separate "Prelims" stage since candidates already have substantial practice experience.', structure:'A separate, senior entry route directly to District Judge \u2014 distinct from the Civil Judge (Junior Division) track most states run via PCS-J.', frequency:'Notified periodically, far less frequently than Civil Judge recruitment.', posts:['District Judge (Entry Level)'] },
+      eligibilitySummary:'Must be an advocate with substantial continuous practice at the Bar \u2014 commonly 7 years, as per Article 233 of the Constitution and the relevant state\u2019s rules. Age limits vary by state.',
+      subjects:['Constitutional Law','Civil & Criminal Procedure','Evidence Act','Substantive Civil & Criminal Law','Current judicial pronouncements & landmark judgments'],
+      cutoff:{ note:'Much smaller vacancy pool than Civil Judge recruitment \u2014 cutoffs are highly state- and cycle-specific. Always confirm from that state\u2019s official notification.' },
+      career:'District Judge \u2192 Additional District Judge (Senior Scale) \u2192 potential elevation to the High Court Bench on rare, merit-driven selection \u2014 this is the most senior entry point into the subordinate judiciary.'
+    }
+  };
+
+  var EXAM_LIST = ['up','bihar','mp','rajasthan','delhi','higher'];
+
+  function overview(){
+    var cards = EXAM_LIST.map(function(k){
+      var e = JUD_EXAMS[k];
+      return '<button type="button" class="exam-icon-card" onclick="judRender(\''+k+'\')">'+
+        '<span class="exam-icon">'+e.icon+'</span>'+
+        '<b>'+e.name+'</b>'+
+        '<span>'+e.sub+'</span>'+
+        '<em>Explore →</em>'+
+      '</button>';
+    }).join('');
+    return `
+      <section class="upsc-section" style="margin-top:28px;">
+        <div class="cid-kicker">JUDICIARY INTELLIGENCE</div>
+        <h1 style="margin:8px 0 8px;">Judicial Services \u2014 PCS-J / Civil Judge</h1>
+        <p class="sub">Not a single national exam \u2014 each state runs its own Judicial Service Examination via its State PSC or High Court. Pick a state to explore its specific process.</p>
+        <div class="exam-icon-grid" style="margin-top:22px;">${cards}</div>
+      </section>`;
+  }
+
+  function examOverview(key){
+    var e = JUD_EXAMS[key];
+    if(!e) return overview();
+    var sections = [
+      { key:'exam', icon:'📋', title:'Exam Details & Pattern', desc:'Conducting body, stages, marking and frequency.' },
+      { key:'eligibility', icon:'✅', title:'Eligibility Criterion', desc:'Education, age band and an interactive quick-check tool.' },
+      { key:'subjects', icon:'📚', title:'Syllabus', desc:'Papers and topics tested across Prelims and Mains.' },
+      { key:'cutoff', icon:'📊', title:'Cutoff', desc:'What score gets a candidate through \u2014 and why it varies so much.' },
+      { key:'career', icon:'💼', title:'Career Path', desc:'Where this appointment leads over a judicial career.' }
+    ];
+    var cardsHTML = sections.map(function(s){
+      return '<button class="upsc-module" type="button" onclick="judRender(\''+key+':'+s.key+'\')"><div class="i">'+s.icon+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p></button>';
+    }).join('');
+    return back('Judiciary Overview', "judRender('overview')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">JUDICIARY</div>
+        <h2>${e.icon} ${e.name}</h2>
+        <p class="sub">${e.sub}</p>
+        <div class="upsc-grid" style="margin-top:22px;">${cardsHTML}</div>
+      </section>`;
+  }
+
+  function examDetailsBody(e){
+    return '<div class="ca-detail-block"><div class="ca-step-label">Conducting Body</div><div class="ca-step-card">'+e.examDetails.body+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Stages</div><div class="ca-step-card">'+
+        '<div class="exam-stage-flow">'+e.examDetails.stages.map(function(s,i){ return (i>0?'<span class="exam-stage-arrow">→</span>':'')+'<span class="exam-stage-chip">'+s+'</span>'; }).join('')+'</div>'+
+      '</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Marking</div><div class="ca-step-card">'+e.examDetails.marking+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Structure</div><div class="ca-step-card">'+e.examDetails.structure+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Frequency</div><div class="ca-step-card">'+e.examDetails.frequency+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Posts</div><div class="ca-step-card">'+chipList(e.examDetails.posts)+'</div></div>';
+  }
+
+  function eligibilityBody(key, e){
+    var checkerHTML =
+      '<div class="df-checker"><div class="df-check-grid">'+
+        '<div class="df-field"><label>Date of Birth</label><input id="judDob" type="date"></div>'+
+        '<div class="df-field"><label>Education Status</label><select id="judEdu"><option value="completed">LLB Completed</option><option value="final">Final Year / Appearing</option><option value="notyet">Not Yet LLB</option></select></div>'+
+      '</div>'+
+      '<div class="upsc-checker-actions"><button class="upsc-check-btn" id="judCheckBtn">Check Eligibility</button><button class="upsc-reset-btn" id="judResetBtn">Reset</button></div>'+
+      '<div id="judEligibilityResult" class="upsc-check-result"></div></div>';
+    return '<div class="ca-detail-block"><div class="ca-step-label">At a Glance</div><div class="ca-step-card">'+e.eligibilitySummary+'</div></div>'+
+      '<div class="ca-detail-block"><div class="ca-step-label">Quick Eligibility Checker</div>'+checkerHTML+
+      '<div class="ca-step-note">Age bands vary meaningfully by state and change across notification cycles \u2014 always confirm the exact current-cycle limits before giving a final answer.</div></div>';
+  }
+
+  var JUD_AGE_BANDS = { up:[22,35], bihar:[22,35], mp:[21,40], rajasthan:[23,35], delhi:[21,32], higher:[35,45] };
+
+  function ageOn(dobStr, refDate){
+    var d = new Date(dobStr+'T00:00:00');
+    var age = refDate.getFullYear() - d.getFullYear();
+    if(refDate.getMonth() < d.getMonth() || (refDate.getMonth() === d.getMonth() && refDate.getDate() < d.getDate())) age--;
+    return age;
+  }
+
+  function bindChecker(key){
+    var checkBtn = document.getElementById('judCheckBtn');
+    var resetBtn = document.getElementById('judResetBtn');
+    if(!checkBtn) return;
+    var today = new Date();
+    checkBtn.onclick = function(){
+      var out = document.getElementById('judEligibilityResult');
+      var dob = document.getElementById('judDob').value;
+      if(!dob){
+        out.className = 'upsc-check-result show warn';
+        out.innerHTML = '<div class="upsc-result-title">Enter Date of Birth</div><div class="upsc-result-sub">Please select a DOB to calculate age eligibility.</div>';
+        return;
+      }
+      var age = ageOn(dob, today);
+      var edu = document.getElementById('judEdu').value;
+      var band = JUD_AGE_BANDS[key];
+      var ok = true, reasons = [];
+      if(age < band[0] || age > band[1]){ ok = false; reasons.push('Age must be between '+band[0]+' and '+band[1]+' years for this exam (currently '+age+'; exact band varies by cycle).'); }
+      if(edu === 'notyet'){ ok = false; reasons.push('Must hold (or be in the final year of) an LLB degree.'); }
+      if(key === 'higher'){ reasons.push('Higher Judicial Service also requires ~7 years of continuous Bar practice \u2014 this quick-check does not verify practice years.'); }
+      var stats = [['Age Today', age+' years'], ['Age Band', band[0]+'\u2013'+band[1]+' yrs (typical)'], ['Education', edu === 'completed' ? 'LLB Completed' : (edu === 'final' ? 'Final Year' : 'Not Yet LLB')]];
+      out.className = 'upsc-check-result show ' + (ok ? 'ok' : 'no');
+      out.innerHTML = '<div class="upsc-result-title">'+(ok ? 'Eligible for quick check' : 'Not Eligible for quick check')+'</div>'+
+        '<div class="upsc-result-sub">'+(ok ? 'Age and education conditions are within the selected limits.' : reasons.join(' '))+'</div>'+
+        '<div class="upsc-result-grid">'+stats.map(function(s){ return '<div class="upsc-result-stat"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>'; }).join('')+'</div>';
+    };
+    if(resetBtn){
+      resetBtn.onclick = function(){
+        var dobEl = document.getElementById('judDob'); if(dobEl) dobEl.value = '';
+        var out = document.getElementById('judEligibilityResult'); if(out) out.className = 'upsc-check-result';
+      };
+    }
+  }
+
+  function sectionDetail(examKey, section){
+    var e = JUD_EXAMS[examKey];
+    if(!e) return overview();
+    var title = '', body = '';
+    if(section === 'exam'){ title = 'Exam Details & Pattern'; body = examDetailsBody(e); }
+    else if(section === 'eligibility'){ title = 'Eligibility Criterion'; body = eligibilityBody(examKey, e); }
+    else if(section === 'subjects'){ title = 'Syllabus'; body = '<div class="ca-detail-block"><div class="ca-step-card">'+chipList(e.subjects)+'</div></div>'; }
+    else if(section === 'cutoff'){ title = 'Cutoff'; body = '<div class="ca-detail-block"><div class="ca-step-card">'+e.cutoff.note+'</div></div>'; }
+    else if(section === 'career'){ title = 'Career Path'; body = '<div class="ca-detail-block"><div class="ca-step-card">'+e.career+'</div></div>'; }
+
+    return back(e.name, "judRender('"+examKey+"')") + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">${e.name.toUpperCase()}</div>
+        <h2>${title}</h2>
+        ${body}
+      </section>`;
+  }
+
+  window.judRender = function(view){
+    var r = root();
+    if(!r) return;
+    r.style.display = 'block';
+    if(view && view.indexOf(':') > -1){
+      var parts = view.split(':');
+      r.innerHTML = sectionDetail(parts[0], parts[1]);
+      r.setAttribute('data-current-view', view);
+      if(parts[1] === 'eligibility') bindChecker(parts[0]);
+    } else if(view && JUD_EXAMS[view]){
+      r.innerHTML = examOverview(view);
+      r.setAttribute('data-current-view', view);
+    } else {
+      r.innerHTML = overview();
+      r.setAttribute('data-current-view', 'overview');
+    }
+  };
+
+  var previousOpenCategory = window.cidOpenCategory;
+  window.cidOpenCategory = function(name){
+    if(name === 'Judiciary'){
+      document.body.classList.remove('cid-home-mode');
+      document.body.classList.add('cid-category-mode');
+      if(typeof window.cidRenderCategorySidebar === 'function'){
+        window.cidRenderCategorySidebar('Judiciary', 'Judicial Services', [
+          {key:'overview', label:'Judiciary Overview'},
+          {key:'up', label:'UP PCS-J'},
+          {key:'bihar', label:'Bihar Judicial Service'},
+          {key:'mp', label:'MP Civil Judge'},
+          {key:'rajasthan', label:'RJS (Rajasthan)'},
+          {key:'delhi', label:'DJS (Delhi)'},
+          {key:'higher', label:'Higher Judicial Service'}
+        ], 'overview', function(key){
+          window.judRender(key === 'overview' ? 'overview' : key);
+          window.cidSetSidebarActive(key);
+        });
+      }
+      var home = document.getElementById('cid-category-home');
+      if(home) home.style.display = 'none';
+      var topbar = document.querySelector('.cid-category-topbar');
+      if(topbar){
+        topbar.style.display = 'flex';
+        var label = topbar.querySelector('.cid-current-category');
+        if(label) label.textContent = 'Judiciary';
+      }
+      document.getElementById('pageRoot').innerHTML = '';
+      window.judRender('overview');
       return;
     }
     if(typeof previousOpenCategory === 'function') return previousOpenCategory(name);
