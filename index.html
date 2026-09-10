@@ -639,7 +639,7 @@ body.cid-home-mode .sidebar p{
 
 /* Small dashboard label on sidebar bottom */
 body.cid-home-mode .sidebar::after{
-  content:"COUNSELLOR INTELLIGENCE DASHBOARD\A C.I.D WORKSPACE";
+  content:"COUNSELLOR INTELLIGENCE DASHBOARD\A C.I.D WORKSPACE (A.P)";
   white-space:pre-line;
   position:absolute;
   left:24px;
@@ -891,9 +891,9 @@ body.cid-home-mode .sidebar [data-view="cutoffs"]{
 <div class="app">
   <aside class="sidebar" id="sidebar"></aside>
   <main class="main"><section id="cid-category-home" class="cid-category-home">
-<div class="cid-home-hero"><div><div class="cid-eyebrow">C.I.D WORKSPACE</div><h1>What are you counselling for today?</h1>
+<div class="cid-home-hero"><div><div class="cid-eyebrow">C.I.D WORKSPACE (A.P)</div><h1>What are you counselling for today?</h1>
 <p>Select a category to access exam intelligence, eligibility, cut-offs, results, colleges and counselling resources.</p></div>
-<div class="cid-home-badge"><strong>14</strong><span>Categories</span></div></div>
+<div class="cid-home-badge"><strong>18</strong><span>Categories</span></div></div>
 <div class="cid-category-toolbar"><div><h2>Explore Categories</h2><p>CSIR-NET and IIT-JAM are ready. Other categories will be added one by one.</p></div>
 <div class="cid-category-search-wrap"><span>⌕</span><input id="cidCategorySearch" placeholder="Search category..." oninput="cidFilterCategories()"></div></div>
 <div id="cidCategoryGrid" class="cid-category-grid"><button class="cid-category-card" onclick="cidOpenCategory('MBA')">
@@ -4203,46 +4203,53 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
 
   const zones={
     'UR / EWS':[
-      ['660+','Elite National Colleges','Very strong zone for AIIMS Delhi-level / top national institutions, depending heavily on AIR and year.','AIIMS Delhi, top AIIMS campuses and the most competitive central institutes'],
-      ['630–659','Top Government MBBS','Strong zone for highly competitive government colleges under favourable AIR and counselling conditions.','Top state government colleges, central/metro government options'],
-      ['600–629','Strong Government College Zone','Good planning zone for many government MBBS possibilities, but state and AIQ outcomes can differ widely.','Government medical colleges, newer AIIMS possibilities, state quota options'],
-      ['550–599','Mixed Government / Private Zone','Government MBBS becomes highly state- and quota-dependent; keep realistic private and BDS backups.','State quota government options, private MBBS, selected BDS'],
-      ['Below 550','Backup Planning Zone','Do not predict a college from marks alone; focus on AIR, state quota, category, fees and alternate courses.','Private MBBS, BDS, AYUSH and repeat strategy depending AIR']
+      ['660+','Elite National Colleges','Very strong zone for AIIMS Delhi-level / top national institutions, depending heavily on AIR and year.','AIIMS Delhi, JIPMER Puducherry, and other top-tier AIIMS campuses'],
+      ['630–659','Top Government MBBS','Strong zone for highly competitive government colleges under favourable AIR and counselling conditions.','Maulana Azad Medical College (Delhi), King George\u2019s Medical University (Lucknow), Grant Medical College (Mumbai)'],
+      ['600–629','Strong Government College Zone','Good planning zone for many government MBBS possibilities, but state and AIQ outcomes can differ widely.','Government Medical College Nagpur, Madras Medical College Chennai, newer AIIMS campuses (Bhopal/Jodhpur/Rishikesh)'],
+      ['550–599','Mixed Government / Private Zone','Government MBBS becomes highly state- and quota-dependent; keep realistic private and BDS backups.','State-domicile government medical colleges, Kasturba Medical College Manipal, established private MBBS colleges'],
+      ['Below 550','Backup Planning Zone','Do not predict a college from marks alone; focus on AIR, state quota, category, fees and alternate courses.','Private MBBS colleges, deemed universities, BDS and AYUSH courses']
     ],
     'OBC':[
-      ['640+','Elite / Top Government Zone','Very competitive national options remain rank-driven.','Top government and central institutions'],
-      ['600–639','Strong Government MBBS Zone','Good government MBBS planning range subject to AIR and quota.','Government medical colleges through AIQ/state quota'],
-      ['540–599','Government Opportunity Zone','Possibilities improve with category and state quota, but vary sharply by state.','State government colleges, private options'],
-      ['480–539','Mixed College Zone','Use AIR plus domicile to build a realistic college list.','Private MBBS, selected government possibilities, BDS'],
+      ['640+','Elite / Top Government Zone','Very competitive national options remain rank-driven.','AIIMS campuses and central institutes (OBC quota seats)'],
+      ['600–639','Strong Government MBBS Zone','Good government MBBS planning range subject to AIR and quota.','Maulana Azad Medical College, KGMU Lucknow, Grant Medical College (OBC quota seats)'],
+      ['540–599','Government Opportunity Zone','Possibilities improve with category and state quota, but vary sharply by state.','State-domicile government medical colleges, Madras Medical College, GMC Nagpur (OBC quota)'],
+      ['480–539','Mixed College Zone','Use AIR plus domicile to build a realistic college list.','Kasturba Medical College Manipal, established private MBBS colleges'],
       ['Below 480','Backup Planning Zone','Admission route depends strongly on state counselling and fee preference.','Private / BDS / AYUSH / alternate routes']
     ],
     'SC':[
-      ['600+','Top Government Opportunity','Strong score zone; actual allotment remains AIR and seat-category dependent.','Competitive government colleges'],
-      ['520–599','Strong Government Planning Zone','Good range for category-based government planning in many counselling ecosystems.','Government medical colleges depending state/AIQ'],
-      ['450–519','Government / Mixed Zone','State quota and domicile become especially important.','Government possibilities in some states, private MBBS, BDS'],
-      ['380–449','Mixed Private / BDS Zone','Keep a broad preference list and compare fee structure.','Private MBBS, BDS and other medical routes'],
+      ['600+','Top Government Opportunity','Strong score zone; actual allotment remains AIR and seat-category dependent.','AIIMS campuses, Maulana Azad Medical College, KGMU Lucknow (SC quota seats)'],
+      ['520–599','Strong Government Planning Zone','Good range for category-based government planning in many counselling ecosystems.','State-domicile government medical colleges, Madras Medical College, GMC Nagpur (SC quota)'],
+      ['450–519','Government / Mixed Zone','State quota and domicile become especially important.','State government medical colleges (domicile-dependent), select private MBBS'],
+      ['380–449','Mixed Private / BDS Zone','Keep a broad preference list and compare fee structure.','Private MBBS colleges, BDS and allied medical routes'],
       ['Below 380','Backup Planning Zone','Use current AIR and counselling rules before making any college claim.','Private / BDS / AYUSH / alternate options']
     ],
     'ST':[
-      ['560+','Strong Government Opportunity','High planning zone for category-based government options, subject to AIR and seat availability.','Government medical colleges'],
-      ['470–559','Government Planning Zone','Potential government opportunities vary materially by state and quota.','Government MBBS depending state/AIQ'],
-      ['390–469','Mixed Government / Private Zone','Domicile and category seat availability are key.','Government possibilities in selected states, private MBBS'],
-      ['320–389','Private / BDS Planning Zone','Build a wide counselling preference list.','Private MBBS, BDS, AYUSH'],
+      ['560+','Strong Government Opportunity','High planning zone for category-based government options, subject to AIR and seat availability.','AIIMS campuses and top government medical colleges (ST quota seats)'],
+      ['470–559','Government Planning Zone','Potential government opportunities vary materially by state and quota.','State-domicile government medical colleges (ST quota)'],
+      ['390–469','Mixed Government / Private Zone','Domicile and category seat availability are key.','State government medical colleges (select states), established private MBBS'],
+      ['320–389','Private / BDS Planning Zone','Build a wide counselling preference list.','Private MBBS colleges, BDS, AYUSH'],
       ['Below 320','Backup Planning Zone','Marks alone are not enough for a reliable college prediction.','Alternate medical and allied-health routes']
     ]
   };
 
-  const trendRows=[
-    ['2021','610+','Score-to-rank relation was comparatively high; AIR still the safer counselling metric.'],
-    ['2022','600+','Government MBBS planning marks stayed around the 600 range for many General-category strategies.'],
-    ['2023','595+','Broad national planning benchmark softened slightly, but college-level variation remained large.'],
-    ['2024','610–620+','High-scoring distribution pushed score requirements upward for many government-college strategies.'],
-    ['2025','Marks shifted; use AIR first','Tougher paper changed score interpretation significantly, so AIR became more useful than raw marks.']
+  const topColleges=[
+    ['AIIMS New Delhi','~125','The most sought-after MBBS destination in India \u2014 lowest fees, strongest reputation.'],
+    ['Maulana Azad Medical College (MAMC), Delhi','~250','Delhi\u2019s largest government MBBS intake; consistently top-ranked.'],
+    ['Lady Hardinge Medical College (LHMC), Delhi','~240','Women\u2019s college; among Delhi\u2019s most preferred government options.'],
+    ['King George\u2019s Medical University (KGMU), Lucknow','~250','UP\u2019s flagship medical university with a very large intake.'],
+    ['Madras Medical College, Chennai','~250+','One of India\u2019s oldest and largest government medical colleges.'],
+    ['Grant Medical College, Mumbai','~200+','Attached to Sir J.J. Hospital; among Maharashtra\u2019s top choices.'],
+    ['Seth GS Medical College (KEM), Mumbai','~200','Renowned for clinical exposure via KEM Hospital.'],
+    ['JIPMER, Puducherry','~200','Institution of national importance; own separate reputation and pull.'],
+    ['Vardhman Mahavir Medical College (VMMC), Delhi','~170','Attached to Safdarjung Hospital; strong clinical training.'],
+    ['University College of Medical Sciences (UCMS), Delhi','~170','Delhi University-affiliated; consistently high-demand.'],
+    ['BHU Institute of Medical Sciences, Varanasi','~100','Prestigious central university medical institute.'],
+    ['AFMC, Pune','~150','Armed Forces Medical College \u2014 unique service-bond structure, highly preferred.']
   ];
 
   function zoneCards(category){
     return zones[category].map(function(z){
-      return '<article class="neet-college-zone"><div class="zone-score">'+z[0]+' · planning band</div><h3>'+z[1]+'</h3><p>'+z[2]+'</p><ul><li><b>Typical direction:</b> '+z[3]+'</li></ul></article>';
+      return '<article class="neet-college-zone"><div class="zone-score">'+z[0]+' · planning band</div><h3>'+z[1]+'</h3><p>'+z[2]+'</p><ul><li><b>Commonly preferred colleges at this level:</b> '+z[3]+'</li></ul></article>';
     }).join('');
   }
 
@@ -4274,12 +4281,14 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
 
       <div id="neetCollegeZones" class="neet-college-grid">${zoneCards('UR / EWS')}</div>
 
-      <h3 style="margin:28px 0 4px;color:#2d3f58;">5-Year Planning Trend</h3>
-      <p class="sub">Broad General-category government MBBS planning benchmarks observed across recent years; these are not individual college cut-offs.</p>
-      <table class="neet-college-trend-table">
-        <thead><tr><th>YEAR</th><th>BROAD GOVT MBBS PLANNING MARKS</th><th>COUNSELLING READ</th></tr></thead>
-        <tbody>${trendRows.map(r=>'<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+r[2]+'</td></tr>').join('')}</tbody>
+      <h3 style="margin:28px 0 4px;color:#2d3f58;">Top Colleges \u2014 Approx. MBBS Seats</h3>
+      <p class="sub">Some of the most commonly preferred government medical colleges nationally, with their approximate MBBS intake. Seat numbers shift slightly each year with NMC approvals \u2014 use these as a planning reference, not an exact current figure.</p>
+      <div style="overflow:auto;">
+      <table class="mba-cutoff-table">
+        <thead><tr><th>College</th><th>Approx. Seats</th><th>Why It\u2019s Preferred</th></tr></thead>
+        <tbody>${topColleges.map(function(c){ return '<tr><td><b>'+c[0]+'</b></td><td><span class="mba-cutoff-badge">'+c[1]+'</span></td><td>'+c[2]+'</td></tr>'; }).join('')}</tbody>
       </table>
+      </div>
 
       <div class="neet-college-note"><b>Important:</b> This is intentionally shown as a <b>college zone guide</b>, not “X marks = guaranteed college”. College allotment depends on rank, quota, category, domicile, seat availability, preferences and counselling round. The next upgrade can add a college-wise search using AIR + state + category for more precise predictions.</div>
     </section>`;
@@ -4347,27 +4356,27 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     {
       id:'elite',min:660,max:720,score:'660+',zone:'Elite National Colleges',
       desc:'Very strong planning zone for the most competitive national institutions; AIR remains the deciding factor.',
-      colleges:['AIIMS Delhi','Top AIIMS campuses','Maulana Azad Medical College','VMMC & Safdarjung','Other top national government colleges']
+      colleges:['AIIMS Delhi','JIPMER Puducherry','Maulana Azad Medical College, Delhi','Lady Hardinge Medical College, Delhi','Newer AIIMS campuses (Bhopal/Jodhpur/Rishikesh)']
     },
     {
       id:'top',min:630,max:659,score:'630–659',zone:'Top Government MBBS',
       desc:'Strong zone for highly competitive government MBBS planning under favourable AIR and counselling conditions.',
-      colleges:['Leading state government medical colleges','Top metro government colleges','Strong central government options','Selected AIIMS / INI possibilities','High-demand government MBBS colleges']
+      colleges:['King George\u2019s Medical University, Lucknow','Grant Medical College, Mumbai','Vardhman Mahavir Medical College, Delhi','Madras Medical College, Chennai','University College of Medical Sciences, Delhi']
     },
     {
       id:'strong',min:600,max:629,score:'600–629',zone:'Strong Government Zone',
       desc:'A good government MBBS planning range, but outcomes vary significantly by AIR, category and state quota.',
-      colleges:['Established state government medical colleges','Newer AIIMS possibilities','Government colleges through state quota','Regional government MBBS options','Lower-demand government seats depending on AIR']
+      colleges:['Government Medical College, Nagpur','Seth GS Medical College (KEM), Mumbai','BHU Institute of Medical Sciences, Varanasi','JIPMER (select category seats)','State government medical colleges (domicile-dependent)']
     },
     {
       id:'mixed',min:550,max:599,score:'550–599',zone:'Mixed Government / Private',
       desc:'Government MBBS becomes more state- and quota-dependent; realistic backup options should also be planned.',
-      colleges:['State quota government possibilities','Lower-closing government colleges in some states','Private MBBS colleges','Selected deemed university options','Government / private BDS options']
+      colleges:['State-domicile government medical colleges','Kasturba Medical College, Manipal','Established private MBBS colleges','Government medical colleges via state quota','Government/private BDS options']
     },
     {
       id:'backup',min:0,max:549,score:'Below 550',zone:'Backup Planning Zone',
       desc:'Marks alone should not be used to promise a college. Build options using AIR, state quota, fees and counselling choices.',
-      colleges:['Private MBBS options','BDS colleges','AYUSH colleges','State-specific counselling options','Repeat / alternate course planning']
+      colleges:['Private MBBS colleges','BDS colleges','AYUSH colleges (BAMS/BHMS/BUMS)','Deemed university medical colleges','Repeat / alternate course planning']
     }
   ];
 
