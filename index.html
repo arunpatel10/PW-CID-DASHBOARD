@@ -6952,6 +6952,30 @@ document.addEventListener('click', function(e){
 .acca-road-branch::before{content:'';width:2px;height:22px;background:#d7e2f0;}
 @media(max-width:620px){.acca-road-fork{flex-direction:column;gap:14px;padding-top:0;}.acca-road-fork::before,.acca-road-fork::after{display:none;}.acca-road-branch::before{display:none;}}
 .acca-level-note{background:#f6f8fc;border:1px solid #e3e8ef;border-radius:12px;padding:12px 16px;font-size:12.5px;color:#607086;margin-top:16px;}
+.acca-calc-banner{margin-top:18px;}
+.acca-calc-banner-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:760px){.acca-calc-banner-row{grid-template-columns:1fr;}}
+.acca-calc-entry-btn{width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:18px 22px;border-radius:18px;border:1.5px solid #ffb648;background:linear-gradient(120deg,#fff8ec,#fff3dc 60%,#fff8ec);cursor:pointer;text-decoration:none;}
+.acca-calc-entry-btn:hover{transform:translateY(-2px);border-color:#e8940a;}
+.acca-calc-entry-icon{font-size:30px;line-height:1;flex-shrink:0;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 6px rgba(180,120,10,.15);}
+.acca-calc-entry-text{display:flex;flex-direction:column;gap:3px;flex:1;}
+.acca-calc-entry-text b{font-size:16px;color:#7a4c02;}
+.acca-calc-entry-text span{font-size:12.5px;color:#8a6a2e;}
+.acca-calc-entry-btn em{font-style:normal;font-weight:700;font-size:13px;color:#a9660a;flex-shrink:0;}
+.acca-official-link{border-color:#a9c3f5;background:linear-gradient(120deg,#eef3ff,#e4ecff 60%,#eef3ff);}
+.acca-official-link:hover{border-color:#2952E3;}
+.acca-official-link .acca-calc-entry-icon{box-shadow:0 2px 6px rgba(30,60,180,.12);}
+.acca-official-link .acca-calc-entry-text b{color:#1f3a8f;}
+.acca-official-link .acca-calc-entry-text span{color:#3f5aa8;}
+.acca-official-link em{color:#2952E3;}
+.acca-calc-result{margin-top:6px;}
+.acca-calc-summary{display:flex;align-items:center;gap:18px;background:#fff8ec;border:1px solid #ffe1a8;border-radius:16px;padding:16px 20px;margin-bottom:16px;flex-wrap:wrap;}
+.acca-calc-summary>div{font-size:12.5px;color:#7a6a4a;line-height:1.3;}
+.acca-calc-num{font-size:26px;font-weight:800;color:#a9660a;margin-right:2px;}
+.acca-calc-divider{width:1px;align-self:stretch;background:#ffe1a8;}
+.ca-topic-chip.acca-chip-exempt{background:#eafbea;border:1px solid #b6e6b6;color:#1f7a2e;padding:6px 12px;}
+.ca-topic-chip.acca-chip-sit{background:#eef2fb;border:1px solid #cdd8f2;color:#2d4488;padding:6px 12px;}
+.ca-topic-chip small{display:block;font-weight:500;font-size:10.5px;opacity:.85;margin-top:2px;}
 </style>
 <script id="acca-category-module">
 (function(){
@@ -7043,6 +7067,78 @@ document.addEventListener('click', function(e){
     ['US CMA','Typically 3 exemptions.']
   ];
 
+  var QUALIFICATION_EXEMPTIONS = [
+    { key:'noncom12', label:'12th Pass — Non-Commerce', exempt:[], note:'No exemptions. Since the background is non-commerce, the student may need to enter via the FIA route (Foundations in Accountancy) before the main ACCA Qualification, depending on exact subjects and marks — check ACCA’s minimum entry criteria.' },
+    { key:'com12', label:'12th Pass — Commerce (Maths/Accounts + English)', exempt:[], note:'No exemptions, but the student meets ACCA’s minimum entry requirement directly (typically 65%+ in 2 subjects incl. Maths/Accounts & English, 50%+ in the rest) — can start straight at Applied Knowledge, no FIA route needed.' },
+    { key:'bcom', label:'B.Com Graduate', exempt:['BT','MA','FA'], note:'Standard B.Com exemption — all of Applied Knowledge. Some ACCA-accredited/MoU university programmes carry additional exemptions (up to LW/FR) — verify the specific university’s accreditation status.' },
+    { key:'mcom', label:'M.Com', exempt:['BT','MA','FA'], note:'Same baseline exemption as B.Com — all of Applied Knowledge. Postgraduate commerce study rarely adds further exemptions beyond this unless the university has a specific ACCA MoU.' },
+    { key:'bba', label:'BBA / BBM', exempt:['BT','MA','FA'], note:'All of Applied Knowledge exempted, same as B.Com — based on general business/management coursework overlap.' },
+    { key:'nongrad', label:'Any Other Graduate — Non-Commerce', exempt:[], note:'No standard exemptions for a non-commerce degree — the student begins at Applied Knowledge with no papers skipped, unless the specific course had significant accounting/finance content worth a manual review.' },
+    { key:'cafound', label:'CA Foundation (Passed)', exempt:['BT','FA'], note:'2 papers exempted. The student still sits MA, plus all of Applied Skills and Strategic Professional.' },
+    { key:'cainter', label:'CA Intermediate / IPCC (Passed)', exempt:['BT','MA','FA','LW','TX','AA'], note:'6 exemptions — all of Applied Knowledge plus LW, TX and AA from Applied Skills. The student still sits PM, FR, FM + all 4 Strategic Professional papers (7 total).' },
+    { key:'cafinal', label:'CA Final / CA Qualified (ICAI Member)', exempt:['BT','MA','FA','LW','PM','TX','FR','AA','FM'], note:'Maximum exemption — all 9 papers across Applied Knowledge and Applied Skills. Only the 4 Strategic Professional papers remain (SBL + SBR + any 2 of AFM/APM/ATX/AAA).' },
+    { key:'cmalt5', label:'ICMAI CMA — Qualified, under 5 yrs experience', exempt:['BT','MA','FA','LW','TX','FR','FM'], note:'7 exemptions. The student still sits PM and AA, plus all 4 Strategic Professional papers.' },
+    { key:'cmagt5', label:'ICMAI CMA — Qualified, 5+ yrs experience', exempt:['BT','MA','FA','LW','PM','TX','FR','AA','FM'], note:'With 5+ years’ relevant experience, ICMAI CMAs get the same maximum exemption as CA Final — all 9 papers. Only Strategic Professional remains.' },
+    { key:'cs', label:'CS — Company Secretary (ICSI Qualified)', exempt:['BT','FA','LW'], note:'3 exemptions, reflecting overlap in business law and foundational accounting. The remaining Applied Skills papers (PM, TX, FR, AA, FM) plus Strategic Professional still apply.' },
+    { key:'mbafin', label:'MBA (Finance)', exempt:['BT','MA','FA'], note:'Baseline exemption of all Applied Knowledge papers. Some university MBA programmes with strongly ACCA-mapped curricula can carry more (up to 9 in rare accredited cases) — always verify via the official ACCA calculator.' },
+    { key:'uscpa', label:'US CPA (Qualified)', exempt:['BT','MA','FA','LW','PM','TX','FR','AA','FM'], note:'A qualified US CPA typically receives maximum exemption across Applied Knowledge and Applied Skills (9 papers), given the substantial technical overlap. Only Strategic Professional remains.' },
+    { key:'uscma', label:'US CMA (Qualified)', exempt:['BT','MA','FA'], note:'3 exemptions — all of Applied Knowledge, reflecting overlap in cost/management accounting and business fundamentals.' }
+  ];
+
+  function paperLabel(code){
+    var all = [].concat(LEVELS.ak.papers, LEVELS.as_.papers, LEVELS.sp.papers);
+    var found = all.filter(function(p){ return p.code === code; })[0];
+    return found ? found.name : code;
+  }
+
+  function calcResultHTML(qKey){
+    var q = QUALIFICATION_EXEMPTIONS.filter(function(x){ return x.key === qKey; })[0];
+    if(!q) return '';
+    var allMain = [].concat(LEVELS.ak.papers, LEVELS.as_.papers, LEVELS.sp.papers).map(function(p){ return p.code; });
+    var toSit = allMain.filter(function(c){ return q.exempt.indexOf(c) === -1; });
+    function badgeGroup(codes, cls){
+      if(!codes.length) return '<div class="ca-step-note">None</div>';
+      return '<div class="ca-topic-chips">' + codes.map(function(c){
+        return '<span class="ca-topic-chip '+cls+'">'+c+'<small>'+paperLabel(c)+'</small></span>';
+      }).join('') + '</div>';
+    }
+    return '<div class="acca-calc-result">' +
+      '<div class="acca-calc-summary">' +
+        '<div><span class="acca-calc-num">'+q.exempt.length+'</span>papers exempted</div>' +
+        '<div class="acca-calc-divider"></div>' +
+        '<div><span class="acca-calc-num">'+toSit.length+'</span>of 13 papers still to sit</div>' +
+      '</div>' +
+      '<div class="exam-block-label">Exempted Papers</div>' + badgeGroup(q.exempt, 'acca-chip-exempt') +
+      '<div class="exam-block-label" style="margin-top:14px;">Papers Still to Sit</div>' + badgeGroup(toSit, 'acca-chip-sit') +
+      '<div class="ca-step-card" style="margin-top:14px;">'+q.note+'</div>' +
+      '<div class="ca-step-note" style="margin-top:10px;">Indicative only, based on ACCA’s published exemption policy for common Indian qualifications. Actual exemptions are confirmed against the student’s exact transcript/syllabus by ACCA directly — verify via ACCA’s official Exemptions Calculator before finalising guidance.</div>' +
+    '</div>';
+  }
+
+  function calculatorHTML(){
+    var options = QUALIFICATION_EXEMPTIONS.map(function(q){
+      return '<option value="'+q.key+'">'+q.label+'</option>';
+    }).join('');
+    return back('ACCA Overview', 'overview') + `
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">PW × ACCA</div>
+        <h2>🧮 PW Exemption Calculator</h2>
+        <p class="sub">Select the student’s existing qualification to see exactly which ACCA papers they can skip, based on ACCA’s published exemption policy for common Indian qualifications.</p>
+        <div class="df-checker" style="margin-top:18px;">
+          <div class="df-check-grid">
+            <div class="df-field" style="max-width:480px;">
+              <label>Student’s Qualification</label>
+              <select id="accaCalcSelect">
+                <option value="">Select qualification…</option>
+                ${options}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id="accaCalcResult" style="margin-top:18px;"></div>
+      </section>`;
+  }
+
   function overview(){
     var levelKeys = ['fia','ak','as_','sp'];
     var cards = levelKeys.map(function(k){
@@ -7061,6 +7157,18 @@ document.addEventListener('click', function(e){
         <p class="sub">A globally recognised accountancy qualification (UK-based) \u2014 13 papers across 3 levels, plus an alternate foundation entry route.</p>
         ${roadmapHTML()}
         <div class="acca-level-note">The roadmap above shows the full journey. Tap a level below to see its individual papers.</div>
+        <div class="acca-calc-banner acca-calc-banner-row">
+          <button type="button" class="acca-calc-entry-btn" data-acca-open="calc">
+            <span class="acca-calc-entry-icon">🧮</span>
+            <span class="acca-calc-entry-text"><b>PW Exemption Calculator</b><span>Pick the student’s qualification to see exactly which papers they can skip</span></span>
+            <em>Open →</em>
+          </button>
+          <a class="acca-calc-entry-btn acca-official-link" href="https://www.accaglobal.com/gb/en/help/exemptions-calculator.html" target="_blank" rel="noopener">
+            <span class="acca-calc-entry-icon">🔗</span>
+            <span class="acca-calc-entry-text"><b>ACCA Official Calculator</b><span>Opens ACCA’s own exemptions calculator on accaglobal.com</span></span>
+            <em>Visit →</em>
+          </a>
+        </div>
         <div class="ca-level-grid" style="margin-top:18px;">${cards}</div>
       </section>`;
   }
@@ -7190,6 +7298,14 @@ document.addEventListener('click', function(e){
     r.querySelectorAll('[data-acca-back]').forEach(function(btn){
       btn.onclick = function(){ render(this.getAttribute('data-acca-back')); };
     });
+    var calcSel = r.querySelector('#accaCalcSelect');
+    if(calcSel){
+      calcSel.onchange = function(){
+        var res = document.getElementById('accaCalcResult');
+        if(!res) return;
+        res.innerHTML = this.value ? calcResultHTML(this.value) : '';
+      };
+    }
   }
 
   function render(view){
@@ -7199,6 +7315,8 @@ document.addEventListener('click', function(e){
     if(view && view.indexOf(':') > -1){
       var parts = view.split(':');
       r.innerHTML = paperDetail(parts[0], parts[1]);
+    } else if(view === 'calc'){
+      r.innerHTML = calculatorHTML();
     } else if(view && LEVELS[view]){
       r.innerHTML = levelPapers(view);
     } else {
@@ -7215,6 +7333,7 @@ document.addEventListener('click', function(e){
       if(typeof window.cidRenderCategorySidebar === 'function'){
         window.cidRenderCategorySidebar('ACCA', 'Global Accountancy', [
           {key:'overview', label:'ACCA Overview'},
+          {key:'calc', label:'Exemption Calculator'},
           {key:'fia', label:'Foundations in Accountancy'},
           {key:'ak', label:'Applied Knowledge'},
           {key:'as_', label:'Applied Skills'},
