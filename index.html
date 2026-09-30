@@ -1954,6 +1954,18 @@ function renderExamPage(examId){
       </div>
     </div>
 
+    ${examId==="iitjam" ? `
+    <div class="section-title">MEQ Checker</div>
+    <div class="card" style="margin-bottom:22px;padding:16px;border:1px solid #dbe5ff;background:#f8faff;">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:3px;">Cross-subject MEQ Checker</div>
+          <div style="font-size:12px;color:var(--ink-soft);line-height:1.5;">One searchable table — Subject, Institute, Programme, Seats and Minimum Educational Qualification — across all 7 JAM papers, instead of opening each subject card one by one.</div>
+        </div>
+        <button class="btn btn-primary btn-sm" id="jamMeqCheckerBtn">Open MEQ Checker →</button>
+      </div>
+    </div>` : ""}
+
     <div class="section-title">Jump to</div>
     <div class="btn-group">
       <button class="btn" data-go="eligibility">Check Eligibility for ${exam.shortName}</button>
@@ -1966,6 +1978,7 @@ function renderExamPage(examId){
     el.addEventListener("click", ()=> openSubjectModal(el.dataset.exam, el.dataset.subject));
   });
   root.querySelectorAll("[data-go]").forEach(el=> el.addEventListener("click", ()=>goTo(el.dataset.go)));
+  document.getElementById("jamMeqCheckerBtn")?.addEventListener("click", ()=>openJAMMEQChecker());
 }
 
 /* ---------------------------------------------------------------------- */
@@ -2113,6 +2126,93 @@ function openJAMCollegeGuide(subjectId){
   `);
   document.getElementById("backToSubject")?.addEventListener("click", ()=>openSubjectModal("iitjam", subjectId));
   document.getElementById("collegePitchBtn")?.addEventListener("click", ()=>{ closeModal(); goTo("results"); });
+}
+
+/* ---------------------------------------------------------------------- */
+/* JAM MEQ CHECKER — flat, filterable, cross-subject view                 */
+/* Built from JAM_COLLEGE_GUIDE (already carries meq per row) + JAM_SUBJECTS */
+/* ---------------------------------------------------------------------- */
+function buildJAMMEQRows(){
+  const rows = [];
+  Object.keys(JAM_COLLEGE_GUIDE).forEach(subjectId=>{
+    const subject = JAM_SUBJECTS[subjectId];
+    const data = JAM_COLLEGE_GUIDE[subjectId];
+    data.rows.forEach(r=>{
+      rows.push({
+        subjectId, subjectName: subject.name, subjectCode: subject.code,
+        type:r.type, institute:r.institute, program:r.program,
+        seats:r.seats, tier:r.tier, meq: r.meq || "MEQ not listed for this row — check the JAM Admission Brochure Annexure II directly."
+      });
+    });
+  });
+  return rows;
+}
+
+function openJAMMEQChecker(){
+  const allRows = buildJAMMEQRows();
+  const subjectOptions = Object.keys(JAM_SUBJECTS).map(sid=>JAM_SUBJECTS[sid]);
+
+  const renderRows = (rows)=> rows.length ? rows.map(r=>`
+    <tr>
+      <td><span class="tag">${r.subjectCode}</span> ${r.subjectName}</td>
+      <td><strong>${r.institute}</strong><div style="font-size:10px;color:var(--ink-faint);margin-top:2px;">${r.type} · ${r.tier}</div></td>
+      <td>${r.program}</td>
+      <td>${r.seats}</td>
+      <td style="white-space:normal;min-width:260px;font-size:11.5px;color:var(--ink-soft);line-height:1.5;">${r.meq}</td>
+    </tr>`).join("") : `<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);padding:18px;">No matching institute/programme for this filter.</td></tr>`;
+
+  openModal(`
+    <div class="modal-head">
+      <div>
+        <div class="page-eyebrow">IIT-JAM · All Subjects</div>
+        <h3 style="font-size:19px;">MEQ Checker</h3>
+      </div>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="callout info" style="margin-bottom:14px;">
+        <strong>How to use this:</strong> Filter by subject and/or search an institute or programme name to instantly see seats and the Minimum Educational Qualification (MEQ) — useful when a student asks "will my degree be accepted here?" without opening each subject card separately.
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+        <select id="meqSubjectFilter" class="input" style="max-width:220px;">
+          <option value="all">All subjects (${allRows.length} rows)</option>
+          ${subjectOptions.map(s=>`<option value="${s.id}">${s.code} — ${s.name}</option>`).join("")}
+        </select>
+        <input id="meqSearchBox" class="input" type="text" placeholder="Search institute or programme…" style="flex:1;min-width:200px;">
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:14px;">
+        <table>
+          <thead><tr><th>Subject</th><th>Institute</th><th>Programme</th><th>2026 seats</th><th>MEQ</th></tr></thead>
+          <tbody id="meqTableBody">${renderRows(allRows)}</tbody>
+        </table>
+      </div>
+
+      <div style="font-size:11px;color:var(--ink-faint);line-height:1.6;margin-bottom:14px;">
+        <strong>Data basis:</strong> JAM 2026 official seat matrix and MEQs (Annexure II) for IIT programmes; NIT rows are admitted via CCMN using JAM scores, with their own separate eligibility notice. MEQs and seat matrix are tentative and subject to change by the admitting institute — always verify against the current JAM Admission Brochure before quoting them as final.
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-sm" id="meqBackBtn">← Close</button>
+      </div>
+    </div>
+  `);
+
+  const applyFilter = ()=>{
+    const subjectVal = document.getElementById("meqSubjectFilter")?.value || "all";
+    const searchVal = (document.getElementById("meqSearchBox")?.value || "").trim().toLowerCase();
+    let filtered = allRows;
+    if(subjectVal !== "all") filtered = filtered.filter(r=>r.subjectId === subjectVal);
+    if(searchVal) filtered = filtered.filter(r=>
+      r.institute.toLowerCase().includes(searchVal) || r.program.toLowerCase().includes(searchVal)
+    );
+    const tbody = document.getElementById("meqTableBody");
+    if(tbody) tbody.innerHTML = renderRows(filtered);
+  };
+  document.getElementById("meqSubjectFilter")?.addEventListener("change", applyFilter);
+  document.getElementById("meqSearchBox")?.addEventListener("input", applyFilter);
+  document.getElementById("meqBackBtn")?.addEventListener("click", closeModal);
 }
 
 function openSubjectModal(examId, subjectId){
