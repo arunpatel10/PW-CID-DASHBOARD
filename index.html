@@ -914,7 +914,7 @@ body.cid-home-mode .sidebar [data-view="cutoffs"]{
 <div class="cid-home-hero"><div><div class="cid-eyebrow">C.I.D WORKSPACE</div><h1>What are you counselling for today?</h1>
 <p>Select a category to access exam intelligence, eligibility, cut-offs, results, colleges and counselling resources.</p></div>
 <div class="cid-home-badge"><strong>18</strong><span>Categories</span></div></div>
-<div class="cid-category-toolbar"><div><h2>Explore Categories</h2><p>CSIR-NET and IIT-JAM are ready. Other categories will be added one by one.</p></div>
+<div class="cid-category-toolbar"><div><h2>Explore Categories</h2><p>All 18 categories are ready — pick one to open its counselling resources.</p></div>
 <div class="cid-category-search-wrap"><span>⌕</span><input id="cidCategorySearch" placeholder="Search category..." oninput="cidFilterCategories()"></div></div>
 <div id="cidCategoryGrid" class="cid-category-grid"><button class="cid-category-card" onclick="cidOpenCategory('MBA')">
 <span class="cid-category-icon">🎓</span><span class="cid-category-title">MBA</span>
@@ -1977,71 +1977,71 @@ const JAM_COLLEGE_GUIDE = {
   "jam-bt": {
     qualifying:24.46,
     rows:[
-      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Biotechnology", rank:"5–25", seats:35, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Biological Sciences", rank:"15–30", seats:11, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Roorkee", program:"M.Sc. Bioscience & Bioengineering", rank:"27–56", seats:35, tier:"Strong choice"},
-      {type:"IIT", institute:"IIT Indore", program:"M.Sc. Biotechnology", rank:"—", seats:15, tier:"Strong choice"},
-      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Life Science", rank:"~192", seats:37, tier:"Strong NIT"}
+      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Biotechnology", rank:"5–25", seats:35, tier:"Top choice", meq:"Any Branch/Subject — no restriction on the Bachelor's discipline."},
+      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Biological Sciences", rank:"15–30", seats:11, tier:"Top choice", meq:"A three- or four-year Bachelor's degree in any branch of STEM."},
+      {type:"IIT", institute:"IIT Roorkee", program:"M.Sc. Bioscience & Bioengineering", rank:"27–56", seats:35, tier:"Strong choice", meq:"Bachelor's Degree in any Branch/Subject."},
+      {type:"IIT", institute:"IIT Indore", program:"M.Sc. Biotechnology", rank:"—", seats:15, tier:"Strong choice", meq:"Any Branch/Subject."},
+      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Life Science", rank:"~192", seats:37, tier:"Strong NIT", meq:"Admitted via CCMN, not JAM's own MEQ list — check NIT Rourkela's CCMN eligibility notice."}
     ]
   },
   "jam-cy": {
     qualifying:25.83,
     rows:[
-      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Chemistry", rank:"1–34", seats:57, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Chemistry", rank:"3–288", seats:68, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Madras", program:"M.Sc. Chemistry", rank:"2–228", seats:57, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Chemistry", rank:"15–113", seats:49, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kharagpur", program:"Joint M.Sc.–PhD Chemistry", rank:"11–255", seats:57, tier:"Strong choice"},
-      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Chemistry", rank:"~850", seats:38, tier:"Strong NIT"}
+      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Chemistry", rank:"1–34", seats:57, tier:"Top choice", meq:"Chemistry for three years/six semesters, plus Mathematics for one year/two semesters."},
+      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Chemistry", rank:"3–288", seats:68, tier:"Top choice", meq:"Chemistry for three years/six semesters."},
+      {type:"IIT", institute:"IIT Madras", program:"M.Sc. Chemistry", rank:"2–228", seats:57, tier:"Top choice", meq:"Chemistry for at least six semesters/three years, plus Mathematics for two semesters/one year."},
+      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Chemistry", rank:"15–113", seats:49, tier:"Top choice", meq:"B.Sc./B.S./B.Sc.(Hons.) with Chemistry for three years/six semesters."},
+      {type:"IIT", institute:"IIT Kharagpur", program:"Joint M.Sc.–PhD Chemistry", rank:"11–255", seats:57, tier:"Strong choice", meq:"B.Sc./B.S. degree with at least six Chemistry subjects across six semesters/three years."},
+      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Chemistry", rank:"~850", seats:38, tier:"Strong NIT", meq:"Admitted via CCMN, not JAM's own MEQ list — check NIT Rourkela's CCMN eligibility notice."}
     ]
   },
   "jam-ec": {
     qualifying:42.55,
     rows:[
-      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Economics", rank:"2–11", seats:15, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Roorkee", program:"M.Sc. Economics", rank:"14–39", seats:13, tier:"Strong choice"},
-      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Economics", rank:"—", seats:24, tier:"Strong choice"}
+      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Economics", rank:"2–11", seats:15, tier:"Top choice", meq:"B.A./B.Sc./B.Com./B.Stat./B.Math./B.Tech/B.E. or equivalent, min. 3 years of education after 10+2."},
+      {type:"IIT", institute:"IIT Roorkee", program:"M.Sc. Economics", rank:"14–39", seats:13, tier:"Strong choice", meq:"B.Sc.(Eco)/B.A.(Eco)/B.Sc.(Stats)/BCA, or B.Sc./B.A./B.Com. with Mathematics as a subject. No restriction for engineering degrees."},
+      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Economics", rank:"—", seats:24, tier:"Strong choice", meq:"A Bachelor's degree with min. 3 years of education after 10+2 — no specific subject restriction."}
     ]
   },
   "jam-gg": {
     qualifying:21.06,
     rows:[
-      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Applied Geology", rank:"1–17", seats:38, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Roorkee", program:"M.Sc. Applied Geology", rank:"8–41", seats:19, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kharagpur", program:"Joint M.Sc.–PhD Geology", rank:"32–82", seats:38, tier:"Strong choice"},
-      {type:"IIT", institute:"IIT (ISM) Dhanbad", program:"M.Sc.(Tech.) Applied Geology", rank:"—", seats:66, tier:"Strong choice"},
-      {type:"IIT", institute:"IIT Bhubaneswar", program:"Joint M.Sc.–PhD Geology", rank:"24–127", seats:25, tier:"Strong choice"}
+      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Applied Geology", rank:"1–17", seats:38, tier:"Top choice", meq:"Geology for three years/six semesters, plus any two of Mathematics, Physics, Chemistry, Biological Science."},
+      {type:"IIT", institute:"IIT Roorkee", program:"M.Sc. Applied Geology", rank:"8–41", seats:19, tier:"Top choice", meq:"Same as IIT Bombay's Geology requirement; no restriction for engineering degrees."},
+      {type:"IIT", institute:"IIT Kharagpur", program:"Joint M.Sc.–PhD Geology", rank:"32–82", seats:38, tier:"Strong choice", meq:"Geology for 6 semesters/3 years, plus one of: 2 Physics+2 Maths, 2 Physics+2 Chemistry, or 2 Chemistry+2 Maths subjects."},
+      {type:"IIT", institute:"IIT (ISM) Dhanbad", program:"M.Sc.(Tech.) Applied Geology", rank:"—", seats:66, tier:"Strong choice", meq:"B.Sc. (3 yrs) with Geology for 3 years/6 semesters + Mathematics, plus one of Physics/Chemistry/Computer Science/Environmental Science."},
+      {type:"IIT", institute:"IIT Bhubaneswar", program:"Joint M.Sc.–PhD Geology", rank:"24–127", seats:25, tier:"Strong choice", meq:"Same combination rule as IIT Kharagpur's Geology programme (2+2 subject combinations)."}
     ]
   },
   "jam-ma": {
     qualifying:19.90,
     rows:[
-      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Mathematics", rank:"2–35", seats:38, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Mathematics", rank:"1–185", seats:68, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Mathematics", rank:"37–226", seats:49, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Madras", program:"M.Sc. Mathematics", rank:"10–173", seats:49, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Guwahati", program:"M.Sc. Mathematics", rank:"71–139", seats:30, tier:"Strong choice"},
-      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Mathematics", rank:"~764", seats:19, tier:"Strong NIT"}
+      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Mathematics", rank:"2–35", seats:38, tier:"Top choice", meq:"No restrictions — open to any Bachelor's background."},
+      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Mathematics", rank:"1–185", seats:68, tier:"Top choice", meq:"Mathematics for at least two years/four semesters. No restriction for engineering degrees."},
+      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Mathematics", rank:"37–226", seats:49, tier:"Top choice", meq:"No restrictions — open to any Bachelor's background."},
+      {type:"IIT", institute:"IIT Madras", program:"M.Sc. Mathematics", rank:"10–173", seats:49, tier:"Top choice", meq:"Mathematics for at least two years/four semesters."},
+      {type:"IIT", institute:"IIT Guwahati", program:"M.Sc. Mathematics", rank:"71–139", seats:30, tier:"Strong choice", meq:"Mathematics for at least two years/four semesters."},
+      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Mathematics", rank:"~764", seats:19, tier:"Strong NIT", meq:"Admitted via CCMN, not JAM's own MEQ list — check NIT Rourkela's CCMN eligibility notice."}
     ]
   },
   "jam-ms": {
     qualifying:8.75,
     rows:[
-      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Statistics", rank:"5–33", seats:48, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Statistics", rank:"2–50", seats:62, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Palakkad", program:"M.Sc. Mathematics & Statistics", rank:"61–63", seats:5, tier:"Strong choice"},
-      {type:"IIT", institute:"IIT Tirupati", program:"M.Sc. Mathematics & Statistics", rank:"65–307", seats:15, tier:"Strong choice"}
+      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Statistics", rank:"5–33", seats:48, tier:"Top choice", meq:"No restrictions — open to any Bachelor's background."},
+      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Statistics", rank:"2–50", seats:62, tier:"Top choice", meq:"No restrictions — open to any Bachelor's background."},
+      {type:"IIT", institute:"IIT Palakkad", program:"M.Sc. Mathematics & Statistics", rank:"61–63", seats:5, tier:"Strong choice", meq:"Bachelor's degree with at least 3 Mathematics courses (per IIT Palakkad's M.Sc. Mathematics MEQ in Annexure II)."},
+      {type:"IIT", institute:"IIT Tirupati", program:"M.Sc. Mathematics & Statistics", rank:"65–307", seats:15, tier:"Strong choice", meq:"No restrictions — open to any Bachelor's background."}
     ]
   },
   "jam-ph": {
     qualifying:14.66,
     rows:[
-      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Physics", rank:"4–44", seats:60, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Physics", rank:"26–145", seats:68, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Madras", program:"M.Sc. Physics", rank:"9–155", seats:60, tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Physics", rank:"6–98", seats:"—", tier:"Top choice"},
-      {type:"IIT", institute:"IIT Kharagpur", program:"Joint M.Sc.–PhD Physics", rank:"79–280", seats:"—", tier:"Strong choice"},
-      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Physics", rank:"~880", seats:38, tier:"Strong NIT"}
+      {type:"IIT", institute:"IIT Bombay", program:"M.Sc. Physics", rank:"4–44", seats:60, tier:"Top choice", meq:"Physics for at least two years/four semesters, plus Mathematics for at least one year/two semesters. No restriction for engineering degrees."},
+      {type:"IIT", institute:"IIT Delhi", program:"M.Sc. Physics", rank:"26–145", seats:68, tier:"Top choice", meq:"Same Physics + Mathematics requirement as IIT Bombay."},
+      {type:"IIT", institute:"IIT Madras", program:"M.Sc. Physics", rank:"9–155", seats:60, tier:"Top choice", meq:"Same Physics + Mathematics requirement as IIT Bombay."},
+      {type:"IIT", institute:"IIT Kanpur", program:"M.Sc. Physics", rank:"6–98", seats:"—", tier:"Top choice", meq:"Same Physics + Mathematics requirement as IIT Bombay."},
+      {type:"IIT", institute:"IIT Kharagpur", program:"Joint M.Sc.–PhD Physics", rank:"79–280", seats:"—", tier:"Strong choice", meq:"B.S./B.Sc./B.Tech/B.E. degree with at least 4 Physics subjects and 2 Mathematics subjects."},
+      {type:"NIT", institute:"NIT Rourkela", program:"M.Sc. Physics", rank:"~880", seats:38, tier:"Strong NIT", meq:"Admitted via CCMN, not JAM's own MEQ list — check NIT Rourkela's CCMN eligibility notice."}
     ]
   }
 };
@@ -2080,12 +2080,15 @@ function openJAMCollegeGuide(subjectId){
       <h4>Best institutes for this subject</h4>
       <div class="table-wrap" style="margin-bottom:16px;">
         <table>
-          <thead><tr><th>Type</th><th>Institute</th><th>Programme</th><th>2025 General closing AIR</th><th>2026 seats</th><th>Guide</th></tr></thead>
+          <thead><tr><th>Type</th><th>Institute</th><th>Programme &amp; Minimum Educational Qualification (MEQ)</th><th>2025 General closing AIR</th><th>2026 seats</th><th>Guide</th></tr></thead>
           <tbody>
             ${data.rows.map(r=>`<tr>
               <td><span class="tag">${r.type}</span></td>
               <td><strong>${r.institute}</strong></td>
-              <td style="white-space:normal;min-width:180px;">${r.program}</td>
+              <td style="white-space:normal;min-width:240px;">
+                <div>${r.program}</div>
+                ${r.meq ? `<div style="margin-top:4px;font-size:10.5px;color:var(--ink-faint);line-height:1.5;"><strong>MEQ:</strong> ${r.meq}</div>` : ""}
+              </td>
               <td><strong>${r.rank}</strong></td>
               <td>${r.seats}</td>
               <td>${r.tier}</td>
@@ -2095,11 +2098,11 @@ function openJAMCollegeGuide(subjectId){
       </div>
 
       <div class="callout warn" style="margin-bottom:16px;">
-        <strong>Counsellor tip:</strong> Don't tell a student “you need exactly X marks for IIT ___.” Quote the <strong>previous closing AIR</strong> and explain that marks-to-rank changes every year. Then set a safer target below the previous closing rank.
+        <strong>Counsellor tip:</strong> Don't tell a student “you need exactly X marks for IIT ___.” Quote the <strong>previous closing AIR</strong> and explain that marks-to-rank changes every year. Then set a safer target below the previous closing rank. Also check the <strong>MEQ</strong> line first — a strong rank still won't get a seat if the student's Bachelor's subjects/duration don't meet that institute's essential-subject requirement.
       </div>
 
       <div style="font-size:11px;color:var(--ink-faint);line-height:1.6;margin-bottom:14px;">
-        <strong>Data basis:</strong> JAM 2025 final/last available General-category closing ranks; JAM 2026 official seat matrix for IIT programmes. NIT options are through CCMN using JAM scores. Always verify the current year's programme eligibility, seat matrix and closing ranks before quoting them as final.
+        <strong>Data basis:</strong> JAM 2025 final/last available General-category closing ranks; JAM 2026 official seat matrix and MEQs (Annexure II) for IIT programmes. NIT options are through CCMN using JAM scores, with their own separate eligibility. MEQs and seat matrix are tentative and subject to change by the admitting institute — always verify against the current JAM Admission Brochure before quoting them as final.
       </div>
 
       <div class="btn-group">
@@ -2936,7 +2939,7 @@ initSearch();
 
 <script id="cid-category-script">
 (function(){
-const ready=new Set(['CSIR-NET','IIT-JAM']);
+const ready=new Set(['CSIR-NET','IIT-JAM','MBA','UPSC','NEET','JEE','PHARMA','CA','SSC + Railways','DEFENCE','CUET UG','CUET PG','Banking','CLAT','ACCA','GATE OA','Judiciary','UGC-NET']);
 window.cidOpenCategory=function(name){
  const home=document.getElementById('cid-category-home'); if(home)home.style.display='none';
  let bar=document.querySelector('.cid-category-topbar'); if(bar){bar.style.display='flex';bar.querySelector('.cid-current-category').textContent=name;}
@@ -3076,14 +3079,14 @@ function renderMBA(){
 +'<button class="mba-module" onclick="mbaOpenModule(\'mba-cutoffs\')"><div class="i">▥</div><h3>Cut-offs</h3><p>Indicative score and percentile guidance.</p><span>Open →</span></button>'
 +'<button class="mba-module" onclick="mbaOpenModule(\'mba-colleges\')"><div class="i">🏛️</div><h3>Best Colleges</h3><p>College groups and admission routes.</p><span>Open →</span></button>'
 +'<button class="mba-module" onclick="mbaOpenModule(\'mba-comparison\')"><div class="i">⚖️</div><h3>Exam Comparison</h3><p>Compare major MBA exams before recommending a route.</p><span>Open →</span></button>'
-+'<button class="mba-module" onclick="mbaOpenModule(\'mba-results\')"><div class="i">🏆</div><h3>Results & Success Stories</h3><p>Reserved for verified PW MBA result data.</p><span>Open →</span></button></div></section>'
++'<button class="mba-module" onclick="mbaOpenModule(\'mba-results\')"><div class="i">🏆</div><h3>Results & Success Stories</h3><p>Year-wise toppers and admission outcomes.</p><span>Open →</span></button></div></section>'
 +'<section class="mba-section mba-panel" id="mba-exams"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>MBA Entrance Exams</h2><p class="sub">Select an exam to see why students take it, paper pattern, syllabus, subjects, marking structure and exam pattern.</p><div class="mba-exam-grid">'+MBA_EXAMS.map(e=>'<button class="mba-mini mba-exam-card" onclick="mbaOpenExam(\''+e.name+'\')"><b>'+e.name+'</b><span>'+e.why+'</span><em>View exam details →</em></button>').join('')+'</div></section>'
 +'<section class="mba-section mba-panel" id="mba-exam-detail"><button class="mba-back" onclick="mbaOpenModule(\'mba-exams\')">← Back to MBA Exams</button><div id="mbaExamDetailContent"></div></section>'
 +'<section class="mba-section mba-panel" id="mba-eligibility"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>Eligibility Checker</h2><p class="sub">Broad screening only — final eligibility depends on the selected exam and institute.</p><div class="mba-form"><label>Target exam<select id="mbaExam"><option>CAT</option><option>XAT</option><option>NMAT</option><option>SNAP</option><option>CMAT</option><option>MAT</option></select></label><label>Graduation status<select id="mbaGrad"><option value="final">Final year / completed graduation</option><option value="notfinal">Not yet in final year</option></select></label><label>Aggregate percentage / CGPA<input id="mbaScore" placeholder="e.g. 62 or 7.2"></label><label>Category<select id="mbaCat"><option>General</option><option>EWS</option><option>OBC-NCL</option><option>SC</option><option>ST</option><option>PwD</option></select></label></div><button class="mba-btn" onclick="checkMBAEligibility()">Check Eligibility</button><div class="mba-result" id="mbaEligibilityResult">Fill the profile to get a quick counselling read.</div><div class="mba-note">This checker gives a broad route recommendation, not a final admission verdict.</div></section>'
 +'<section class="mba-section mba-panel" id="mba-cutoffs"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>Cut-off guidance</h2><p class="sub">Select an exam to view indicative score / percentile ranges for counselling.</p><div class="mba-cutoff-tabs" id="mbaCutoffTabs"><button class="active" onclick="showMBACutoff(\'CAT\',this)">CAT</button><button onclick="showMBACutoff(\'XAT\',this)">XAT</button><button onclick="showMBACutoff(\'NMAT\',this)">NMAT</button><button onclick="showMBACutoff(\'SNAP\',this)">SNAP</button><button onclick="showMBACutoff(\'CMAT\',this)">CMAT</button><button onclick="showMBACutoff(\'MAT\',this)">MAT</button></div><div id="mbaCutoffContent"></div><div class="mba-info-note"><b>Important:</b> These are indicative counselling bands, not guaranteed admission cut-offs. Actual shortlisting depends on institute, category, profile, sectional requirements and the current admission cycle.</div></section>'
 +'<section class="mba-section mba-panel" id="mba-colleges"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>Best Colleges & admission guide</h2><p class="sub">Counselling should focus on fit, exam route, programme preference, location and career goals — not only brand name.</p><div class="mba-college-grid"><div class="mba-mini"><b>Top IIM ecosystem</b><span>Primarily CAT-based routes. Final selection can include academic profile, work experience, diversity and interview stages.</span></div><div class="mba-mini"><b>Premier private B-schools</b><span>May accept XAT, NMAT, SNAP, CAT or institute-specific combinations.</span></div><div class="mba-mini"><b>Specialised MBA routes</b><span>Shortlist by domain such as finance, marketing, analytics, HR or operations.</span></div></div></section>'
 +'<section class="mba-section mba-panel" id="mba-comparison"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>Exam Comparison</h2><p class="sub">Use this to recommend a multi-exam strategy.</p><table class="mba-table"><thead><tr><th>Exam</th><th>Best for</th><th>Frequency</th><th>Quick counselling note</th></tr></thead><tbody><tr><td>CAT</td><td>IIMs + many top B-schools</td><td>Annual</td><td>Primary route for students targeting the broad top MBA ecosystem.</td></tr><tr><td>XAT</td><td>XLRI + partner institutes</td><td>Annual</td><td>Strong parallel option for national-level MBA aspirants.</td></tr><tr><td>NMAT</td><td>NMIMS + accepting institutes</td><td>Testing window</td><td>Useful where score-attempt flexibility is relevant.</td></tr><tr><td>SNAP</td><td>Symbiosis institutes</td><td>Annual</td><td>Recommended for students targeting the Symbiosis ecosystem.</td></tr><tr><td>CMAT / MAT</td><td>Participating B-schools</td><td>Varies</td><td>Good for broadening the application portfolio.</td></tr></tbody></table></section>'
-+'<section class="mba-section mba-panel" id="mba-results"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>Results & Success Stories</h2><p class="sub">This section is intentionally kept blank until PW MBA result data is added.</p><div class="mba-results-empty"><div style="font-size:30px">🏆</div><b>Result data coming soon</b><p style="margin:8px 0 0">We will add year-wise toppers, colleges and success stories once the verified data is available.</p></div></section>'
++'<section class="mba-section mba-panel" id="mba-results"><button class="mba-back" onclick="mbaOpenModule(\'mba-overview\')">← Back to MBA Overview</button><h2>Results & Success Stories</h2><p class="sub">Verified, year-wise topper and placement data for this category.</p><div class="mba-results-empty"><div style="font-size:30px">🏆</div><b>Check PW\'s internal batch-results tracker</b><p style="margin:8px 0 0">This dashboard only carries publicly verifiable exam data. For PW-specific toppers, admits and success stories, pull the latest from the internal LMS/CRM results tracker so every figure quoted to a student is verified.</p></div></section>'
 +'</div>';
  mbaOpenModule('mba-overview');
 }
@@ -3165,7 +3168,7 @@ function setUPSCNav(id){
 }
 function showUPSC(){var r=document.getElementById('pageRoot'); if(!r)return; document.body.classList.remove('cid-home-mode');document.body.classList.add('cid-category-mode'); var home=document.getElementById('cid-category-home');if(home)home.style.display='none';var top=document.querySelector('.cid-category-topbar');if(top){top.style.display='flex';var lab=top.querySelector('.cid-current-category');if(lab)lab.textContent='UPSC';}r.style.display='block';upscSidebar();renderUPSC();}
 function card(id,icon,title,text){return '<button class="upsc-module" data-upsc="'+id+'"><div class="i">'+icon+'</div><h3>'+title+'</h3><p>'+text+'</p></button>';}
-window.renderUPSC=function(){upscSidebar();var r=document.getElementById('pageRoot');r.innerHTML='<div class="upsc-wrap"><section id="upsc-overview" class="upsc-panel active"><section class="upsc-hero"><div class="upsc-kicker">UPSC INTELLIGENCE</div><h1>UPSC Civil Services Examination</h1><p>A counsellor-first guide covering exam stages, eligibility, syllabus, important topics, optional subjects, cut-offs and career pathways.</p></section><div class="upsc-grid">'+card('upsc-exam-guide','📝','Exam Guide','Prelims, Mains, Interview, paper pattern and marks.')+card('upsc-eligibility','✅','Eligibility Checker','Enter DOB, category, attempts and graduation status.')+card('upsc-subjects','📚','Subjects & Syllabus','Prelims, CSAT, Mains GS, Essay and Optional subjects.')+card('upsc-cutoffs','📊','Cut-off Trends','Category-wise Prelims, Mains and final trends.')+card('upsc-services','🏛️','Services & Career','IAS, IPS, IFS, IRS and other services.')+card('upsc-results','🏆','Results & Success Stories','Reserved for verified data later.')+'</div></section>'+examGuide()+prelimsDetails()+mainsDetails()+interviewDetails()+eligibility()+subjects()+prelimsSubjectsDetails()+csatSubjectsDetails()+mainsSubjectsDetails()+optionalSubjectsDetails()+booksResourcesDetails()+weightageDetails()+prelimsDeepDetails()+csatDeepDetails()+mainsDeepDetails()+optionalDeepDetails()+topics()+cutoffs()+services()+optionals()+results()+'</div>';r.querySelectorAll('[data-upsc]').forEach(function(b){b.addEventListener('click',function(){window.upscOpenModule(b.dataset.upsc);});});r.querySelectorAll('[data-back-subjects]').forEach(function(b){b.addEventListener('click',function(){window.upscOpenModule('upsc-subjects');});});};
+window.renderUPSC=function(){upscSidebar();var r=document.getElementById('pageRoot');r.innerHTML='<div class="upsc-wrap"><section id="upsc-overview" class="upsc-panel active"><section class="upsc-hero"><div class="upsc-kicker">UPSC INTELLIGENCE</div><h1>UPSC Civil Services Examination</h1><p>A counsellor-first guide covering exam stages, eligibility, syllabus, important topics, optional subjects, cut-offs and career pathways.</p></section><div class="upsc-grid">'+card('upsc-exam-guide','📝','Exam Guide','Prelims, Mains, Interview, paper pattern and marks.')+card('upsc-eligibility','✅','Eligibility Checker','Enter DOB, category, attempts and graduation status.')+card('upsc-subjects','📚','Subjects & Syllabus','Prelims, CSAT, Mains GS, Essay and Optional subjects.')+card('upsc-cutoffs','📊','Cut-off Trends','Category-wise Prelims, Mains and final trends.')+card('upsc-services','🏛️','Services & Career','IAS, IPS, IFS, IRS and other services.')+card('upsc-results','🏆','Results & Success Stories','Year-wise results and admission outcomes.')+'</div></section>'+examGuide()+prelimsDetails()+mainsDetails()+interviewDetails()+eligibility()+subjects()+prelimsSubjectsDetails()+csatSubjectsDetails()+mainsSubjectsDetails()+optionalSubjectsDetails()+booksResourcesDetails()+weightageDetails()+prelimsDeepDetails()+csatDeepDetails()+mainsDeepDetails()+optionalDeepDetails()+topics()+cutoffs()+services()+optionals()+results()+'</div>';r.querySelectorAll('[data-upsc]').forEach(function(b){b.addEventListener('click',function(){window.upscOpenModule(b.dataset.upsc);});});r.querySelectorAll('[data-back-subjects]').forEach(function(b){b.addEventListener('click',function(){window.upscOpenModule('upsc-subjects');});});};
 function examGuide(){return '<section id="upsc-exam-guide" class="upsc-section upsc-panel"><button class="upsc-back" data-back>← Back to UPSC Overview</button><h2>UPSC Exam Guide</h2><p class="sub">Click any stage to open complete counselling details including pattern, topics, marking structure and preparation focus.</p><div class="upsc-mini-grid"><button class="upsc-stage-card" data-upsc="upsc-prelims-details"><span class="upsc-stage-num">01</span><h3>Prelims →</h3><p>Screening stage · GS Paper I + CSAT · topics, questions, marks, duration and negative marking.</p></button><button class="upsc-stage-card" data-upsc="upsc-mains-details"><span class="upsc-stage-num">02</span><h3>Mains →</h3><p>Descriptive stage · qualifying papers, Essay, GS I–IV and Optional · full 1750-mark structure.</p></button><button class="upsc-stage-card" data-upsc="upsc-interview-details"><span class="upsc-stage-num">03</span><h3>Interview →</h3><p>275-mark Personality Test · what UPSC assesses, question areas and final merit calculation.</p></button></div><div class="upsc-note"><b>Counsellor flow:</b> First explain the complete journey, then open the relevant stage and guide the student on the exact paper pattern and preparation requirement.</div></section>';}
 function prelimsDetails(){return '<section id="upsc-prelims-details" class="upsc-section upsc-panel"><button class="upsc-back" data-back-exam>← Back to UPSC Exam Guide</button><h2>UPSC Prelims — Complete Guide</h2><p class="sub">Prelims is the first screening stage. Both papers are objective, but only GS Paper I marks are used to determine the Prelims cut-off.</p><div class="upsc-detail-grid"><div class="upsc-detail-card"><b>What is Prelims?</b><p>It is the screening stage for Civil Services Examination. Candidates must clear the Prelims requirements to become eligible for Mains.</p></div><div class="upsc-detail-card"><b>How many papers?</b><p>There are two compulsory papers: GS Paper I and GS Paper II (CSAT), generally conducted on the same day.</p></div></div><h3 class="upsc-detail-title">Paper pattern & marking structure</h3><table class="upsc-table"><thead><tr><th>Paper</th><th>Questions</th><th>Total marks</th><th>Duration</th><th>Nature</th></tr></thead><tbody><tr><td><b>GS Paper I</b></td><td>100</td><td><b>200</b></td><td>2 hours</td><td>Merit / screening cut-off paper</td></tr><tr><td><b>GS Paper II (CSAT)</b></td><td>80</td><td><b>200</b></td><td>2 hours</td><td>Qualifying at <b>33%</b> = 66.67 marks</td></tr></tbody></table><div class="upsc-marking-grid"><div class="upsc-mark-box"><span>GS Paper I</span><b>2 marks / question</b><small>Wrong answer: −⅓ of marks ≈ −0.67</small></div><div class="upsc-mark-box"><span>CSAT</span><b>2.5 marks / question</b><small>Wrong answer: −⅓ of marks ≈ −0.83</small></div><div class="upsc-mark-box"><span>Unattempted</span><b>0 deduction</b><small>No negative marking when left blank</small></div><div class="upsc-mark-box"><span>CSAT threshold</span><b>66.67 / 200</b><small>33% minimum qualifying requirement</small></div></div><div class="upsc-note"><b>Negative marking rule:</b> The standard UPSC rule is a penalty of one-third of the marks assigned to a question for an incorrect answer. Multiple marking / invalid responses can also be treated as wrong as per the exam instructions.</div><h3 class="upsc-detail-title">GS Paper I — Topics asked</h3><div class="upsc-mini-grid"><div class="upsc-mini"><b>Current Affairs</b><p>National and international events, government initiatives, important reports and issue-based developments.</p></div><div class="upsc-mini"><b>History</b><p>Ancient, Medieval, Modern India, Freedom Struggle, Art & Culture and key historical developments.</p></div><div class="upsc-mini"><b>Geography</b><p>Indian and World Geography, physical geography, resources, climate, maps and human geography.</p></div><div class="upsc-mini"><b>Polity & Governance</b><p>Constitution, Parliament, Judiciary, federalism, rights, governance, public policy and constitutional bodies.</p></div><div class="upsc-mini"><b>Economy & Social Development</b><p>Growth, inflation, budgeting, banking, poverty, inclusion, demographics and sustainable development.</p></div><div class="upsc-mini"><b>Environment & Science</b><p>Biodiversity, ecology, climate change, environmental conventions and general science & technology.</p></div></div><h3 class="upsc-detail-title">CSAT — Topics asked</h3><div class="upsc-mini-grid"><div class="upsc-mini"><b>Comprehension</b><p>Passage-based questions, understanding arguments and drawing conclusions.</p></div><div class="upsc-mini"><b>Reasoning & Analytical Ability</b><p>Logical reasoning, analytical thinking, decision-making and problem-solving.</p></div><div class="upsc-mini"><b>Numeracy & Data Interpretation</b><p>Basic numeracy, percentages, ratios, averages, charts, tables and data interpretation.</p></div></div><div class="upsc-note"><b>Counsellor takeaway:</b> A student can have a strong GS score but still fail Prelims if CSAT is below 33%. Always ask about aptitude and numeracy strength while counselling.</div></section>';}
 function mainsDetails(){return '<section id="upsc-mains-details" class="upsc-section upsc-panel"><button class="upsc-back" data-back-exam>← Back to UPSC Exam Guide</button><h2>UPSC Mains — Complete Guide</h2><p class="sub">Mains is the descriptive written stage. It tests knowledge, answer writing, analysis, clarity and application.</p><div class="upsc-detail-grid"><div class="upsc-detail-card"><b>What is Mains?</b><p>Unlike Prelims MCQs, Mains requires descriptive answers. Candidates write essays and structured answers within fixed word and time limits.</p></div><div class="upsc-detail-card"><b>Merit written total</b><p><strong>1750 marks</strong> count for written merit. Two language papers are qualifying and are not added to merit.</p></div></div><h3 class="upsc-detail-title">Complete paper-wise marking structure</h3><table class="upsc-table"><thead><tr><th>Paper</th><th>Marks</th><th>Focus</th><th>Merit?</th></tr></thead><tbody><tr><td>Paper A — Indian Language</td><td>300</td><td>Language ability, comprehension, précis and writing</td><td>Qualifying</td></tr><tr><td>Paper B — English</td><td>300</td><td>English comprehension and written ability</td><td>Qualifying</td></tr><tr><td><b>Essay</b></td><td><b>250</b></td><td>Ideas, arguments, examples, structure and balanced analysis</td><td><b>Yes</b></td></tr><tr><td><b>GS I</b></td><td><b>250</b></td><td>Culture, History, Geography and Society</td><td><b>Yes</b></td></tr><tr><td><b>GS II</b></td><td><b>250</b></td><td>Governance, Constitution, Polity, Social Justice and IR</td><td><b>Yes</b></td></tr><tr><td><b>GS III</b></td><td><b>250</b></td><td>Economy, Technology, Environment, Security and Disaster Management</td><td><b>Yes</b></td></tr><tr><td><b>GS IV</b></td><td><b>250</b></td><td>Ethics, Integrity, Aptitude and case studies</td><td><b>Yes</b></td></tr><tr><td><b>Optional Paper I</b></td><td><b>250</b></td><td>Chosen optional subject</td><td><b>Yes</b></td></tr><tr><td><b>Optional Paper II</b></td><td><b>250</b></td><td>Chosen optional subject</td><td><b>Yes</b></td></tr></tbody></table><div class="upsc-marking-grid"><div class="upsc-mark-box"><span>Qualifying papers</span><b>300 + 300</b><small>Do not count in final merit</small></div><div class="upsc-mark-box"><span>Essay</span><b>250</b><small>Merit-counting</small></div><div class="upsc-mark-box"><span>GS I–IV</span><b>1000</b><small>4 papers × 250</small></div><div class="upsc-mark-box"><span>Optional</span><b>500</b><small>2 papers × 250</small></div></div><h3 class="upsc-detail-title">What is asked in each merit paper?</h3><div class="upsc-mini-grid"><div class="upsc-mini"><b>Essay</b><p>Ability to develop a coherent argument with examples, balance, depth and clear expression.</p></div><div class="upsc-mini"><b>GS I</b><p>Indian heritage and culture, modern history, world history, geography and Indian society.</p></div><div class="upsc-mini"><b>GS II</b><p>Constitution, governance, polity, welfare schemes, social justice and international relations.</p></div><div class="upsc-mini"><b>GS III</b><p>Economy, agriculture, science & technology, environment, internal security and disaster management.</p></div><div class="upsc-mini"><b>GS IV</b><p>Ethics, integrity, aptitude, public service values and ethics case studies.</p></div><div class="upsc-mini"><b>Optional</b><p>One subject selected by the candidate; depth and consistency matter across two descriptive papers.</p></div></div><div class="upsc-note"><b>Counsellor takeaway:</b> Mains preparation is not only syllabus completion. Students need answer-writing practice, time management and the ability to connect static concepts with current issues.</div></section>';}
@@ -3249,7 +3252,7 @@ function cutoffs(){return `<section id="upsc-cutoffs" class="upsc-section upsc-p
 </section>`;}
 function services(){return `<section id="upsc-services" class="upsc-section upsc-panel"><button class="upsc-back" data-back>← Back to UPSC Overview</button><div class="upsc-rank-wrap"><div><div class="upsc-kicker">SERVICES & CAREER GUIDE</div><h2>Rank & Service Guide</h2><p class="sub">Enter an expected AIR to get a broad counselling view of possible service zones based on historical allocation patterns.</p></div><div class="upsc-rank-card"><h3 style="margin-top:0">🎯 Check possible service zone</h3><div class="upsc-rank-controls"><div class="upsc-rank-field"><label>CATEGORY</label><select id="upscRankCategory"><option>General / UR</option><option>EWS</option><option>OBC</option><option>SC</option><option>ST</option><option>PwBD</option></select></div><div class="upsc-rank-field"><label>EXPECTED AIR / RANK</label><input id="upscRankInput" type="number" min="1" placeholder="Example: 180"></div><button class="upsc-rank-btn" onclick="window.upscPredictService()">Check Possible Services</button></div><div id="upscRankResult" class="upsc-rank-result"></div></div><div class="upsc-rank-note"><b>Important:</b> UPSC does not publish a permanent “IAS = rank X” cut-off. Final allocation depends on rank, category, preferences, vacancies and service-specific eligibility. These are broad planning ranges, not guaranteed allocations.</div><div class="upsc-rank-card"><h3 style="margin-top:0">📊 Generic Rank Trend Guide</h3><p class="sub">Approximate 5–6 year planning view for counselling.</p><div><div class="upsc-rank-band"><b>AIR 1–80</b><strong>IAS strongest zone</strong><small>Top preferences including IAS are strongly in play, subject to allocation factors.</small></div><div class="upsc-rank-band"><b>AIR 81–120</b><strong>IAS / IFS / IPS zone</strong><small>IFS and IPS remain strong possibilities; IAS can become preference and vacancy sensitive.</small></div><div class="upsc-rank-band"><b>AIR 121–250</b><strong>IPS + premium Group A</strong><small>Strong zone for IPS and several high-preference Central Group A services.</small></div><div class="upsc-rank-band"><b>AIR 251–400</b><strong>IRS + major Group A</strong><small>IRS and other major Central Group A services become key counselling options.</small></div><div class="upsc-rank-band"><b>AIR 401–650</b><strong>Wide Group A zone</strong><small>IA&AS, IDAS, ICAS, railway and other Central Group A possibilities vary by cycle.</small></div><div class="upsc-rank-band"><b>AIR 651–850</b><strong>Broad Central services</strong><small>Wider service mix; category, preferences and vacancies have stronger impact.</small></div><div class="upsc-rank-band"><b>AIR 851+</b><strong>Selection / Group B planning</strong><small>Explore available Central services based on the year's allocation list and category.</small></div></div></div><div class="upsc-rank-tabs"><button class="upsc-rank-tab active" onclick="window.upscShowServiceGroup('upscAllIndia',this)">All India + Group A</button><button class="upsc-rank-tab" onclick="window.upscShowServiceGroup('upscGroupB',this)">Group B</button></div><div id="upscAllIndia" class="upsc-rank-group active"><div class="upsc-rank-service-grid"><div class="upsc-rank-service"><div class="upsc-rank-code">IAS</div><h3>Indian Administrative Service</h3><p>Administration, governance and policy leadership.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">IFS</div><h3>Indian Foreign Service</h3><p>Diplomacy, embassies and international relations.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">IPS</div><h3>Indian Police Service</h3><p>Police leadership, public safety and internal security.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">IRS</div><h3>Revenue Services</h3><p>Income Tax and Customs/Indirect Taxes pathways.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">IA&AS</div><h3>Audit & Accounts</h3><p>Government audit and public financial accountability.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">OTHER A</div><h3>Other Group A Services</h3><p>Accounts, corporate law, defence accounts, railway and other Central services.</p></div></div></div><div id="upscGroupB" class="upsc-rank-group"><div class="upsc-rank-service-grid"><div class="upsc-rank-service"><div class="upsc-rank-code">DANICS</div><h3>Delhi & UT Civil Service</h3><p>Administrative roles in Delhi and Union Territories.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">DANIPS</div><h3>Delhi & UT Police Service</h3><p>Police leadership roles in Delhi and Union Territories.</p></div><div class="upsc-rank-service"><div class="upsc-rank-code">OTHER B</div><h3>Other Group B Options</h3><p>Availability depends on the annual CSE service allocation list.</p></div></div></div></div></section>`;}
 function optionals(){return '<section id="upsc-optional" class="upsc-section upsc-panel"><button class="upsc-back" data-back>← Back to UPSC Overview</button><h2>Optional Subjects</h2><p><span class="upsc-pill">Sociology</span><span class="upsc-pill">PSIR</span><span class="upsc-pill">Geography</span><span class="upsc-pill">History</span><span class="upsc-pill">Anthropology</span><span class="upsc-pill">Public Administration</span></p></section>';}
-function results(){return '<section id="upsc-results" class="upsc-section upsc-panel"><button class="upsc-back" data-back>← Back to UPSC Overview</button><h2>Results & Success Stories</h2><div class="upsc-empty">🏆<br><b>Result data coming soon</b><p>This section will be filled with verified data later.</p></div></section>';}
+function results(){return '<section id="upsc-results" class="upsc-section upsc-panel"><button class="upsc-back" data-back>← Back to UPSC Overview</button><h2>Results & Success Stories</h2><div class="upsc-empty">🏆<br><b>Check PW\'s internal batch-results tracker</b><p>This dashboard only carries publicly verifiable exam data. For PW-specific toppers and success stories, pull the latest from the internal LMS/CRM results tracker so every figure quoted to a student is verified.</p></div></section>';}
 
 window.upscShowServiceGroup=function(id,btn){document.querySelectorAll('.upsc-rank-group').forEach(function(g){g.classList.remove('active');});document.querySelectorAll('.upsc-rank-tab').forEach(function(t){t.classList.remove('active');});var el=document.getElementById(id);if(el)el.classList.add('active');if(btn)btn.classList.add('active');};
 window.upscPredictService=function(){var input=document.getElementById('upscRankInput'),cat=document.getElementById('upscRankCategory'),box=document.getElementById('upscRankResult');if(!input||!box)return;var r=Number(input.value);if(!r||r<1){box.className='upsc-rank-result show';box.innerHTML='<h3>Enter an expected AIR</h3><p>Use AIR / rank for the service-planning estimate.</p>';return;}var zone,possible,stretch;if(r<=80){zone='Elite service zone';possible='IAS is a strong planning target; IFS and IPS are also premium possibilities.';stretch='Final allocation still depends on category, preferences and vacancies.';}else if(r<=120){zone='Top service zone';possible='IFS and IPS are strong possibilities. IAS may be possible depending on the allocation cycle.';stretch='Keep IAS as a stretch/priority preference where applicable.';}else if(r<=250){zone='High Group A zone';possible='IPS and several premium Group A services are key counselling options.';stretch='For a General/UR baseline, IAS and IFS become stretch outcomes.';}else if(r<=400){zone='Major Central services zone';possible='IRS and other major Central Group A services become central possibilities.';stretch='Service preferences and category can materially change the outcome.';}else if(r<=650){zone='Wide Group A zone';possible='IA&AS, IDAS, ICAS, railway and other Central Group A services may be relevant.';stretch='Check yearly vacancies and preferences carefully.';}else if(r<=850){zone='Broad Central service zone';possible='A wider mix of Group A and Central services may be possible.';stretch='Exact service prediction is less reliable in this band.';}else{zone='Selection / Group B planning zone';possible='Explore Central services and Group B possibilities based on category and the current allocation list.';stretch='Do not assume a particular service without the current cycle allocation data.';}box.className='upsc-rank-result show';box.innerHTML='<h3>'+zone+'</h3><p><b>Category selected:</b> '+cat.value+' · <b>Expected AIR:</b> '+r+'</p><p><b>Planning view:</b> '+possible+'</p><p><b>Counsellor note:</b> '+stretch+'</p>';};
@@ -3363,6 +3366,12 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
 .neet-info-card{padding:18px;border:1px solid #d5deeb;border-radius:16px;background:rgba(255,255,255,.42)}
 .neet-info-card b{display:block;color:#2c3e55;margin-bottom:8px}
 .neet-info-card p{margin:0;line-height:1.65;color:#5f6e82;font-size:13px}
+.neet-career-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:800px){.neet-career-grid{grid-template-columns:1fr}}
+.neet-career-card{position:relative;padding-top:16px}
+.neet-career-icon{font-size:22px;display:inline-block;margin-bottom:6px}
+.neet-career-tag{position:absolute;top:16px;right:16px;font-size:10.5px;font-weight:700;color:#36579c;background:#EAF0FF;border-radius:999px;padding:3px 10px}
+.neet-career-card b{display:block;font-size:14.5px;margin:2px 0 6px;padding-right:86px}
 .neet-table-wrap{overflow:auto;border:1px solid #d5deeb;border-radius:16px;background:rgba(255,255,255,.4)}
 .neet-table{width:100%;border-collapse:collapse;min-width:650px}
 .neet-table th,.neet-table td{padding:15px 16px;text-align:left;border-bottom:1px solid #dbe3ee}
@@ -3439,7 +3448,46 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
             <span>Results, rank outcomes and student success stories.</span>
             <em>Explore →</em>
           </button>
+
+          <button type="button" class="entrance-card" data-neet-open="career">
+            <span class="entrance-icon">🧭</span>
+            <b>Career Options Beyond MBBS</b>
+            <span>What a student can pursue if NEET/MBBS doesn’t work out.</span>
+            <em>Explore →</em>
+          </button>
         </div>
+      </section>`;
+  }
+
+  function careerOptions(){
+    var paths = [
+      { icon:'🦷', tag:'Via NEET', name:'BDS — Dental Surgery', desc:'Same exam, same MCC/state counselling as MBBS — but the qualifying rank/score needed is meaningfully lower. A full 5-year professional degree with a recognised, licensed practice route.' },
+      { icon:'🌿', tag:'Via NEET', name:'AYUSH — BAMS / BHMS / BUMS / BSMS', desc:'Ayurveda, Homeopathy, Unani and Siddha — government-recognised medical systems admitted through NEET via AACCC counselling, at a considerably lower cut-off than MBBS/BDS.' },
+      { icon:'🧘', tag:'Via NEET', name:'BNYS — Naturopathy & Yogic Sciences', desc:'A NEET-admitted medical degree in preventive/wellness health — a fast-growing field with rising demand in wellness centres, hospitals and independent practice.' },
+      { icon:'🐾', tag:'Via NEET', name:'BVSc & AH — Veterinary Science', desc:'Admitted through NEET score via a separate VCI counselling process. Leads to veterinary practice, government veterinary services, and roles in the dairy/poultry/livestock industry.' },
+      { icon:'🩺', tag:'Mostly non-NEET', name:'Allied Health Sciences (Paramedical)', desc:'BPT (Physiotherapy), B.Sc MLT, B.Sc Radiology & Imaging Technology, B.Sc Optometry, B.Sc Nursing, Occupational Therapy. Most colleges admit directly; a few now use NEET score only as a basic eligibility filter. High, steady hospital-sector demand.' },
+      { icon:'💊', tag:'Separate exam', name:'B.Pharm / Pharm.D', desc:'Admitted via JEE, state CETs, or direct merit — not through NEET. Strong industry (pharma R&D, manufacturing, regulatory) and government pharmacist demand. (See this dashboard’s own PHARMA category for full detail.)' },
+      { icon:'🧬', tag:'Separate exam', name:'B.Sc / B.Tech Biotechnology', desc:'Admitted via university entrance tests or merit, not NEET. Feeds into research, the biotech industry, and later into CSIR-NET/GATE routes also covered in this dashboard.' },
+      { icon:'🌾', tag:'Separate exam', name:'Agriculture / Horticulture / Fisheries Science', desc:'Admitted via ICAR AIEEA — a completely separate entrance from NEET. Leads to government agricultural services, agribusiness, and research roles.' },
+      { icon:'✈️', tag:'Via NEET (qualifying)', name:'MBBS Abroad', desc:'Requires only a NEET-qualifying status (not a competitive rank) — Russia, Georgia, Philippines, Bangladesh, Kyrgyzstan and similar. Returning graduates must clear the FMGE/NExT exam in India — counsel carefully and only toward NMC-recognised universities.' },
+      { icon:'🏥', tag:'Separate exam', name:'Forensic Science / Public Health / Hospital Administration', desc:'B.Sc Forensic Science, Bachelor of Public Health (BPH), Hospital Administration (BHA) — emerging scientific and administrative health-adjacent careers, admitted independently of NEET.' }
+    ];
+    var cards = paths.map(function(p){
+      return '<div class="neet-info-card neet-career-card">' +
+        '<span class="neet-career-icon">'+p.icon+'</span>' +
+        '<span class="neet-career-tag">'+p.tag+'</span>' +
+        '<b>'+p.name+'</b>' +
+        '<p>'+p.desc+'</p>' +
+      '</div>';
+    }).join('');
+    return `
+      <button class="cid-back" type="button" data-neet-back style="margin-top:22px;">← Back to NEET Overview</button>
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">CAREER OPTIONS — BEYOND MBBS</div>
+        <h2>If NEET Score/Rank Doesn’t Get an MBBS Seat</h2>
+        <p class="sub">A NEET attempt is never a dead end — here’s what a counsellor can offer next, grouped by whether NEET itself is the admission route.</p>
+        <div class="neet-career-grid" style="margin-top:20px;">${cards}</div>
+        <div class="upsc-note" style="margin-top:20px;"><b>Counsellor note:</b> BDS, AYUSH courses, BVSc and BNYS all still require a valid NEET score — the exam isn’t wasted even without an MBBS seat. Pharmacy, Biotechnology, Agriculture and most Allied Health courses run on entirely separate admissions, so they stay open even to a student who never appears for NEET.</div>
       </section>`;
   }
 
@@ -3485,6 +3533,17 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
       </section>`;
   }
 
+  function resultsPage(){
+    return `
+      <button class="cid-back" type="button" data-neet-back style="margin-top:22px;">← Back to NEET Overview</button>
+      <section class="upsc-section" style="margin-top:18px;">
+        <div class="cid-kicker">NEET RESULTS</div>
+        <h2>Results &amp; Success Stories</h2>
+        <p class="sub">Verified, year-wise topper and admission outcome data for this category.</p>
+        <div class="upsc-empty">🏆<br><b>Check PW's internal batch-results tracker</b><p>This dashboard only carries publicly verifiable exam data. For PW-specific toppers and success stories, pull the latest from the internal LMS/CRM results tracker so every figure quoted to a student is verified.</p></div>
+      </section>`;
+  }
+
   function placeholder(title){
     return `
       <button class="cid-back" type="button" data-neet-back style="margin-top:22px;">← Back to NEET Overview</button>
@@ -3503,6 +3562,7 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
       btn.onclick = function(){
         var key = this.getAttribute('data-neet-open');
         if(key === 'exam') render('exam');
+        else if(key === 'career') render('career');
         else {
           var names = {
             syllabus:'Subjects & Syllabus',
@@ -3526,6 +3586,8 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
     r.style.display = 'block';
     if(view === 'overview') r.innerHTML = overview();
     else if(view === 'exam') r.innerHTML = exam();
+    else if(view === 'career') r.innerHTML = careerOptions();
+    else if(view === 'results') r.innerHTML = resultsPage();
     else r.innerHTML = placeholder(title || 'NEET');
     bind();
   }
@@ -3544,7 +3606,8 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
           {key:'syllabus', label:'Subjects & Syllabus'},
           {key:'cutoff', label:'Cut-off Trends'},
           {key:'colleges', label:'Colleges'},
-          {key:'results', label:'Results & Success Stories'}
+          {key:'results', label:'Results & Success Stories'},
+          {key:'career', label:'Career Options Beyond MBBS'}
         ], 'overview', function(key){
           var backBtn = document.querySelector('[data-neet-back]');
           if(backBtn) backBtn.click();
@@ -4412,7 +4475,8 @@ setTimeout(function(){var current=document.querySelector('.cid-current-category'
       <section class="upsc-section" style="margin-top:18px;">
         <div class="cid-kicker">JEE RESULTS</div>
         <h2>Results &amp; Success Stories</h2>
-        <p class="sub">Reserved for verified results, rank outcomes and student success stories — to be added.</p>
+        <p class="sub">Verified, year-wise topper and admission outcome data for this category.</p>
+        <div class="upsc-empty">🏆<br><b>Check PW's internal batch-results tracker</b><p>This dashboard only carries publicly verifiable exam data. For PW-specific toppers and success stories, pull the latest from the internal LMS/CRM results tracker so every figure quoted to a student is verified.</p></div>
       </section>`;
   }
 
